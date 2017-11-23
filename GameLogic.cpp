@@ -10,21 +10,20 @@
 
 GameLogic::GameLogic(Board &board): board(board) {}
 
-void GameLogic::turn(Player &winning, Player &loosing) {
-    emptyCellStack.isRepeat();
-    cout << winning.getForm() << ": It's your move." << endl << "Your possible moves: ";
-    for (int i = 0; i < emptyCellStack.getAmount(); i++) {
-        cout << "(" << emptyCellStack.getDisc(i).getRowLocation() << "," << emptyCellStack.getDisc(i).getColumnLocation() << ") ";
+void GameLogic::turn(Player &currentPlayer, Player &opponentPlayer) {
+    stackOfOptions.isRepeat();
+    cout << currentPlayer.getForm() << ": It's your move." << endl << "Your possible moves: ";
+    for (int i = 0; i < stackOfOptions.getAmount(); i++) {
+        cout << "(" << stackOfOptions.getDisc(i).getRowLocation() << "," << stackOfOptions.getDisc(i).getColumnLocation() << ") ";
     }
     cout << endl << endl << "Please enter your move row,col:";
     while (true) {
         char input[50];
         cin.getline(input,50);
-        emptyCell = fromStringToDisc(input);
-        if (emptyCellStack.appear(emptyCell)) {
-            winning.addToStack(emptyCell.getRowLocation(), emptyCell.getColumnLocation());
-            board.setCell(emptyCell.getRowLocation(),emptyCell.getColumnLocation(),winning.getForm());
-            eat(winning,loosing);
+        playerChoise = fromStringToDisc(input);
+        if (stackOfOptions.appear(playerChoise)) {
+            vector<Player> tempPlayers = eat(currentPlayer,opponentPlayer);
+            updateMove(tempPlayers, currentPlayer, opponentPlayer);
             break;
         } else {
             cout << endl << endl << "illegal move! Please enter your move row,col:";
@@ -53,7 +52,7 @@ Disc GameLogic::fromStringToDisc(char input[50]) {
 }
 
 void GameLogic::options(const char &winning,const Player &loosing) {
-    emptyCellStack.emptyStack();
+    stackOfOptions.emptyStack();
     //Passes the discs that the opposing player has put on the board
     for(int n = 0; n < loosing.getAmount(); n++) {
         int row = loosing.getDisc(n).getRowLocation();
@@ -70,7 +69,7 @@ void GameLogic::options(const char &winning,const Player &loosing) {
                         l = l + j;
                     }
                     if(board.getCell(row - k,col - l) == winning) {
-                        emptyCellStack.addToStack(row + i,col + j);
+                        stackOfOptions.addToStack(row + i,col + j);
                     }
                 }
             }
@@ -78,9 +77,12 @@ void GameLogic::options(const char &winning,const Player &loosing) {
     }
 }
 
-void GameLogic::eat(Player &winning,Player &loosing) {
-    int row = emptyCell.getRowLocation();
-    int col = emptyCell.getColumnLocation();
+vector<Player> GameLogic::eat(Player winning,Player loosing) {
+    vector<Player> tempPlayers;
+    tempPlayers.push_back(winning);
+    tempPlayers.push_back(loosing);
+    int row = playerChoise.getRowLocation();
+    int col = playerChoise.getColumnLocation();
     for(int i = -1; i < 2; i++) {
         for(int j = -1; j < 2; j++) {
             // m counts how many discs should be replace
@@ -96,23 +98,36 @@ void GameLogic::eat(Player &winning,Player &loosing) {
                 while(m) {
                     k = k - i;
                     l = l - j;
-                    board.setCell(row + k,col + l,winning.getForm());
+                    //board.setCell(row + k,col + l,winning.getForm());
                     Disc loose(row + k, col + l);
-                    winning.addToStack(row+k,col+l);
-                    loosing.removeFromStack(loose);
+                    tempPlayers[0].addToStack(row+k,col+l);
+                    tempPlayers[1].removeFromStack(loose);
                     m--;
                 }
             }
         }
     }
+    return tempPlayers;
+}
+
+void GameLogic::updateMove(const vector<Player>& tempPlayers, Player &currentPlayer, Player &opponentPlayer) {
+    currentPlayer = tempPlayers[0];
+    currentPlayer.addToStack(playerChoise.getRowLocation(), playerChoise.getColumnLocation());
+    opponentPlayer = tempPlayers[1];
+    board.setCell(playerChoise.getRowLocation(),playerChoise.getColumnLocation(),currentPlayer.getForm());
+    for(int i = 0; i < 2; i++) {
+       for(int j = 0;j < tempPlayers[i].getAmount(); j++) {
+           board.setCell(tempPlayers[i].getDisc(j).getRowLocation(),tempPlayers[i].getDisc(j).getColumnLocation(),tempPlayers[i].getForm());
+       }
+    }
 }
 
 void GameLogic::noTurn(const char &winning,const char &loosing) {
-    cout << winning << " played (" << emptyCell.getRowLocation() << "," << emptyCell.getColumnLocation() << ")" << endl << endl;
+    cout << winning << " played (" << playerChoise.getRowLocation() << "," << playerChoise.getColumnLocation() << ")" << endl << endl;
     cout << loosing << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
 
 }
 
 int GameLogic::hasMoves() const {
-    return emptyCellStack.getAmount();
+    return stackOfOptions.getAmount();
 }

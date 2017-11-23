@@ -6,7 +6,6 @@
 #include "Player.h"
 
 
-
 Player::Player(const char form): form(form), StackOfDiscs() {}
 
 

@@ -11,6 +11,8 @@
 #include "Player.h"
 #include <string>
 #include <cstring>
+#include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -33,13 +35,13 @@ public:
      * @param winning - current player's stack
      * @param loosing - opponent's stack
      */
-    void eat(Player &winning, Player &loosing);
+    vector<Player> eat(Player winning, Player loosing);
     /**
      * manages winning player's turn
-     * @param winning - current player
-     * @param loosing - opponent player
+     * @param currentPlayer - current player
+     * @param opponentPlayer - opponent player
      */
-    void turn(Player &winning, Player &loosing);
+    void turn(Player &currentPlayer, Player &opponentPlayer);
     /**
      * Gets a location on the board from the user and translates it to disc
      * @param input - string the user typed
@@ -57,11 +59,12 @@ public:
      * @return
      */
     int hasMoves() const;
+    void updateMove(const vector<Player> &tempPlayers, Player &currentPlayer, Player &opponentPlayer);
 
 private:
     Board &board;
-    StackOfDiscs emptyCellStack;
-    Disc emptyCell;
+    StackOfDiscs stackOfOptions;
+    Disc playerChoise;
 };
 
 #endif //EX2_GAMELOGIC_H

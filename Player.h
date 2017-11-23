@@ -29,7 +29,7 @@ public:
     char getForm() const;
 
 private:
-    const char form;
+    char form;
 };
 
 
