@@ -30,25 +30,26 @@ char ReversiGame::play() {
     cout << "current board:\n\n";
     board.printBoard();
     while(notOver && black.getAmount() + white.getAmount() != size*size) {
-        gameLogic.options(black.getForm(),white);
-        if (gameLogic.hasMoves()) {
+        black.playerMoveOption(white ,board);
+        if (gameLogic.hasMoves(black)) {
             notOver = 2;
-            gameLogic.turn(black, white);
+            gameLogic.turn(black, white,black.playerLogic());
         } else {
             notOver--;
             if(notOver) {
-                gameLogic.noTurn(white.getForm(), black.getForm());
+                cout << black.getForm() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
+
             }
         }
         if(notOver && black.getAmount() + white.getAmount() != size*size) {
-            gameLogic.options(white.getForm(),black);
-            if (gameLogic.hasMoves()) {
+            white.playerMoveOption(black ,board);
+            if (gameLogic.hasMoves(white)) {
                 notOver = 2;
-                gameLogic.turn(white, black);
+                gameLogic.turn(white, black,white.playerLogic());
             } else {
                 notOver--;
                 if(notOver) {
-                    gameLogic.noTurn(black.getForm(), white.getForm());
+                    cout << white.getForm() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
                 }
             }
         }

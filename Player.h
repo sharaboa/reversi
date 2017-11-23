@@ -9,7 +9,9 @@
 
 #include "StackOfDiscs.h"
 #include "Disc.h"
+#include <iostream>
 #include <vector>
+
 
 using namespace std;
 
@@ -27,9 +29,15 @@ public:
      * @return
      */
     char getForm() const;
+    StackOfDiscs getOptionStack() const;
+    virtual Disc playerLogic();
 
-private:
+    void playerMoveOption(const Player opponentPlayer,Board &board);
+
+protected:
     char form;
+    StackOfDiscs optionStack;
+
 };
 
 

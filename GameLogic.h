@@ -28,43 +28,37 @@ public:
      * @param currentPlayer - current player's form
      * @param opponentPlayer - stack of the opponent
      */
-    void options(const char &currentPlayer,const Player &opponentPlayer);
+   // void options(const Player &opponentPlayer,Board board);
 
     /**
      * Updating the board and the players status following the move of the winning player
      * @param currentPlayer - current player's stack
      * @param opponentPlayer - opponent's stack
      */
-    vector<Player> eat(Player currentPlayer, Player opponentPlayer);
+    vector<Player> eat(Player currentPlayer, Player opponentPlayer,Disc playerChoise);
     /**
      * manages winning player's turn
      * @param currentPlayer - current player
      * @param opponentPlayer - opponent player
      */
-    void turn(Player &currentPlayer, Player &opponentPlayer);
-    /**
+    void turn(Player &currentPlayer, Player &opponentPlayer,Disc playerChoise);
+  /*  *//**
      * Gets a location on the board from the user and translates it to disc
      * @param input - string the user typed
      * @return - the asked disc
-     */
-    Disc fromStringToDisc(char input[50]);
-    /**
-     * Prints a note that the player has no moves
-     * @param winning - current player's form
-     * @param loosing - opponent playerws form
-     */
-    void noTurn(const char &winning,const char &loosing);
+     *//*
+    Disc fromStringToDisc(char input[50]);*/
     /**
      * Returns the number of options available to the current player
      * @return
      */
-    int hasMoves() const;
-    void updateMove(const vector<Player> &tempPlayers, Player &currentPlayer, Player &opponentPlayer);
+    int hasMoves(Player &currentPlayer) const;
+    void updateMove(const vector<Player> &tempPlayers, Player &currentPlayer, Player &opponentPlayer,Disc &playerChoise);
 
 private:
     Board &board;
-    StackOfDiscs stackOfOptions;
-    Disc playerChoise;
+   // StackOfDiscs stackOfOptions;
+   // Disc playerChoise;
 };
 
 #endif //EX2_GAMELOGIC_H

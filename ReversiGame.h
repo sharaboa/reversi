@@ -12,6 +12,7 @@
 #include "Board.h"
 #include "Player.h"
 #include "GameLogic.h"
+#include "HumanPlayer.h"
 
 using namespace std;
 
@@ -50,8 +51,8 @@ public:
 
 private:
     Board board;
-    Player black;
-    Player white;
+    HumanPlayer black;
+    HumanPlayer white;
     GameLogic gameLogic;
     const int size;
 };

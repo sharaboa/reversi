@@ -8,6 +8,7 @@
 
 
 #include "Disc.h"
+#include "Board.h"
 #include <vector>
 using namespace std;
 

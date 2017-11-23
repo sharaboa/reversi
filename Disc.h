@@ -39,6 +39,8 @@ public:
 
     bool operator ==(const Disc &otherDisc) const;
 
+    void setDisc(int row, int col);
+
 private:
     int location[2];
 };

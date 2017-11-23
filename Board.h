@@ -6,9 +6,9 @@
 #ifndef EX2_BOARD_H
 #define EX2_BOARD_H
 
+#include "Board.h"
 #include <string>
 #include "Disc.h"
-#include "Player.h"
 
 using namespace std;
 

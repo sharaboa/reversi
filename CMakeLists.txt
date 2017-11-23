@@ -16,6 +16,6 @@ set(SOURCE_FILES
         ReversiGame.cpp
         ReversiGame.h
         StackOfDiscs.cpp
-        StackOfDiscs.h)
+        StackOfDiscs.h HumanPlayer.cpp HumanPlayer.h)
 
 add_executable(reversi ${SOURCE_FILES})

@@ -23,3 +23,9 @@ int Disc::getColumnLocation() const {
 bool Disc::operator==(const Disc &otherDisc) const {
     return otherDisc.getColumnLocation() == location[1] && otherDisc.getRowLocation() == location[0];
 }
+
+void Disc::setDisc(int row, int col) {
+    location[0] = row;
+    location[1] = col;
+
+}
