@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-    ReversiGame reversi;
+    ReversiGame reversi(6,'X','O');
     char winner = reversi.play();
     if(winner == ' ') {
         cout << "Game Over! it's a tie " << endl;
