@@ -20,7 +20,6 @@ int Disc::getColumnLocation() const {
     return location[1];
 }
 
-
-bool Disc::isSimilar(Disc otherDisc) {
+bool Disc::operator==(const Disc &otherDisc) const {
     return otherDisc.getColumnLocation() == location[1] && otherDisc.getRowLocation() == location[0];
 }

@@ -31,11 +31,13 @@ public:
      */
     int getColumnLocation() const;
     /**
+     * operator overloading
      * compares two discs and return true if epual
      * @param otherDisc - the Equated disc to the stack
      * @return - true if equal
      */
-    bool isSimilar(Disc otherDisc);
+
+    bool operator ==(const Disc &otherDisc) const;
 
 private:
     int location[2];
