@@ -25,17 +25,17 @@ public:
     explicit GameLogic(Board &board);
     /**
      * Updating the stack to contain the places where the winning player can put a disc
-     * @param winning - current player's form
-     * @param loosing - stack of the opponent
+     * @param currentPlayer - current player's form
+     * @param opponentPlayer - stack of the opponent
      */
-    void options(const char &winning,const Player &loosing);
+    void options(const char &currentPlayer,const Player &opponentPlayer);
 
     /**
      * Updating the board and the players status following the move of the winning player
-     * @param winning - current player's stack
-     * @param loosing - opponent's stack
+     * @param currentPlayer - current player's stack
+     * @param opponentPlayer - opponent's stack
      */
-    vector<Player> eat(Player winning, Player loosing);
+    vector<Player> eat(Player currentPlayer, Player opponentPlayer);
     /**
      * manages winning player's turn
      * @param currentPlayer - current player

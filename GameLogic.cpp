@@ -51,12 +51,12 @@ Disc GameLogic::fromStringToDisc(char input[50]) {
     return disc;
 }
 
-void GameLogic::options(const char &winning,const Player &loosing) {
+void GameLogic::options(const char &currentPlayer,const Player &opponentPlayer) {
     stackOfOptions.emptyStack();
     //Passes the discs that the opposing player has put on the board
-    for(int n = 0; n < loosing.getAmount(); n++) {
-        int row = loosing.getDisc(n).getRowLocation();
-        int col = loosing.getDisc(n).getColumnLocation();
+    for(int n = 0; n < opponentPlayer.getAmount(); n++) {
+        int row = opponentPlayer.getDisc(n).getRowLocation();
+        int col = opponentPlayer.getDisc(n).getColumnLocation();
         //Looking for a possible place to put a disc
         for(int i = -1; i < 2; i++) {
             for(int j = -1; j < 2; j++) {
@@ -64,11 +64,11 @@ void GameLogic::options(const char &winning,const Player &loosing) {
                     //k and l Pass the matrix in a certain direction to make sure that it is indeed legal to put a disc
                     int k = i;
                     int l = j;
-                    while(board.getCell(row - k,col - l) == loosing.getForm()) {
+                    while(board.getCell(row - k,col - l) == opponentPlayer.getForm()) {
                         k = k + i;
                         l = l + j;
                     }
-                    if(board.getCell(row - k,col - l) == winning) {
+                    if(board.getCell(row - k,col - l) == currentPlayer) {
                         stackOfOptions.addToStack(row + i,col + j);
                     }
                 }
@@ -77,10 +77,10 @@ void GameLogic::options(const char &winning,const Player &loosing) {
     }
 }
 
-vector<Player> GameLogic::eat(Player winning,Player loosing) {
+vector<Player> GameLogic::eat(Player currentPlayer,Player opponentPlayer) {
     vector<Player> tempPlayers;
-    tempPlayers.push_back(winning);
-    tempPlayers.push_back(loosing);
+    tempPlayers.push_back(currentPlayer);
+    tempPlayers.push_back(opponentPlayer);
     int row = playerChoise.getRowLocation();
     int col = playerChoise.getColumnLocation();
     for(int i = -1; i < 2; i++) {
@@ -89,16 +89,16 @@ vector<Player> GameLogic::eat(Player winning,Player loosing) {
             int k = i;
             int l = j;
             int m = 0;
-            while(board.getCell(row + k,col + l) == loosing.getForm()) {
+            while(board.getCell(row + k,col + l) == opponentPlayer.getForm()) {
                 k = k + i;
                 l = l + j;
                 m++;
             }
-            if(board.getCell(row + k,col + l) == winning.getForm()) {
+            if(board.getCell(row + k,col + l) == currentPlayer.getForm()) {
                 while(m) {
                     k = k - i;
                     l = l - j;
-                    //board.setCell(row + k,col + l,winning.getForm());
+                    //board.setCell(row + k,col + l,currentPlayer.getForm());
                     Disc loose(row + k, col + l);
                     tempPlayers[0].addToStack(row+k,col+l);
                     tempPlayers[1].removeFromStack(loose);
