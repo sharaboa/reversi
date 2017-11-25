@@ -4,8 +4,6 @@
 //
 
 #include <iostream>
-#include <cstdio>
-#include <cstdlib>
 #include "GameLogic.h"
 
 GameLogic::GameLogic(Board &board): board(board) {}
@@ -16,7 +14,7 @@ void GameLogic::turn(Player &currentPlayer, Player &opponentPlayer,Disc playerCh
     cout << endl << endl;
     cout << "current board:\n\n";
     board.printBoard();
-    cout <<endl<<endl<< currentPlayer.getForm() << " played (" << playerChoise.getRowLocation() << "," << playerChoise.getColumnLocation() << ")" << endl << endl;
+    cout <<endl<< currentPlayer.getForm() << " played (" << playerChoise.getRowLocation() << "," << playerChoise.getColumnLocation() << ")" << endl << endl;
 
 }
 

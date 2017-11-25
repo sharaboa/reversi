@@ -6,16 +6,13 @@
 #include <iostream>
 #include "ReversiGame.h"
 
-ReversiGame::ReversiGame(): board(10),black('X'),white('O'), gameLogic(board),size(8){
-    initialize(board,black,white);
-}
 
-ReversiGame::ReversiGame(const int size,const char b,const char w):
+ReversiGame::ReversiGame(const int size,const HumanPlayer b,const HumanPlayer w):
         board(size + 2),black(b),white(w),gameLogic(board),size(size){
-    initialize(board,black,white);
+    initialize();
 }
 
-void ReversiGame::initialize(Board &board, Player &black, Player &white) {
+void ReversiGame::initialize() {
     int midSize = (size + 2) / 2;
     board.fillMatrixBoard(midSize,black.getForm(),white.getForm());
     white.addToStack(midSize,midSize);
@@ -27,7 +24,7 @@ void ReversiGame::initialize(Board &board, Player &black, Player &white) {
 char ReversiGame::play() {
     //notOver zeroed when both players have no moves
     int notOver = 2;
-    cout << "current board:\n\n";
+    cout << "current board:\n";
     board.printBoard();
     while(notOver && black.getAmount() + white.getAmount() != size*size) {
         black.playerMoveOption(white ,board);
@@ -54,14 +51,15 @@ char ReversiGame::play() {
             }
         }
     }
-    char winner = getWinner();
-    return winner;
+    announceWinner();
 }
 
 
-char ReversiGame::getWinner() const {
+void ReversiGame::announceWinner() const {
     if (black.getAmount() == white.getAmount()) {
-        return ' ';
+        cout << "Game Over! it's a tie " << endl;
     }
-    return black.getAmount() > white.getAmount() ? black.getForm() : white.getForm();
+    black.getAmount() > white.getAmount() ?
+           cout << "Game Over! the winner is: " << black.getForm() :
+           cout << "Game Over! the winner is: " << white.getForm();
 }

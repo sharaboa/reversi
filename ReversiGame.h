@@ -24,18 +24,14 @@ public:
      * @param black - first player
      * @param white - second player
      */
-    ReversiGame(int size,char black,char white);
-    /**
-     * constructor. difault - initialize 8x8 board and x,o players
-     */
-    ReversiGame();
+    ReversiGame(int size,HumanPlayer b,HumanPlayer w);
     /**
      * Initializes the board and players after placing two discs per player in the center of the board
      * @param board
      * @param black - x player
      * @param white - o player
      */
-    void initialize(Board &board, Player &black, Player &white);
+    void initialize();
     /**
      * The game manager. decides who turn to play and returns the winner
      * @return
@@ -46,7 +42,7 @@ public:
      * Returns the form of the winner
      * @return
      */
-    char getWinner() const;
+    void announceWinner() const;
 
 
 private:

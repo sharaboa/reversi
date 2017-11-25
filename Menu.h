@@ -6,6 +6,7 @@
 #define REVERSI_MENU_H
 
 #include <iostream>
+#include <limits>
 
 using namespace std;
 
