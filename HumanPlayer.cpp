@@ -20,18 +20,11 @@ Disc HumanPlayer::playerLogic() {
         fromInputToDisc(input);
         if (optionStack.appear(myChoise)) {
             return myChoise;
-            //cout << endl << endl << "illegal move! Please enter your move row,col:";
         }
         else{
             cout << endl << endl << "illegal move! Please enter your move row,col:";
         }
     }
-
-
-  /*  cout << endl << endl;
-    cout << "current board:\n\n";
-    board.printBoard();*/
-
 }
 
 void HumanPlayer::fromInputToDisc(char input[50]) {
