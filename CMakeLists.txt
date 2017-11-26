@@ -20,6 +20,6 @@ set(SOURCE_FILES
         HumanPlayer.cpp
         HumanPlayer.h
         Menu.cpp
-        Menu.h)
+        Menu.h AiPlayer.cpp AiPlayer.h)
 
 add_executable(reversi ${SOURCE_FILES})

@@ -6,9 +6,10 @@
 #define REVERSI_AIPLAYER_H
 
 #include "Player.h"
-#include <iostream>
 
-class Aiplayer public: Player{};
+class AiPlayer public:Player {
+
+};
 
 
 #endif //REVERSI_AIPLAYER_H
