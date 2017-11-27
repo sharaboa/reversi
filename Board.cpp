@@ -13,32 +13,32 @@ Board::Board(const int size): size(size){
 }
 
 void Board::buildMatrixBoard() {
-    matrixBoard = new char*[size];
+    matrixBoard = new boardSymbol*[size];
     for(int i = 0; i < size; i++) {
-        matrixBoard[i] = new char[size];
+        matrixBoard[i] = new boardSymbol[size];
     }
 }
 
 void Board::fillMatrixBoard(const int &midSize,const char &black,const char &white) {
     //puts the player's discs in the middle of the matrix
-    matrixBoard[midSize][midSize] = white;
-    matrixBoard[midSize - 1][midSize] = black;
-    matrixBoard[midSize][midSize - 1] = black;
-    matrixBoard[midSize - 1][midSize - 1] = white;
+    matrixBoard[midSize][midSize] = (boardSymbol) white;
+    matrixBoard[midSize - 1][midSize] = (boardSymbol) black;
+    matrixBoard[midSize][midSize - 1] = (boardSymbol) black;
+    matrixBoard[midSize - 1][midSize - 1] = (boardSymbol) white;
     //puts spaces in rest of the matrix
     for (int i = 1; i < size - 1; i++) {
         for(int j = 1; j < size - 1; j++) {
             if (matrixBoard[i][j] != black && matrixBoard[i][j] != white) {
-                matrixBoard[i][j] = ' ';
+                matrixBoard[i][j] = S;
             }
         }
     }
     //puts $ in the borderlines of the matrix
     for(int i = 0; i < size; i++) {
-        matrixBoard[0][i] = '$';
-        matrixBoard[i][0] = '$';
-        matrixBoard[size - 1][i] = '$';
-        matrixBoard[i][size - 1] = '$';
+        matrixBoard[0][i] = B;
+        matrixBoard[i][0] = B;
+        matrixBoard[size - 1][i] = B;
+        matrixBoard[i][size - 1] = B;
     }
 }
 
@@ -55,7 +55,7 @@ void Board::printBoard() const {
                     if (j == 0 && i > 0) {
                         cout << i << "| ";
                     } else {
-                        cout << matrixBoard[i][j] << " | ";
+                        cout << (char)matrixBoard[i][j] << " | ";
                     }
                 }
             }
@@ -81,13 +81,13 @@ char Board::getCell(const int &i,const int &j) const {
 }
 
 void Board::setCell(const int &i, const int &j, const char &win) {
-    matrixBoard[i][j] = win;
+    matrixBoard[i][j] = (boardSymbol) win;
 }
 
 void Board::setBoard(Board otherBoard) {
     for(int i = 0; i < size; i++) {
         for(int j = 0;j < size; j++) {
-            matrixBoard[i][j] = otherBoard.getCell(i,j);
+            matrixBoard[i][j] = static_cast<boardSymbol>(otherBoard.getCell(i, j));
         }
     }
 }
@@ -110,3 +110,4 @@ int Board::getSize() const {
 Board Board::getBoard() const {
     return *this;
 }
+
