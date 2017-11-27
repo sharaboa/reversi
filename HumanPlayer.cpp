@@ -7,7 +7,7 @@
 
 HumanPlayer::HumanPlayer(const char form) : Player(form) {}
 
-Disc HumanPlayer::playerLogic() {
+Disc HumanPlayer::playerLogic(Player opponentPlayer) {
     optionStack.isRepeat();
     cout << form << ": It's your move." << endl << "Your possible moves: ";
     for (int i = 0; i < optionStack.getAmount(); i++) {

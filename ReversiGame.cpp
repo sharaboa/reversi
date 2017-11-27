@@ -33,7 +33,7 @@ char ReversiGame::play() {
         black.playerMoveOption(white ,board);
         if (gameLogic.hasMoves(black)) {
             notOver = 2;
-            gameLogic.turn(black, white,black.playerLogic());
+            gameLogic.turn(black, white,black.playerLogic(white));
         } else {
             notOver--;
             if(notOver) {
@@ -45,7 +45,7 @@ char ReversiGame::play() {
             white.playerMoveOption(black ,board);
             if (gameLogic.hasMoves(white)) {
                 notOver = 2;
-                gameLogic.turn(white, black,white.playerLogic());
+                gameLogic.turn(white, black,white.playerLogic(black));
             } else {
                 notOver--;
                 if(notOver) {
