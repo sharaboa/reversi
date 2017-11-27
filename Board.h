@@ -66,6 +66,7 @@ public:
 private:
     const int size;
     char** matrixBoard;
+    //vector< vector<char> > matrixBoard;
 };
 
 

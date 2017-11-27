@@ -6,16 +6,14 @@
 #include <iostream>
 #include "ReversiGame.h"
 
-ReversiGame::ReversiGame(int size, HumanPlayer b): board(size + 2),black(b),gameLogic(board),size(size),white('O',gameLogic,board){
+/*ReversiGame::ReversiGame(int size, HumanPlayer b): board(size + 2),black(b),gameLogic(board),size(size),white('O',gameLogic,board){
     initialize();
-}
+}*/
 
-/*
 ReversiGame::ReversiGame(const int size,const HumanPlayer b,const HumanPlayer w):
         board(size + 2),black(b),white(w),gameLogic(board),size(size){
     initialize();
 }
-*/
 
 void ReversiGame::initialize() {
     int midSize = (size + 2) / 2;
@@ -47,7 +45,7 @@ char ReversiGame::play() {
             white.playerMoveOption(black ,board);
             if (gameLogic.hasMoves(white)) {
                 notOver = 2;
-                gameLogic.turn(white, black,white.playerLogic(black));
+                gameLogic.turn(white, black,white.playerLogic());
             } else {
                 notOver--;
                 if(notOver) {

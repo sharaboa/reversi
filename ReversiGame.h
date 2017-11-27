@@ -19,14 +19,14 @@ using namespace std;
 
 class ReversiGame {
 public:
-    ReversiGame(int size,HumanPlayer);
+   // ReversiGame(int size,HumanPlayer);
     /**
      * constructor. Initializes board and players
      * @param size - of board
      * @param black - first player
      * @param white - second player
      */
-   // ReversiGame(int size,HumanPlayer b,HumanPlayer w);
+    ReversiGame(int size,HumanPlayer b,HumanPlayer w);
     /**
      * Initializes the board and players after placing two discs per player in the center of the board
      * @param board
@@ -49,7 +49,7 @@ public:
 
 private:
     Board board;
-    AiPlayer white;
+    HumanPlayer white;
     HumanPlayer black;
     GameLogic gameLogic;
     const int size;
