@@ -10,28 +10,22 @@
 Menu::Menu(const int size,const char b,const char w):size(size),black(b),white(w) {}
 
 char Menu::opponentType() {
-    HumanPlayer me(black);
-    char choise = 0;
-    do {
+    char choise;
+    while (true) {
         cout << "choose opponent tipe:\npress h for human\npress c for computer\n";
-        scanf(" %c",&choise);
-        if (!cin.fail()) {
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        }
-        cin.clear();
-    } while(choise != 'c' && choise != 'C' && choise != 'h' && choise != 'H');
-
-    switch (choise) {
-        /*case 'c': case 'C': {
-            // AiPlayer opponentAiPlayer(white);
-            ReversiGame reversiGame(size, me);
+        cin >> choise;
+        if (choise == 'c' || choise == 'C' || choise == 'h' || choise == 'H') {
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //skip bad input
+            ReversiGame reversiGame(size,black,white,choise);
             reversiGame.play();
-        }*/
-            case 'h': case 'H': {
-                HumanPlayer opponentHumanPlayer(white);
-                ReversiGame reversiGame(size, me, opponentHumanPlayer);
-                reversiGame.play();
-                break;
-            }
+            break;
         }
+
+        // user didn't input a number
+        cout << "choose opponent tipe:\npress h for human\npress c for computer\n" << endl;
+        cin.clear(); // reset failbit
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //skip bad input
     }
+}
+
+

@@ -7,7 +7,7 @@
 
 AiPlayer::AiPlayer(const char form,  GameLogic myLogic,Board &gameBoard) : Player(form), myLogic(myLogic),gameBoard(gameBoard) {}
 
-Disc AiPlayer::playerLogic(Player opponentPlayer){
+Disc AiPlayer::playerLogic(Player opponentPlayer) {
     Board tempBoardAi = gameBoard.getBoard();
     Board resetAi(tempBoardAi.getSize());
     Board tempBoardHu(tempBoardAi.getSize());

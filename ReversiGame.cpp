@@ -6,22 +6,29 @@
 #include <iostream>
 #include "ReversiGame.h"
 
-/*ReversiGame::ReversiGame(int size, HumanPlayer b): board(size + 2),black(b),gameLogic(board),size(size),white('O',gameLogic,board){
-    initialize();
-}*/
+ReversiGame::ReversiGame(int size, const char b, const char w,char x): board(size + 2),gameLogic(board),size(size),hOrc(x) {
+    black = new HumanPlayer(b);
 
-ReversiGame::ReversiGame(const int size,const HumanPlayer b,const HumanPlayer w):
-        board(size + 2),black(b),white(w),gameLogic(board),size(size){
+    switch (x) {
+            case 'c': case 'C': {
+                white = new AiPlayer(w,gameLogic,board);
+                break;
+            }
+            case 'h': case 'H': {
+                white = new HumanPlayer(w);
+            }
+        }
     initialize();
 }
 
+
 void ReversiGame::initialize() {
     int midSize = (size + 2) / 2;
-    board.fillMatrixBoard(midSize,black.getForm(),white.getForm());
-    white.addToStack(midSize,midSize);
-    white.addToStack(midSize - 1, midSize - 1);
-    black.addToStack(midSize - 1, midSize);
-    black.addToStack(midSize,midSize - 1);
+    board.fillMatrixBoard(midSize,black->getForm(),white->getForm());
+    white->addToStack(midSize,midSize);
+    white->addToStack(midSize - 1, midSize - 1);
+    black->addToStack(midSize - 1, midSize);
+    black->addToStack(midSize,midSize - 1);
 }
 
 char ReversiGame::play() {
@@ -29,27 +36,31 @@ char ReversiGame::play() {
     int notOver = 2;
     cout << "current board:\n";
     board.printBoard();
-    while(notOver && black.getAmount() + white.getAmount() != size*size) {
-        black.playerMoveOption(white ,board);
-        if (gameLogic.hasMoves(black)) {
+    while(notOver && black->getAmount() + white->getAmount() != size*size) {
+        black->playerMoveOption(*white ,board);
+        if (gameLogic.hasMoves(*black)) {
             notOver = 2;
-            gameLogic.turn(black, white,black.playerLogic(white));
+            gameLogic.turn(*black, *white, ((HumanPlayer *) black)->playerLogic(*white));
         } else {
             notOver--;
             if(notOver) {
-                cout << black.getForm() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
+                cout << black->getForm() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
 
             }
         }
-        if(notOver && black.getAmount() + white.getAmount() != size*size) {
-            white.playerMoveOption(black ,board);
-            if (gameLogic.hasMoves(white)) {
+        if(notOver && black->getAmount() + white->getAmount() != size*size) {
+            white->playerMoveOption(*black ,board);
+            if (gameLogic.hasMoves(*white)) {
                 notOver = 2;
-                gameLogic.turn(white, black,white.playerLogic(black));
+                if(hOrc == 'c' || hOrc == 'C') {
+                    gameLogic.turn(*white, *black, ((AiPlayer *) white)->playerLogic(*black));
+                } else {
+                    gameLogic.turn(*white, *black, ((HumanPlayer *) white)->playerLogic(*black));
+                }
             } else {
                 notOver--;
                 if(notOver) {
-                    cout << white.getForm() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
+                    cout << white->getForm() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
                 }
             }
         }
@@ -58,11 +69,11 @@ char ReversiGame::play() {
 }
 
 void ReversiGame::announceWinner() const {
-    if (black.getAmount() == white.getAmount()) {
+    if (black->getAmount() == white->getAmount()) {
         cout << "Game Over! it's a tie " << endl;
     } else {
-        black.getAmount() > white.getAmount() ?
-        cout << "Game Over! the winner is: " << black.getForm() :
-        cout << "Game Over! the winner is: " << white.getForm();
+        black->getAmount() > white->getAmount() ?
+        cout << "Game Over! the winner is: " << black->getForm() :
+        cout << "Game Over! the winner is: " << white->getForm();
     }
 }

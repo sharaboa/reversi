@@ -19,20 +19,25 @@ using namespace std;
 
 class ReversiGame {
 public:
-   // ReversiGame(int size,HumanPlayer);
+    ReversiGame(int size,const char b,const char w,char x);
     /**
      * constructor. Initializes board and players
      * @param size - of board
      * @param black - first player
      * @param white - second player
      */
-    ReversiGame(int size,HumanPlayer b,HumanPlayer w);
+
+    //ReversiGame(const int size);
+
+    //ReversiGame(const int size, const Player &b, const Player &w);
+
+
     /**
-     * Initializes the board and players after placing two discs per player in the center of the board
-     * @param board
-     * @param black - x player
-     * @param white - o player
-     */
+                     * Initializes the board and players after placing two discs per player in the center of the board
+                     * @param board
+                     * @param black - x player
+                     * @param white - o player
+                     */
     void initialize();
     /**
      * The game manager. decides who turn to play and returns the winner
@@ -49,10 +54,11 @@ public:
 
 private:
     Board board;
-    HumanPlayer white;
-    HumanPlayer black;
+    Player *white;
+    Player *black;
     GameLogic gameLogic;
     const int size;
+    char hOrc;
 };
 
 
