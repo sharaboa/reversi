@@ -6,7 +6,7 @@
 using namespace std;
 
 int main() {
-    Menu reversi(4,'X','O');
-   reversi.opponentType();
-
+    ReversiGame reversiGame(4);
+    Menu menu;
+    menu.opponentType(reversiGame,'X','O');
 }

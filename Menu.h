@@ -7,18 +7,15 @@
 
 #include <iostream>
 #include <limits>
+#include "ReversiGame.h"
 
 using namespace std;
 
 
 class Menu {
 public:
-    Menu(int size,char black,char white);
-    char opponentType();
-private:
-    const char black;
-    const char white;
-    const int size;
+    Menu();
+    void opponentType(ReversiGame reversiGame, const char black, const char white);
 };
 
 
