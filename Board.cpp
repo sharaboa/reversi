@@ -9,7 +9,7 @@
 
 
 Board::Board(const int size): size(size){
-    buildMatrixBoard() ;
+    buildMatrixBoard();
 }
 
 void Board::buildMatrixBoard() {
