@@ -9,7 +9,7 @@
 GameLogic::GameLogic(Board &board): board(board) {}
 
 void GameLogic::turn(Player &currentPlayer, Player &opponentPlayer,Disc playerChoise) {
-    vector<Player> tempPlayers = eat(currentPlayer,opponentPlayer,playerChoise);
+    vector<Player> tempPlayers = eat(currentPlayer,opponentPlayer,playerChoise,board);
     updateMove(tempPlayers, currentPlayer, opponentPlayer,playerChoise);
     cout << endl << endl;
     cout << "current board:\n\n";
@@ -61,28 +61,34 @@ void GameLogic::options(const char &currentPlayer,const Player &opponentPlayer) 
     }
 }*/
 
-vector<Player> GameLogic::eat(Player currentPlayer,Player opponentPlayer,Disc playerChoise) {
+vector<Player> GameLogic::eat(Player currentPlayer,Player opponentPlayer,Disc playerChoise,Board &tempBoard) {
+    //currentPlayer.addToStack(playerChoise.getRowLocation(),playerChoise.getColumnLocation());
+
+    tempBoard.setCell(playerChoise.getRowLocation(),playerChoise.getColumnLocation(),currentPlayer.getForm());
     vector<Player> tempPlayers;
     tempPlayers.push_back(currentPlayer);
     tempPlayers.push_back(opponentPlayer);
     int row = playerChoise.getRowLocation();
+    cout<<"11111111111111    "<<row<<endl;
     int col = playerChoise.getColumnLocation();
+    cout<<"11111111111111    "<<col<<endl;
+   // tempBoard.printBoard();
     for(int i = -1; i < 2; i++) {
         for(int j = -1; j < 2; j++) {
             // m counts how many discs should be replace
             int k = i;
             int l = j;
             int m = 0;
-            while(board.getCell(row + k,col + l) == opponentPlayer.getForm()) {
+            while(tempBoard.getCell(row + k,col + l) == opponentPlayer.getForm()) {
                 k = k + i;
                 l = l + j;
                 m++;
             }
-            if(board.getCell(row + k,col + l) == currentPlayer.getForm()) {
+            if(tempBoard.getCell(row + k,col + l) == currentPlayer.getForm()) {
                 while(m) {
                     k = k - i;
                     l = l - j;
-                    //board.setCell(row + k,col + l,currentPlayer.getForm());
+                    tempBoard.setCell(row + k,col + l,currentPlayer.getForm());
                     Disc loose(row + k, col + l);
                     tempPlayers[0].addToStack(row+k,col+l);
                     tempPlayers[1].removeFromStack(loose);
@@ -90,6 +96,7 @@ vector<Player> GameLogic::eat(Player currentPlayer,Player opponentPlayer,Disc pl
                 }
             }
         }
+   //     tempBoard.printBoard();
     }
     return tempPlayers;
 }
@@ -97,7 +104,7 @@ vector<Player> GameLogic::eat(Player currentPlayer,Player opponentPlayer,Disc pl
 void GameLogic::updateMove(const vector<Player>& tempPlayers, Player &currentPlayer, Player &opponentPlayer,Disc &playerChoise) {
     currentPlayer = tempPlayers[0];
     opponentPlayer = tempPlayers[1];
-    currentPlayer.addToStack(playerChoise.getRowLocation(),playerChoise.getColumnLocation());
+   // currentPlayer.addToStack(playerChoise.getRowLocation(),playerChoise.getColumnLocation());
     board.setCell(playerChoise.getRowLocation(),playerChoise.getColumnLocation(),currentPlayer.getForm());
     for(int i = 0; i < 2; i++) {
        for(int j = 0;j < tempPlayers[i].getAmount(); j++) {

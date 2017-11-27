@@ -6,9 +6,17 @@
 #define REVERSI_AIPLAYER_H
 
 #include "Player.h"
+#include "GameLogic.h"
 
-class AiPlayer public:Player {
-
+class AiPlayer: public Player{
+public:
+    AiPlayer(const char form, GameLogic myLogic,Board &gameBoard);
+    virtual Disc playerLogic(Player opponentPlayer);
+   // Disc calculateChoise();
+private:
+    Disc myChoise;
+    GameLogic myLogic;
+    Board gameBoard;
 };
 
 

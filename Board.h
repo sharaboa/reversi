@@ -8,6 +8,7 @@
 
 #include "Board.h"
 #include <string>
+#include <vector>
 #include "Disc.h"
 
 using namespace std;
@@ -53,7 +54,14 @@ public:
      * @param j - column
      * @param win - the form that enters the board
      */
-    void setCell(const int &i, const int &j, const char &win) const;
+    void setCell(const int &i, const int &j, const char &win);
+
+    void setBoard(Board board);
+
+    int getSize() const;
+
+    Board getBoard() const;
+    void  copyBoard(Board &otherBoard);
 
 private:
     const int size;

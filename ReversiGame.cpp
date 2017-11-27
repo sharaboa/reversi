@@ -6,11 +6,16 @@
 #include <iostream>
 #include "ReversiGame.h"
 
+ReversiGame::ReversiGame(int size, HumanPlayer b): board(size + 2),black(b),gameLogic(board),size(size),white('O',gameLogic,board){
+    initialize();
+}
 
+/*
 ReversiGame::ReversiGame(const int size,const HumanPlayer b,const HumanPlayer w):
         board(size + 2),black(b),white(w),gameLogic(board),size(size){
     initialize();
 }
+*/
 
 void ReversiGame::initialize() {
     int midSize = (size + 2) / 2;
@@ -42,7 +47,7 @@ char ReversiGame::play() {
             white.playerMoveOption(black ,board);
             if (gameLogic.hasMoves(white)) {
                 notOver = 2;
-                gameLogic.turn(white, black,white.playerLogic());
+                gameLogic.turn(white, black,white.playerLogic(black));
             } else {
                 notOver--;
                 if(notOver) {
@@ -54,12 +59,12 @@ char ReversiGame::play() {
     announceWinner();
 }
 
-
 void ReversiGame::announceWinner() const {
     if (black.getAmount() == white.getAmount()) {
         cout << "Game Over! it's a tie " << endl;
+    } else {
+        black.getAmount() > white.getAmount() ?
+        cout << "Game Over! the winner is: " << black.getForm() :
+        cout << "Game Over! the winner is: " << white.getForm();
     }
-    black.getAmount() > white.getAmount() ?
-           cout << "Game Over! the winner is: " << black.getForm() :
-           cout << "Game Over! the winner is: " << white.getForm();
 }

@@ -35,7 +35,7 @@ public:
      * @param currentPlayer - current player's stack
      * @param opponentPlayer - opponent's stack
      */
-    vector<Player> eat(Player currentPlayer, Player opponentPlayer,Disc playerChoise);
+    vector<Player> eat(Player currentPlayer, Player opponentPlayer,Disc playerChoise, Board &tempBoard);
     /**
      * manages winning player's turn
      * @param currentPlayer - current player

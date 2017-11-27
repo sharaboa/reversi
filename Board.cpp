@@ -7,7 +7,8 @@
 #include <iostream>
 
 
-Board::Board(const int size): size(size), matrixBoard() {
+
+Board::Board(const int size): size(size){
     buildMatrixBoard();
 }
 
@@ -67,18 +68,45 @@ void Board::printBoard() const {
         cout << endl;
     }
 }
-
 Board::~Board() {
-    for(int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) {
         delete[]matrixBoard[i];
     }
-    delete[] matrixBoard;
+    if (*matrixBoard)
+        delete[] matrixBoard;
 }
 
 char Board::getCell(const int &i,const int &j) const {
     return matrixBoard[i][j];
 }
 
-void Board::setCell(const int &i, const int &j, const char &win) const {
+void Board::setCell(const int &i, const int &j, const char &win) {
     matrixBoard[i][j] = win;
+}
+
+void Board::setBoard(Board otherBoard) {
+    for(int i = 0; i < size; i++) {
+        for(int j = 0;j < size; j++) {
+            matrixBoard[i][j] = otherBoard.getCell(i,j);
+        }
+    }
+}
+void Board::copyBoard(Board &otherBoard){
+    otherBoard.buildMatrixBoard();
+    for(int i = 0; i < size; i++) {
+        for(int j = 0;j < size; j++) {
+            // cout<<"orig"<<matrixBoard[i][j]<<"  ";
+            otherBoard.setCell(i,j,matrixBoard[i][j]);
+            // cout<<"other"<<otherBoard.getCell(i,j)<<endl;
+        }
+    }
+    cout<<"other board"<<endl;
+    otherBoard.printBoard();
+}
+int Board::getSize() const {
+    return size;
+}
+
+Board Board::getBoard() const {
+    return *this;
 }

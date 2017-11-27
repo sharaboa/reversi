@@ -22,15 +22,16 @@ char Menu::opponentType() {
     } while(choise != 'c' && choise != 'C' && choise != 'h' && choise != 'H');
 
     switch (choise) {
-            /*case 'c' || 'C':
-                AiPlayer opponentAiPlayer(white);
-                GameLogic gameLogic(size, me, opponentAiPlayer);
-                reversiGame.play();*/
-            case 'h': case 'H': {
+        case 'c': case 'C': {
+            // AiPlayer opponentAiPlayer(white);
+            ReversiGame reversiGame(size, me);
+            reversiGame.play();
+        }
+          /*  case 'h': case 'H': {
                 HumanPlayer opponentHumanPlayer(white);
                 ReversiGame reversiGame(size, me, opponentHumanPlayer);
                 reversiGame.play();
                 break;
-            }
+            }*/
         }
     }

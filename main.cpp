@@ -6,8 +6,18 @@
 using namespace std;
 
 int main() {
-    Menu reversi(3,'X','O');
-    reversi.opponentType();
+   /* Board board(6);
+    board.fillMatrixBoard(3,'X','O');
+    cout<<"origin board   "<<endl;
+    board.setCell(1,1,'@');
+    board.printBoard();
+    cout<<board.getCell(1,1)<<endl;
+    Board board1(6);
+    board.copyBoard(board1);
+    cout<<"copy board   "<<endl;
+    board1.printBoard();*/
+    Menu reversi(6,'X','O');
+   reversi.opponentType();
     //char winner = reversi.play();
   /*  if(winner == ' ') {
         cout << "Game Over! it's a tie " << endl;
