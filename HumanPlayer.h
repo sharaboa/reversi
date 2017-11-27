@@ -13,7 +13,7 @@
 class HumanPlayer: public Player{
 public:
     HumanPlayer(const char form);
-    virtual Disc playerLogic();
+    virtual Disc playerLogic(Player opponentPlayer);
     void fromInputToDisc(char input[50]);
 private:
     Disc myChoise;

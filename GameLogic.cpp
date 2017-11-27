@@ -65,9 +65,11 @@ vector<Player> GameLogic::eat(Player currentPlayer,Player opponentPlayer,Disc pl
     //currentPlayer.addToStack(playerChoise.getRowLocation(),playerChoise.getColumnLocation());
 
     tempBoard.setCell(playerChoise.getRowLocation(),playerChoise.getColumnLocation(),currentPlayer.getForm());
+    currentPlayer.addToStack(playerChoise.getRowLocation(),playerChoise.getColumnLocation());
     vector<Player> tempPlayers;
     tempPlayers.push_back(currentPlayer);
     tempPlayers.push_back(opponentPlayer);
+
     int row = playerChoise.getRowLocation();
     cout<<"11111111111111    "<<row<<endl;
     int col = playerChoise.getColumnLocation();
