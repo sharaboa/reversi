@@ -15,6 +15,10 @@ using namespace std;
 
 
 class Board {
+    enum boardSymbol{
+        X = 'X', O = 'O',S = '  ',B = '$'
+    };
+
 public:
     /**
      * constructor. getting the board size
@@ -65,9 +69,8 @@ public:
 
 private:
     const int size;
-    char** matrixBoard;
+    boardSymbol** matrixBoard;
     //vector< vector<char> > matrixBoard;
 };
-
 
 #endif //EX2_BOARD_H
