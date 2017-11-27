@@ -6,21 +6,7 @@
 #include <iostream>
 #include "ReversiGame.h"
 
-ReversiGame::ReversiGame(int size): board(size + 2),gameLogic(board),size(size) {
-    /*Player *black = new HumanPlayer(b);
-    Player *white;
-
-    switch (x) {
-            case 'c': case 'C': {
-                white = new AiPlayer(w,gameLogic,board);
-                break;
-            }
-            case 'h': case 'H': {
-                white = new HumanPlayer(w);
-            }
-        }*/
-   // initialize(black,white);
-}
+ReversiGame::ReversiGame(int size): board(size + 2),gameLogic(board),size(size) {}
 
 
 void ReversiGame::initialize(char b,char w,char x) {
@@ -66,11 +52,8 @@ char ReversiGame::play(Player *black,Player *white) {
             white->playerMoveOption(*black ,board);
             if (gameLogic.hasMoves(*white)) {
                 notOver = 2;
-                if(hOrc == 'c' || hOrc == 'C') {
-                    gameLogic.turn(*white, *black, ((AiPlayer *) white)->playerLogic(*black));
-                } else {
-                    gameLogic.turn(*white, *black, ((HumanPlayer *) white)->playerLogic(*black));
-                }
+                gameLogic.turn(*white, *black,white->playerLogic(*black));
+
             } else {
                 notOver--;
                 if(notOver) {
