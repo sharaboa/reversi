@@ -94,14 +94,10 @@ void Board::setBoard(Board otherBoard) {
 void Board::copyBoard(Board &otherBoard){
     otherBoard.buildMatrixBoard();
     for(int i = 0; i < size; i++) {
-        for(int j = 0;j < size; j++) {
-            // cout<<"orig"<<matrixBoard[i][j]<<"  ";
-            otherBoard.setCell(i,j,matrixBoard[i][j]);
-            // cout<<"other"<<otherBoard.getCell(i,j)<<endl;
+        for (int j = 0; j < size; j++) {
+            otherBoard.setCell(i, j, matrixBoard[i][j]);
         }
     }
-    cout<<"other board"<<endl;
-    otherBoard.printBoard();
 }
 int Board::getSize() const {
     return size;

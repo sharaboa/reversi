@@ -12,7 +12,6 @@ class AiPlayer: public Player{
 public:
     AiPlayer(const char form, GameLogic myLogic,Board &gameBoard);
     virtual Disc playerLogic(Player opponentPlayer) ;
-   // Disc calculateChoise();
 private:
     Disc myChoise;
     GameLogic myLogic;
