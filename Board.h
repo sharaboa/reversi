@@ -16,7 +16,7 @@ using namespace std;
 
 class Board {
     enum boardSymbol{
-        X = 'X', O = 'O',S = '  ',B = '$'
+        X = 'X', O = 'O',S = ' ',B = '$'
     };
 
 public:

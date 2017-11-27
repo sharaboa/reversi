@@ -16,8 +16,8 @@ char Menu::opponentType() {
         cin >> choise;
         if (choise == 'c' || choise == 'C' || choise == 'h' || choise == 'H') {
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //skip bad input
-            ReversiGame reversiGame(size,black,white,choise);
-            reversiGame.play();
+            ReversiGame reversiGame(size);
+            reversiGame.initialize(black,white,choise);
             break;
         }
 

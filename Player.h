@@ -30,7 +30,7 @@ public:
      */
     char getForm() const;
     StackOfDiscs getOptionStack() const;
-    virtual Disc playerLogic();
+    virtual Disc playerLogic(Player p);
 
     void playerMoveOption(const Player opponentPlayer,Board &board);
 

@@ -18,7 +18,7 @@ StackOfDiscs Player::getOptionStack() const {
     return optionStack;
 }
 
-Disc Player::playerLogic() {}
+Disc Player::playerLogic(Player p) {}
 
 void Player::playerMoveOption(const Player opponentPlayer,Board &board) {
     optionStack.emptyStack();

@@ -6,8 +6,9 @@
 #include <iostream>
 #include "ReversiGame.h"
 
-ReversiGame::ReversiGame(int size, const char b, const char w,char x): board(size + 2),gameLogic(board),size(size),hOrc(x) {
-    black = new HumanPlayer(b);
+ReversiGame::ReversiGame(int size): board(size + 2),gameLogic(board),size(size) {
+    /*Player *black = new HumanPlayer(b);
+    Player *white;
 
     switch (x) {
             case 'c': case 'C': {
@@ -17,21 +18,34 @@ ReversiGame::ReversiGame(int size, const char b, const char w,char x): board(siz
             case 'h': case 'H': {
                 white = new HumanPlayer(w);
             }
-        }
-    initialize();
+        }*/
+   // initialize(black,white);
 }
 
 
-void ReversiGame::initialize() {
+void ReversiGame::initialize(char b,char w,char x) {
+    Player *black = new HumanPlayer(b);
+    Player *white;
+
+    switch (x) {
+        case 'c': case 'C': {
+            white = new AiPlayer(w,gameLogic,board);
+            break;
+        }
+        case 'h': case 'H': {
+            white = new HumanPlayer(w);
+        }
+    }
     int midSize = (size + 2) / 2;
     board.fillMatrixBoard(midSize,black->getForm(),white->getForm());
     white->addToStack(midSize,midSize);
     white->addToStack(midSize - 1, midSize - 1);
     black->addToStack(midSize - 1, midSize);
     black->addToStack(midSize,midSize - 1);
+    play(black,white);
 }
 
-char ReversiGame::play() {
+char ReversiGame::play(Player *black,Player *white) {
     //notOver zeroed when both players have no moves
     int notOver = 2;
     cout << "current board:\n";
@@ -40,7 +54,7 @@ char ReversiGame::play() {
         black->playerMoveOption(*white ,board);
         if (gameLogic.hasMoves(*black)) {
             notOver = 2;
-            gameLogic.turn(*black, *white, ((HumanPlayer *) black)->playerLogic(*white));
+            gameLogic.turn(*black, *white, black->playerLogic(*white));
         } else {
             notOver--;
             if(notOver) {
@@ -65,10 +79,10 @@ char ReversiGame::play() {
             }
         }
     }
-    announceWinner();
+    announceWinner(black,white);
 }
 
-void ReversiGame::announceWinner() const {
+void ReversiGame::announceWinner(Player *black,Player *white) const {
     if (black->getAmount() == white->getAmount()) {
         cout << "Game Over! it's a tie " << endl;
     } else {

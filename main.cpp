@@ -16,7 +16,7 @@ int main() {
     board.copyBoard(board1);
     cout<<"copy board   "<<endl;
     board1.printBoard();*/
-    Menu reversi(3,'X','O');
+    Menu reversi(4,'X','O');
    reversi.opponentType();
     //char winner = reversi.play();
   /*  if(winner == ' ') {
