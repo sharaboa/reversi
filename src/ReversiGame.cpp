@@ -10,9 +10,8 @@ ReversiGame::ReversiGame(int size): board(size + 2),gameLogic(board),size(size) 
 
 
 void ReversiGame::initialize(Symbol b,Symbol w,char x) {
-    Player *black = new HumanPlayer(b);
+    Player *const black = new HumanPlayer(b);
     Player *white;
-
     switch (x) {
         case 'c': case 'C': {
             white = new AiPlayer(w,gameLogic,board);
