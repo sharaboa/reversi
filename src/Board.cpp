@@ -8,7 +8,7 @@
 
 
 
-Board::Board(const int size): size(size){
+Board::Board(const int size): size(size+2){
     buildMatrixBoard();
 }
 
@@ -92,7 +92,7 @@ void Board::copyBoard(Board &otherBoard){
     }
 }
 int Board::getSize() const {
-    return size;
+    return size - 2;
 }
 
 Board Board::getBoard() const {

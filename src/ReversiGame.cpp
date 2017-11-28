@@ -6,7 +6,7 @@
 #include <iostream>
 #include "ReversiGame.h"
 
-ReversiGame::ReversiGame(int size): board(size + 2),gameLogic(board),size(size) {}
+ReversiGame::ReversiGame(int size): board(size),gameLogic(board),size(size) {}
 
 
 void ReversiGame::initialize(Symbol b,Symbol w,char x) {

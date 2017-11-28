@@ -24,7 +24,6 @@ vector<Player> GameLogic::eat(Player currentPlayer,Player opponentPlayer,Disc pl
     vector<Player> tempPlayers;
     tempPlayers.push_back(currentPlayer);
     tempPlayers.push_back(opponentPlayer);
-
     int row = playerChoise.getRowLocation();
     int col = playerChoise.getColumnLocation();
     for(int i = -1; i < 2; i++) {
