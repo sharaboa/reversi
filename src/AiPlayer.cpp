@@ -8,7 +8,6 @@
 AiPlayer::AiPlayer(Symbol symbol,  GameLogic myLogic,Board &gameBoard) : Player(symbol), myLogic(myLogic),gameBoard(gameBoard) {}
 
 Disc AiPlayer::playerLogic(Player opponentPlayer) {
-    //Board tempBoardAi = gameBoard.getBoard();
     Board tempBoardAi(gameBoard.getSize());
     Board resetAi(gameBoard.getSize());
     Board tempBoardHu(gameBoard.getSize());
