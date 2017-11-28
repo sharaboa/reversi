@@ -34,7 +34,7 @@ public:
      * @param black - x player
      * @param white - o player
      */
-    void initialize(char b,char w,char x);
+    void initialize(Symbol b,Symbol w,char x);
     /**
      * The game manager. decides who turn to play and returns the winner
      * @return

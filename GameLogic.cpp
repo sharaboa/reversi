@@ -14,12 +14,12 @@ void GameLogic::turn(Player &currentPlayer, Player &opponentPlayer,Disc playerCh
     cout << endl << endl;
     cout << "current board:\n\n";
     board.printBoard();
-    cout <<endl<< currentPlayer.getForm() << " played (" << playerChoise.getRowLocation() << "," << playerChoise.getColumnLocation() << ")" << endl << endl;
+    cout <<endl<< (char)currentPlayer.getSymbol() << " played (" << playerChoise.getRowLocation() << "," << playerChoise.getColumnLocation() << ")" << endl << endl;
 
 }
 
 vector<Player> GameLogic::eat(Player currentPlayer,Player opponentPlayer,Disc playerChoise,Board &tempBoard) {
-    tempBoard.setCell(playerChoise.getRowLocation(),playerChoise.getColumnLocation(),currentPlayer.getForm());
+    tempBoard.setCell(playerChoise.getRowLocation(),playerChoise.getColumnLocation(),currentPlayer.getSymbol());
     currentPlayer.addToStack(playerChoise.getRowLocation(),playerChoise.getColumnLocation());
     vector<Player> tempPlayers;
     tempPlayers.push_back(currentPlayer);
@@ -33,16 +33,16 @@ vector<Player> GameLogic::eat(Player currentPlayer,Player opponentPlayer,Disc pl
             int k = i;
             int l = j;
             int m = 0;
-            while(tempBoard.getCell(row + k,col + l) == opponentPlayer.getForm()) {
+            while(tempBoard.getCell(row + k,col + l) == opponentPlayer.getSymbol()) {
                 k = k + i;
                 l = l + j;
                 m++;
             }
-            if(tempBoard.getCell(row + k,col + l) == currentPlayer.getForm()) {
+            if(tempBoard.getCell(row + k,col + l) == currentPlayer.getSymbol()) {
                 while(m) {
                     k = k - i;
                     l = l - j;
-                    tempBoard.setCell(row + k,col + l,currentPlayer.getForm());
+                    tempBoard.setCell(row + k,col + l,currentPlayer.getSymbol());
                     Disc loose(row + k, col + l);
                     tempPlayers[0].addToStack(row+k,col+l);
                     tempPlayers[1].removeFromStack(loose);
@@ -57,10 +57,10 @@ vector<Player> GameLogic::eat(Player currentPlayer,Player opponentPlayer,Disc pl
 void GameLogic::updateMove(const vector<Player>& tempPlayers, Player &currentPlayer, Player &opponentPlayer,Disc &playerChoise) {
     currentPlayer = tempPlayers[0];
     opponentPlayer = tempPlayers[1];
-    board.setCell(playerChoise.getRowLocation(),playerChoise.getColumnLocation(),currentPlayer.getForm());
+    board.setCell(playerChoise.getRowLocation(),playerChoise.getColumnLocation(),currentPlayer.getSymbol());
     for(int i = 0; i < 2; i++) {
        for(int j = 0;j < tempPlayers[i].getAmount(); j++) {
-           board.setCell(tempPlayers[i].getDisc(j).getRowLocation(),tempPlayers[i].getDisc(j).getColumnLocation(),tempPlayers[i].getForm());
+           board.setCell(tempPlayers[i].getDisc(j).getRowLocation(),tempPlayers[i].getDisc(j).getColumnLocation(),tempPlayers[i].getSymbol());
        }
     }
 }

@@ -9,14 +9,14 @@
 
 Menu::Menu() {}
 
-void Menu::opponentType(ReversiGame reversiGame, const char black, const char white) {
+void Menu::opponentType(ReversiGame *reversiGame, Symbol black, Symbol white) {
     char choise;
     while (true) {
         cout << "choose opponent tipe:\npress h for human\npress c for computer\n";
         cin >> choise;
         if (choise == 'c' || choise == 'C' || choise == 'h' || choise == 'H') {
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //skip bad input
-            reversiGame.initialize(black,white,choise);
+            reversiGame->initialize(black,white,choise);
             break;
         }
 

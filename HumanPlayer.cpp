@@ -5,11 +5,11 @@
 #include <cstdio>
 #include "HumanPlayer.h"
 
-HumanPlayer::HumanPlayer(const char form) : Player(form) {}
+HumanPlayer::HumanPlayer(Symbol symbol) : Player(symbol) {}
 
 Disc HumanPlayer::playerLogic(Player opponentPlayer) {
     optionStack.isRepeat();
-    cout << form << ": It's your move." << endl << "Your possible moves: ";
+    cout << (char)symbol << ": It's your move." << endl << "Your possible moves: ";
     for (int i = 0; i < optionStack.getAmount(); i++) {
         cout << "(" << optionStack.getDisc(i).getRowLocation() << "," << optionStack.getDisc(i).getColumnLocation() << ") ";
     }

@@ -12,7 +12,7 @@
 
 class HumanPlayer: public Player{
 public:
-    HumanPlayer(const char form);
+    HumanPlayer(Symbol symbol1);
     virtual Disc playerLogic(Player opponentPlayer) ;
     void fromInputToDisc(char input[50]);
 private:

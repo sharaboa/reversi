@@ -9,7 +9,7 @@
 ReversiGame::ReversiGame(int size): board(size + 2),gameLogic(board),size(size) {}
 
 
-void ReversiGame::initialize(char b,char w,char x) {
+void ReversiGame::initialize(Symbol b,Symbol w,char x) {
     Player *black = new HumanPlayer(b);
     Player *white;
 
@@ -23,12 +23,14 @@ void ReversiGame::initialize(char b,char w,char x) {
         }
     }
     int midSize = (size + 2) / 2;
-    board.fillMatrixBoard(midSize,black->getForm(),white->getForm());
+    board.fillMatrixBoard(midSize,black->getSymbol(),white->getSymbol());
     white->addToStack(midSize,midSize);
     white->addToStack(midSize - 1, midSize - 1);
     black->addToStack(midSize - 1, midSize);
     black->addToStack(midSize,midSize - 1);
     play(black,white);
+    delete black;
+    delete white;
 }
 
 char ReversiGame::play(Player *black,Player *white) {
@@ -44,7 +46,7 @@ char ReversiGame::play(Player *black,Player *white) {
         } else {
             notOver--;
             if(notOver) {
-                cout << black->getForm() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
+                cout << (char)black->getSymbol() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
 
             }
         }
@@ -57,7 +59,7 @@ char ReversiGame::play(Player *black,Player *white) {
             } else {
                 notOver--;
                 if(notOver) {
-                    cout << white->getForm() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
+                    cout << (char)white->getSymbol() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
                 }
             }
         }
@@ -70,7 +72,7 @@ void ReversiGame::announceWinner(Player *black,Player *white) const {
         cout << "Game Over! it's a tie " << endl;
     } else {
         black->getAmount() > white->getAmount() ?
-        cout << "Game Over! the winner is: " << black->getForm() :
-        cout << "Game Over! the winner is: " << white->getForm();
+        cout << "Game Over! the winner is: " << (char)black->getSymbol() :
+        cout << "Game Over! the winner is: " << (char)white->getSymbol();
     }
 }

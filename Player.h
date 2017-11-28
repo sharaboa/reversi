@@ -22,20 +22,20 @@ public:
      * Get the form of the player and initialize a stack of discs that the player puts on the board
      * @param form
      */
-    explicit Player(const char form);
+    explicit Player(Symbol symbol);
 
     /**
      * Returns the view on the board of the player
      * @return
      */
-    char getForm() const;
+    Symbol getSymbol() const;
     StackOfDiscs getOptionStack() const;
     virtual Disc playerLogic(Player p);
 
     void playerMoveOption(const Player opponentPlayer,Board &board);
 
 protected:
-    char form;
+    Symbol symbol;
     StackOfDiscs optionStack;
 
 };

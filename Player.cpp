@@ -7,11 +7,11 @@
 
 
 
-Player::Player(const char form): form(form), StackOfDiscs() {}
+Player::Player(Symbol symbol): symbol(symbol), StackOfDiscs() {}
 
 
-char Player::getForm() const {
-    return form;
+Symbol Player::getSymbol() const {
+    return symbol;
 }
 
 StackOfDiscs Player::getOptionStack() const {
@@ -29,15 +29,15 @@ void Player::playerMoveOption(const Player opponentPlayer,Board &board) {
         //Looking for a possible place to put a disc
         for(int i = -1; i < 2; i++) {
             for(int j = -1; j < 2; j++) {
-                if(board.getCell(row + i,col + j) == ' ') {
+                if(board.getCell(row + i,col + j) == S) {
                     //k and l Pass the matrix in a certain direction to make sure that it is indeed legal to put a disc
                     int k = i;
                     int l = j;
-                    while(board.getCell(row - k,col - l) == opponentPlayer.getForm()) {
+                    while(board.getCell(row - k,col - l) == opponentPlayer.getSymbol()) {
                         k = k + i;
                         l = l + j;
                     }
-                    if(board.getCell(row - k,col - l) == form) {
+                    if(board.getCell(row - k,col - l) == symbol) {
                         optionStack.addToStack(row + i,col + j);
                     }
                 }
@@ -45,9 +45,3 @@ void Player::playerMoveOption(const Player opponentPlayer,Board &board) {
         }
     }
 }
-
-
-
-
-
-

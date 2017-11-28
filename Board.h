@@ -10,14 +10,15 @@
 #include <string>
 #include <vector>
 #include "Disc.h"
+#include "Symbol.h"
 
 using namespace std;
 
 
 class Board {
-    enum boardSymbol{
+    /*enum boardSymbol{
         X = 'X', O = 'O',S = ' ',B = '$'
-    };
+    };*/
 
 public:
     /**
@@ -35,7 +36,7 @@ public:
      * @param black - black player's form
      * @param white - white player's form
      */
-    void fillMatrixBoard(const int &midSize,const char &black,const char &white);
+    void fillMatrixBoard(const int &midSize,Symbol black,Symbol white);
     /**
      * prints the board.
      */
@@ -50,7 +51,7 @@ public:
      * @param j - column
      * @return the form in the cell.
      */
-    char getCell(const int &i, const int &j) const;
+    Symbol getCell(const int &i, const int &j) const;
 
     /**
      * Updating disc in the board
@@ -58,9 +59,9 @@ public:
      * @param j - column
      * @param win - the form that enters the board
      */
-    void setCell(const int &i, const int &j, const char &win);
+    void setCell(const int &i, const int &j, Symbol player);
 
-    void setBoard(Board board);
+   // void setBoard(Board board);
 
     int getSize() const;
 
@@ -69,7 +70,7 @@ public:
 
 private:
     const int size;
-    boardSymbol** matrixBoard;
+    Symbol** matrixBoard;
     //vector< vector<char> > matrixBoard;
 };
 

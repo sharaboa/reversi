@@ -13,18 +13,18 @@ Board::Board(const int size): size(size){
 }
 
 void Board::buildMatrixBoard() {
-    matrixBoard = new boardSymbol*[size];
+    matrixBoard = new Symbol*[size];
     for(int i = 0; i < size; i++) {
-        matrixBoard[i] = new boardSymbol[size];
+        matrixBoard[i] = new Symbol[size];
     }
 }
 
-void Board::fillMatrixBoard(const int &midSize,const char &black,const char &white) {
+void Board::fillMatrixBoard(const int &midSize,Symbol black,Symbol white) {
     //puts the player's discs in the middle of the matrix
-    matrixBoard[midSize][midSize] = (boardSymbol) white;
-    matrixBoard[midSize - 1][midSize] = (boardSymbol) black;
-    matrixBoard[midSize][midSize - 1] = (boardSymbol) black;
-    matrixBoard[midSize - 1][midSize - 1] = (boardSymbol) white;
+    matrixBoard[midSize][midSize] = white;
+    matrixBoard[midSize - 1][midSize] = black;
+    matrixBoard[midSize][midSize - 1] = black;
+    matrixBoard[midSize - 1][midSize - 1] = white;
     //puts spaces in rest of the matrix
     for (int i = 1; i < size - 1; i++) {
         for(int j = 1; j < size - 1; j++) {
@@ -69,28 +69,20 @@ void Board::printBoard() const {
     }
 }
 Board::~Board() {
-    for (int i = 0; i < size; i++) {
-        delete[]matrixBoard[i];
-    }
-    if (*matrixBoard)
-        delete[] matrixBoard;
+        for (int i = 0; i < size; i++) {
+            delete[] matrixBoard[i];
+        }
+            delete[] matrixBoard;
 }
 
-char Board::getCell(const int &i,const int &j) const {
+Symbol Board::getCell(const int &i,const int &j) const {
     return matrixBoard[i][j];
 }
 
-void Board::setCell(const int &i, const int &j, const char &win) {
-    matrixBoard[i][j] = (boardSymbol) win;
+void Board::setCell(const int &i, const int &j, Symbol player) {
+    matrixBoard[i][j] = player;
 }
 
-void Board::setBoard(Board otherBoard) {
-    for(int i = 0; i < size; i++) {
-        for(int j = 0;j < size; j++) {
-            matrixBoard[i][j] = static_cast<boardSymbol>(otherBoard.getCell(i, j));
-        }
-    }
-}
 void Board::copyBoard(Board &otherBoard){
     otherBoard.buildMatrixBoard();
     for(int i = 0; i < size; i++) {

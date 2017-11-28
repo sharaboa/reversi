@@ -10,7 +10,7 @@
 
 class AiPlayer: public Player{
 public:
-    AiPlayer(const char form, GameLogic myLogic,Board &gameBoard);
+    AiPlayer(Symbol symbol, GameLogic myLogic,Board &gameBoard);
     virtual Disc playerLogic(Player opponentPlayer) ;
 private:
     Disc myChoise;

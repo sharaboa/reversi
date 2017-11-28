@@ -15,7 +15,7 @@ using namespace std;
 class Menu {
 public:
     Menu();
-    void opponentType(ReversiGame reversiGame, const char black, const char white);
+    void opponentType(ReversiGame *reversiGame, Symbol black, Symbol white);
 };
 
 

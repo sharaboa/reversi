@@ -5,10 +5,11 @@
 #include "AiPlayer.h"
 
 
-AiPlayer::AiPlayer(const char form,  GameLogic myLogic,Board &gameBoard) : Player(form), myLogic(myLogic),gameBoard(gameBoard) {}
+AiPlayer::AiPlayer(Symbol symbol,  GameLogic myLogic,Board &gameBoard) : Player(symbol), myLogic(myLogic),gameBoard(gameBoard) {}
 
 Disc AiPlayer::playerLogic(Player opponentPlayer) {
-    Board tempBoardAi = gameBoard.getBoard();
+    //Board tempBoardAi = gameBoard.getBoard();
+    Board tempBoardAi = gameBoard;
     Board resetAi(tempBoardAi.getSize());
     Board tempBoardHu(tempBoardAi.getSize());
     Board resetBoardHu(tempBoardAi.getSize());

@@ -3,10 +3,15 @@
 #include "ReversiGame.h"
 #include "Menu.h"
 
+
 using namespace std;
 
+
+
 int main() {
-    ReversiGame reversiGame(4);
+    ReversiGame* reversiGame = new ReversiGame(4);
     Menu menu;
-    menu.opponentType(reversiGame,'X','O');
+    menu.opponentType(reversiGame,X,O);
+    delete reversiGame;
+    return 0;
 }
