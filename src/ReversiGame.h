@@ -39,7 +39,7 @@ public:
      * The game manager. decides who turn to play and returns the winner
      * @return
      */
-    char play(Player *black,Player *white);
+    void play(Player *black,Player *white);
 
     /**
      * Returns the form of the winner

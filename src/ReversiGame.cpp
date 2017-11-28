@@ -21,18 +21,18 @@ void ReversiGame::initialize(Symbol b,Symbol w,char x) {
             white = new HumanPlayer(w);
         }
     }
-    int midSize = (size + 2) / 2;
+    int midSize = size / 2;
     board.fillMatrixBoard(midSize,black->getSymbol(),white->getSymbol());
-    white->addToStack(midSize,midSize);
-    white->addToStack(midSize - 1, midSize - 1);
-    black->addToStack(midSize - 1, midSize);
-    black->addToStack(midSize,midSize - 1);
+    white->addToStack(midSize + 1,midSize + 1);
+    white->addToStack(midSize, midSize);
+    black->addToStack(midSize, midSize + 1);
+    black->addToStack(midSize + 1,midSize);
     play(black,white);
     delete black;
     delete white;
 }
 
-char ReversiGame::play(Player *black,Player *white) {
+void ReversiGame::play(Player *black,Player *white) {
     //notOver zeroed when both players have no moves
     int notOver = 2;
     cout << "current board:\n";
