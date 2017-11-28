@@ -9,10 +9,10 @@ AiPlayer::AiPlayer(Symbol symbol,  GameLogic myLogic,Board &gameBoard) : Player(
 
 Disc AiPlayer::playerLogic(Player opponentPlayer) {
     //Board tempBoardAi = gameBoard.getBoard();
-    Board tempBoardAi = gameBoard;
-    Board resetAi(tempBoardAi.getSize());
-    Board tempBoardHu(tempBoardAi.getSize());
-    Board resetBoardHu(tempBoardAi.getSize());
+    Board tempBoardAi(gameBoard.getSize());
+    Board resetAi(gameBoard.getSize());
+    Board tempBoardHu(gameBoard.getSize());
+    Board resetBoardHu(gameBoard.getSize());
     StackOfDiscs tempStack = optionStack;
     Disc tempChoise;
     int maxHumanScore = 0;
