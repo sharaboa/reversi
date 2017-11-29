@@ -20,27 +20,36 @@ TEST(AiPlayer__TEST, Testing){
     int midSize = 2;
 
     board.fillMatrixBoard(midSize,white->getSymbol(),black->getSymbol());
-board.printBoard();
 
-    black->addToStack(2,3);
-    board.setCell(2,3,black->getSymbol());
+
+    black->addToStack(1,1);
+    board.setCell(1,1,black->getSymbol());
+
+    black->addToStack(2, 3);
+    board.setCell(2, 3,black->getSymbol());
 
     black->addToStack(3, 2);
     board.setCell(3, 2,black->getSymbol());
 
-    black->addToStack(3, 3);
-    board.setCell(3, 3,black->getSymbol());
 
+    black->addToStack(3,3);
+    board.setCell(3,3,black->getSymbol());
 
     black->addToStack(3,4);
     board.setCell(3,4,black->getSymbol());
 
-
     white->addToStack(2,2);
     board.setCell(2,2,white->getSymbol());
 
+    white->addToStack(2,1);
+    board.setCell(2,1,white->getSymbol());
+
+    white->addToStack(1,2);
+    board.setCell(1,2,white->getSymbol());
+
     white->playerMoveOption(*black ,board);
-    board.printBoard();
+
+
     EXPECT_EQ(white->playerLogic(*black).getRowLocation(),4);
     EXPECT_EQ(white->playerLogic(*black).getColumnLocation(),4);
 
