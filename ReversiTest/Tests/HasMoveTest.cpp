@@ -6,16 +6,14 @@
 #include <gtest/gtest.h>
 #include <src/GameLogic.h>
 
-//test at begining of game
+//test at beginning of game
 TEST(GameLogicTest_TEST, InitializeHasMoves) {
     Board board(8);
     Player black(X);
     Player white(O);
     GameLogic logic(board);
 
-
     board.fillMatrixBoard(4, X, O);
-
     black.addToStack(4, 5);
     black.addToStack(5, 4);
     white.addToStack(4, 4);
@@ -55,8 +53,6 @@ TEST(GameLogicTest_TEST, MiddleGameHasMoves) {
             }
         }
     }
-
-   // board.printBoard();
 
     black.playerMoveOption(white,board);
     white.playerMoveOption(black,board);
