@@ -13,7 +13,6 @@ TEST(MoveOption_TEST, PlayerMoveOption) {
     Board board(8);
     Player black(X);
     Player white(O);
-    GameLogic logic(board);
     StackOfDiscs optionOfBlack;
     StackOfDiscs optionOfWhite;
 
@@ -46,25 +45,22 @@ TEST(MoveOption_TEST, PlayerMoveOption) {
     white.playerMoveOption(black,board);
 
     //comparing two stacks by removing equal disc
-    for(int i = 0; i < black.getOptionStack().getAmount(); i++) {
-        for(int j = 0; j < optionOfBlack.getAmount();) {
-            Disc disc = optionOfBlack.getDisc(j);
-            if(black.getOptionStack().appear(disc)) {
-                optionOfBlack.removeFromStack(disc);
-            } else {
-                j++;
-            }
+    for(int i = 0; i < optionOfBlack.getAmount();) {
+        Disc disc = optionOfBlack.getDisc(i);
+        if(black.getOptionStack().appear(disc)) {
+            optionOfBlack.removeFromStack(disc);
+        } else {
+            i++;
         }
     }
 
-    for(int i = 0; i < white.getOptionStack().getAmount(); i++) {
-        for(int j = 0; j < optionOfWhite.getAmount();) {
-            Disc disc = optionOfWhite.getDisc(j);
-            if(white.getOptionStack().appear(disc)) {
-                optionOfWhite.removeFromStack(disc);
-            } else {
-                j++;
-            }
+
+    for(int i = 0; i < optionOfWhite.getAmount();) {
+        Disc disc = optionOfWhite.getDisc(i);
+        if(white.getOptionStack().appear(disc)) {
+            optionOfWhite.removeFromStack(disc);
+        } else {
+            i++;
         }
     }
 
