@@ -43,10 +43,10 @@ public:
      */
     ~Board();
     /**
-     * returns asked place in the board
+     * returns the symbol in asked place in the board
      * @param i - row
      * @param j - column
-     * @return the form in the cell.
+     * @return the symbol of the cell.
      */
     Symbol getCell(const int &i, const int &j) const;
 
@@ -54,21 +54,25 @@ public:
      * Updating disc in the board
      * @param i - row
      * @param j - column
-     * @param win - the form that enters the board
+     * @param player - the symbol that enters the board
      */
     void setCell(const int &i, const int &j, Symbol player);
 
-   // void setBoard(Board board);
-
+    /**
+     * size of board without borders
+     * @return size
+     */
     int getSize() const;
 
-    Board getBoard() const;
-    void  copyBoard(Board &otherBoard);
+    /**
+     * copy this matrixBoard to other matrixBoard
+     * @param otherBoard
+     */
+    void copyBoard(Board &otherBoard);
 
 private:
     const int size;
     Symbol** matrixBoard;
-    //vector< vector<char> > matrixBoard;
 };
 
 #endif //EX2_BOARD_H

@@ -21,12 +21,12 @@ public:
 
     /**
      * return row location of disc
-     * @return
+     * @return row
      */
     int getRowLocation() const;
     /**
      * return column location of disc
-     * @return
+     * @return col
      */
     int getColumnLocation() const;
     /**
@@ -35,9 +35,12 @@ public:
      * @param otherDisc - the Equated disc to the stack
      * @return - true if equal
      */
-
     bool operator ==(const Disc &otherDisc) const;
-
+/**
+ * updating new location to disc
+ * @param i - row
+ * @param j - col
+ */
     void setDisc(int i, int j);
 
 private:

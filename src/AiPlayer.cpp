@@ -23,12 +23,13 @@ Disc AiPlayer::playerLogic(Player opponentPlayer) {
         tempChoise.setDisc(tempStack.getDisc(i).getRowLocation(),tempStack.getDisc(i).getColumnLocation());
         vector<Player> tempPlayersAfterAiChoose = myLogic.eat(*this,opponentPlayer,tempChoise,tempBoardAi);
         tempBoardAi.copyBoard(tempBoardHu);
-        ///////////////////////tempPlayersAfterAiChoose[0] = Ai///////////////////////////
+        //tempPlayersAfterAiChoose[0] = Ai
         opponentPlayer.playerMoveOption(tempPlayersAfterAiChoose[0],tempBoardHu);
         for(int j = 0; j < opponentPlayer.getOptionStack().getAmount(); j++) {
             tempBoardHu.copyBoard(resetBoardHu);
             vector<Player> tempPlayersAfterHuChoose = myLogic.eat(tempPlayersAfterAiChoose[1],tempPlayersAfterAiChoose[0],opponentPlayer.getOptionStack().getDisc(j),resetBoardHu);
             if(i==0 && j==0) {
+                //tempPlayersAfterHuChoose[0] = Human
                 maxHumanScore = tempPlayersAfterHuChoose[0].getAmount() - tempPlayersAfterHuChoose[1].getAmount();
                 minHumanScore = tempPlayersAfterHuChoose[0].getAmount() - tempPlayersAfterHuChoose[1].getAmount();
                 myChoise.setDisc(tempStack.getDisc(i).getRowLocation(),tempStack.getDisc(i).getColumnLocation());

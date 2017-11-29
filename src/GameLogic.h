@@ -22,42 +22,36 @@ public:
      * @param board
      */
     explicit GameLogic(Board &board);
-    /**
-     * Updating the stack to contain the places where the winning player can put a disc
-     * @param currentPlayer - current player's form
-     * @param opponentPlayer - stack of the opponent
-     */
-   // void options(const Player &opponentPlayer,Board board);
 
     /**
-     * Updating the board and the players status following the move of the winning player
+     * checks how board and the players status looks like after move of current player
      * @param currentPlayer - current player's stack
      * @param opponentPlayer - opponent's stack
      */
     vector<Player> eat(Player currentPlayer, Player opponentPlayer,Disc playerChoise, Board &tempBoard);
     /**
-     * manages winning player's turn
+     * manages player's turn
      * @param currentPlayer - current player
      * @param opponentPlayer - opponent player
      */
     void turn(Player &currentPlayer, Player &opponentPlayer,Disc playerChoise);
-  /*  *//**
-     * Gets a location on the board from the user and translates it to disc
-     * @param input - string the user typed
-     * @return - the asked disc
-     *//*
-    Disc fromStringToDisc(char input[50]);*/
+
     /**
      * Returns the number of options available to the current player
-     * @return
+     * @return number of moves (with dublications)
      */
     int hasMoves(Player &currentPlayer) const;
+    /**
+     * Updating the board and the players status following the move of current player
+     * @param tempPlayers - vector contain the stacks of players that need to be update
+     * @param currentPlayer - current player before move
+     * @param opponentPlayer - opponent player before move
+     * @param playerChoise - current player choise of disc
+     */
     void updateMove(const vector<Player> &tempPlayers, Player &currentPlayer, Player &opponentPlayer,Disc &playerChoise);
 
 private:
     Board &board;
-   // StackOfDiscs stackOfOptions;
-   // Disc playerChoise;
 };
 
 #endif //EX2_GAMELOGIC_H

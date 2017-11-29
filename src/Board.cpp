@@ -89,11 +89,8 @@ void Board::copyBoard(Board &otherBoard){
         }
     }
 }
+
 int Board::getSize() const {
     return size - 2;
-}
-
-Board Board::getBoard() const {
-    return *this;
 }
 

@@ -10,7 +10,18 @@
 
 class AiPlayer: public Player{
 public:
+    /**
+     * constructor.
+     * @param symbol - of disc of AiPlayer (0)
+     * @param myLogic
+     * @param gameBoard
+     */
     AiPlayer(Symbol symbol, GameLogic myLogic,Board &gameBoard);
+    /**
+     * algorithem to choose disc
+     * @param opponentPlayer
+     * @return
+     */
     virtual Disc playerLogic(Player opponentPlayer) ;
 private:
     Disc myChoise;

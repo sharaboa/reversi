@@ -13,8 +13,21 @@
 
 class HumanPlayer: public Player{
 public:
-    HumanPlayer(Symbol symbol1);
-    virtual Disc playerLogic(Player opponentPlayer) ;
+    /**
+     * constructor.
+     * @param symbol - symbol of player X or O
+     */
+    HumanPlayer(Symbol symbol);
+    /**
+     * ask the player choose disc and checks if legal
+     * @param opponentPlayer - opponent player
+     * @return - chosen disc
+     */
+    virtual Disc playerLogic(Player opponentPlayer);
+    /**
+     * convert input to disc
+     * @param input - input of the player
+     */
     void fromInputToDisc(char input[50]);
 private:
     Disc myChoise;
