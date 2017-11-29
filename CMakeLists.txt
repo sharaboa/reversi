@@ -23,6 +23,6 @@ set(SOURCE_FILES
         src/ReversiGame.h
         src/StackOfDiscs.cpp
         src/StackOfDiscs.h
-        src/Symbol.h ReversiTest/Tests/MoveOptionTest.cpp)
+        src/Symbol.h)
 
-add_executable(reversi ${SOURCE_FILES} ReversiTest/Tests/MoveOptionTest.cpp)
+add_executable(reversi ${SOURCE_FILES})
