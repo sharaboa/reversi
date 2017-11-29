@@ -14,8 +14,8 @@ void GameLogic::turn(Player &currentPlayer, Player &opponentPlayer,Disc playerCh
     cout << endl << endl;
     cout << "current board:\n\n";
     board.printBoard();
-    cout <<endl<< (char)currentPlayer.getSymbol() << " played (" << playerChoise.getRowLocation() << "," << playerChoise.getColumnLocation() << ")" << endl << endl;
-
+    cout <<endl<< (char)currentPlayer.getSymbol() << " played (" << playerChoise.getRowLocation() << "," << playerChoise.getColumnLocation() << ")";
+    cout << " with score: " << currentPlayer.getAmount() - opponentPlayer.getAmount()<<"\n\n";
 }
 
 vector<Player> GameLogic::eat(Player currentPlayer,Player opponentPlayer,Disc playerChoise,Board &tempBoard) {

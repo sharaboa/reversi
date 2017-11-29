@@ -28,14 +28,13 @@ Disc AiPlayer::playerLogic(Player opponentPlayer) {
             tempBoardHu.copyBoard(resetBoardHu);
             vector<Player> tempPlayersAfterHuChoose = myLogic.eat(tempPlayersAfterAiChoose[1],tempPlayersAfterAiChoose[0],opponentPlayer.getOptionStack().getDisc(j),resetBoardHu);
             if(i==0 && j==0) {
-                maxHumanScore = tempPlayersAfterHuChoose[0].getAmount();
-                minHumanScore = tempPlayersAfterHuChoose[0].getAmount();
+                maxHumanScore = tempPlayersAfterHuChoose[0].getAmount() - tempPlayersAfterHuChoose[1].getAmount();
+                minHumanScore = tempPlayersAfterHuChoose[0].getAmount() - tempPlayersAfterHuChoose[1].getAmount();
                 myChoise.setDisc(tempStack.getDisc(i).getRowLocation(),tempStack.getDisc(i).getColumnLocation());
             }
-            if(tempPlayersAfterHuChoose[0].getAmount() < maxHumanScore) {
-                maxHumanScore = tempPlayersAfterHuChoose[0].getAmount();
+            if(tempPlayersAfterHuChoose[0].getAmount() - tempPlayersAfterHuChoose[1].getAmount() < maxHumanScore) {
+                maxHumanScore = tempPlayersAfterHuChoose[0].getAmount() - tempPlayersAfterHuChoose[1].getAmount();
             }
-
         }
          if(minHumanScore >= maxHumanScore) {
              minHumanScore = maxHumanScore;
@@ -44,4 +43,3 @@ Disc AiPlayer::playerLogic(Player opponentPlayer) {
     }
  return myChoise;
 }
-
