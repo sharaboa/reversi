@@ -15,7 +15,7 @@ using namespace std;
 int main() {
     ReversiGame* reversiGame = new ReversiGame(4);
     Menu menu;
-    menu.opponentType(reversiGame,X,O);
+    menu.gameMode(reversiGame, X, O);
     delete reversiGame;
     return 0;
 }

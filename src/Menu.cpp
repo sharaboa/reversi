@@ -10,7 +10,7 @@
 
 Menu::Menu() {}
 
-void Menu::opponentType(ReversiGame *reversiGame, Symbol black, Symbol white) {
+void Menu::gameMode(ReversiGame *reversiGame, Symbol black, Symbol white) {
     char choise;
     while (true) {
         cout << "choose opponent type:\npress h for human\npress c for computer\n";

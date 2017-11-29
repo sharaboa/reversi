@@ -36,13 +36,12 @@ public:
     void initialize(Symbol b,Symbol w,char x);
     /**
      * The game manager. decides who turn to play and returns the winner
-     * @return
      */
     void play(Player *black,Player *white);
 
     /**
-     * Returns the form of the winner
-     * @return
+     * this fun announce the winner/a tie
+     * @return the form of the winner
      */
     void announceWinner(Player *black,Player *white) const;
 
