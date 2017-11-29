@@ -7,7 +7,7 @@
 #include <src/Board.h>
 #include <src/AiPlayer.h>
 #include <src/HumanPlayer.h>
-
+//check that the ai logic works and calculate the correct move
 TEST(AiPlayer__TEST, Testing){
 
 

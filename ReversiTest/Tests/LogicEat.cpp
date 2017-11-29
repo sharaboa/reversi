@@ -7,6 +7,7 @@
 #include <src/Board.h>
 #include <src/AiPlayer.h>
 
+//check if the eat func works properly
 
 TEST(LogicEat__TEST, Testing){
     Board tBoard(4);
@@ -30,11 +31,15 @@ bool test = true;
        (testEat[0].getDisc(i).getRowLocation() == 3 &&testEat[0].getDisc(i).getColumnLocation() == 4)) {
            test = true;
        }
-        else {test =  false;}
+       else {test =  false;}
     }
+    //return true if all expected disc were eaten
     EXPECT_TRUE(test);
+    //check the size of the player after the eat func
     EXPECT_EQ(testEat[1].getAmount(),1);
+    //check the size of the other player after the eat func
     EXPECT_EQ(testEat[0].getAmount(),4);
+    //return true if the expected disc left in the other player
     EXPECT_EQ(testEat[1].getDisc(0).getRowLocation(),2);
     EXPECT_EQ(testEat[1].getDisc(0).getColumnLocation(),2);
 }
