@@ -13,7 +13,7 @@ using namespace std;
 
 
 int main() {
-    ReversiGame* reversiGame = new ReversiGame(4);
+    ReversiGame* reversiGame = new ReversiGame(8);
     Menu menu;
     menu.gameMode(reversiGame, X, O);
     delete reversiGame;
