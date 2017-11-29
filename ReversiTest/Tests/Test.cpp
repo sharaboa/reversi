@@ -5,13 +5,13 @@
 #include <gtest/gtest.h>
 #include <src/GameLogic.h>
 
-
 //test at begining of game
 TEST(GameLogicTest_TEST, InitializeHasMoves) {
     Board board(8);
     Player black(X);
     Player white(O);
     GameLogic logic(board);
+    //board.printBoard();
 
     board.fillMatrixBoard(4, X, O);
     black.addToStack(4, 5);
@@ -24,6 +24,8 @@ TEST(GameLogicTest_TEST, InitializeHasMoves) {
     EXPECT_EQ(logic.hasMoves(black), 4);
     EXPECT_EQ(logic.hasMoves(white), 0);
 }
+
+
 //one player can play all moves and the other non
 TEST(GameLogicTest_TEST, MiddleGameHasMoves) {
     Board board(8);
@@ -33,8 +35,8 @@ TEST(GameLogicTest_TEST, MiddleGameHasMoves) {
 
     //initialized
     board.fillMatrixBoard(4,X,O);
-    for(int i = 1; i < board.getSize() - 1; i ++) {
-        for(int j = 1; j < board.getSize() - 1; j++) {
+    for(int i = 1; i < board.getSize() + 1; i++) {
+        for(int j = 1; j < board.getSize() + 1; j++) {
             board.setCell(i,j,S);
         }
     }
@@ -52,6 +54,8 @@ TEST(GameLogicTest_TEST, MiddleGameHasMoves) {
         }
     }
 
+   // board.printBoard();
+
     black.playerMoveOption(white,board);
     white.playerMoveOption(black,board);
 
@@ -66,17 +70,18 @@ TEST(GameLogicTest_TEST, EndGameHasMoves) {
     Player white(O);
     GameLogic logic(board);
 
-    for(int i = 1; i < board.getSize(); i++) {
-        for(int j = 1; j < board.getSize(); j++) {
+
+
+    for(int i = 1; i < board.getSize() + 1; i++) {
+        for(int j = 1; j < board.getSize() + 1; j++) {
             board.setCell(i,j,X);
             black.addToStack(i,j);
         }
     }
-    board.fillMatrixBoard(4,X,X);
+
+    board.setCell(4,5,O);
     white.addToStack(4, 5);
-    white.addToStack(5, 4);
-    white.addToStack(4, 4);
-    white.addToStack(5, 5);
+
 
     black.playerMoveOption(white, board);
     white.playerMoveOption(black,board);
@@ -84,6 +89,7 @@ TEST(GameLogicTest_TEST, EndGameHasMoves) {
     EXPECT_EQ(logic.hasMoves(black), 0);
     EXPECT_EQ(logic.hasMoves(white), 0);
 }
+
 //just one cell left and both can play
 TEST(GameLogicTest_TEST, OneLeftGameHasMoves) {
     Board board(8);
@@ -93,8 +99,8 @@ TEST(GameLogicTest_TEST, OneLeftGameHasMoves) {
 
     board.fillMatrixBoard(4,X,X);
 
-    for(int i = 0; i < board.getSize() + 1; i++) {
-        for(int j = 0; j < board.getSize() + 1; j++) {
+    for(int i = 0; i < board.getSize() + 2; i++) {
+        for(int j = 0; j < board.getSize() + 2; j++) {
             if(board.getCell(i,j) != B) {
                 board.setCell(i, j, X);
                 black.addToStack(i,j);
@@ -118,30 +124,4 @@ TEST(GameLogicTest_TEST, OneLeftGameHasMoves) {
 
     EXPECT_EQ(logic.hasMoves(black), 1);
     EXPECT_EQ(logic.hasMoves(white), 1);
-}
-
-//checks if the options correct
-TEST(GameLogicTest_TEST, isCorrectHasMoves) {
-    Board board(8);
-    Player black(X);
-    Player white(O);
-    GameLogic logic(board);
-
-    for(int i = 1; i < board.getSize(); i++) {
-        for(int j = 1; j < board.getSize(); j++) {
-            board.setCell(i,j,X);
-            black.addToStack(i,j);
-        }
-    }
-    board.fillMatrixBoard(4,X,X);
-    white.addToStack(4, 5);
-    white.addToStack(5, 4);
-    white.addToStack(4, 4);
-    white.addToStack(5, 5);
-
-    black.playerMoveOption(white, board);
-    white.playerMoveOption(black,board);
-
-    //EXPECT_EQ(logic.hasMoves(black), 0);
-    //EXPECT_EQ(logic.hasMoves(white), 0);
 }

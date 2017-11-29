@@ -20,19 +20,18 @@ void Board::buildMatrixBoard() {
 }
 
 void Board::fillMatrixBoard(const int &midSize,Symbol black,Symbol white) {
+    //puts spaces in rest of the matrix
+    for (int i = 1; i < size - 1; i++) {
+        for(int j = 1; j < size - 1; j++) {
+                matrixBoard[i][j] = S;
+        }
+    }
     //puts the player's discs in the middle of the matrix
     matrixBoard[midSize + 1][midSize + 1] = white;
     matrixBoard[midSize][midSize + 1] = black;
     matrixBoard[midSize + 1][midSize] = black;
     matrixBoard[midSize][midSize] = white;
-    //puts spaces in rest of the matrix
-    for (int i = 1; i < size - 1; i++) {
-        for(int j = 1; j < size - 1; j++) {
-            if (matrixBoard[i][j] != black && matrixBoard[i][j] != white) {
-                matrixBoard[i][j] = S;
-            }
-        }
-    }
+
     //puts $ in the borderlines of the matrix
     for(int i = 0; i < size; i++) {
         matrixBoard[0][i] = B;
