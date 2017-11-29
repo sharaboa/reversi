@@ -1,6 +1,6 @@
 //
 // Or Sharabi 312530496
-// Created by or on 25/10/17.
+//Sahar levi 20340514
 //
 
 #ifndef EX2_BOARD_H
@@ -16,9 +16,7 @@ using namespace std;
 
 
 class Board {
-    /*enum boardSymbol{
-        X = 'X', O = 'O',S = ' ',B = '$'
-    };*/
+
 
 public:
     /**

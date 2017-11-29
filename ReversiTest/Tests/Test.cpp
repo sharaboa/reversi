@@ -11,9 +11,10 @@ TEST(GameLogicTest_TEST, InitializeHasMoves) {
     Player black(X);
     Player white(O);
     GameLogic logic(board);
-    //board.printBoard();
+
 
     board.fillMatrixBoard(4, X, O);
+
     black.addToStack(4, 5);
     black.addToStack(5, 4);
     white.addToStack(4, 4);

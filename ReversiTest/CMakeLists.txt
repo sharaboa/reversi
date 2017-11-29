@@ -9,7 +9,7 @@ include_directories(${gtest_SOURCE_DIR}/include)
 #Add project files
 file(GLOB Reversi_Sources ${reversi_SOURCE_DIR}/src/*.cpp)
 file(GLOB Test_Sources ${ReversiTest_SOURCE_DIR}/Tests/*.cpp)
-set(SOURCE_FILES ${Test_Sources} ${Reversi_Sources})
+set(SOURCE_FILES ${Test_Sources} ${Reversi_Sources} Tests/LogicEat.cpp)
 list(REMOVE_ITEM SOURCE_FILES ${reversi_SOURCE_DIR}/src/main.cpp)
 
 

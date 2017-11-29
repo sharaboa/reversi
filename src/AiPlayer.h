@@ -1,7 +1,7 @@
 //
-// Created by sahar on 26/11/17.
+// Or Sharabi 312530496
+//Sahar levi 20340514
 //
-
 #ifndef REVERSI_AIPLAYER_H
 #define REVERSI_AIPLAYER_H
 
