@@ -1,8 +1,7 @@
 //
 // Or Sharabi 312530496
-//Sahar levi 20340514
+//Sahar levi 203405147
 //
-
 #ifndef EX2_DISC_H
 #define EX2_DISC_H
 
