@@ -84,7 +84,6 @@ void Board::setCell(const int &i, const int &j, Symbol player) {
 }
 
 void Board::copyBoard(Board &otherBoard){
-    otherBoard.buildMatrixBoard();
     for(int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
             otherBoard.setCell(i, j, matrixBoard[i][j]);
