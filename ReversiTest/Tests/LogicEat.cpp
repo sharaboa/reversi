@@ -37,5 +37,4 @@ bool test = true;
     EXPECT_EQ(testEat[0].getAmount(),4);
     EXPECT_EQ(testEat[1].getDisc(0).getRowLocation(),2);
     EXPECT_EQ(testEat[1].getDisc(0).getColumnLocation(),2);
-
 }
