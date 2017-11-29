@@ -119,3 +119,29 @@ TEST(GameLogicTest_TEST, OneLeftGameHasMoves) {
     EXPECT_EQ(logic.hasMoves(black), 1);
     EXPECT_EQ(logic.hasMoves(white), 1);
 }
+
+//checks if the options correct
+TEST(GameLogicTest_TEST, isCorrectHasMoves) {
+    Board board(8);
+    Player black(X);
+    Player white(O);
+    GameLogic logic(board);
+
+    for(int i = 1; i < board.getSize(); i++) {
+        for(int j = 1; j < board.getSize(); j++) {
+            board.setCell(i,j,X);
+            black.addToStack(i,j);
+        }
+    }
+    board.fillMatrixBoard(4,X,X);
+    white.addToStack(4, 5);
+    white.addToStack(5, 4);
+    white.addToStack(4, 4);
+    white.addToStack(5, 5);
+
+    black.playerMoveOption(white, board);
+    white.playerMoveOption(black,board);
+
+    //EXPECT_EQ(logic.hasMoves(black), 0);
+    //EXPECT_EQ(logic.hasMoves(white), 0);
+}
