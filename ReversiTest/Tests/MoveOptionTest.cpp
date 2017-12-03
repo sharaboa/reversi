@@ -8,14 +8,13 @@
 
 
 //checks if the option presented is correct
-TEST(MoveOption_TEST, PlayerMoveOption) {
+TEST(MoveOption_TEST, GetOptionStack) {
     //initialize parameters
     Board board(8);
     Player black(X);
     Player white(O);
     StackOfDiscs optionOfBlack;
     StackOfDiscs optionOfWhite;
-
 
     board.fillMatrixBoard(4,X,O);
     black.addToStack(4, 5);
