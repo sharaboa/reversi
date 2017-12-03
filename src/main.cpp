@@ -18,4 +18,5 @@ int main() {
     menu.gameMode(reversiGame, X, O);
     delete reversiGame;
     return 0;
+
 }
