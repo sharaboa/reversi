@@ -2,8 +2,8 @@
 // Created by or on 03/12/17.
 //
 
-#include "Client.h"
-#include "Client.h"
+#include "ClientPlayer.h"
+#include "ClientPlayer.h"
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -12,10 +12,10 @@
 #include <string.h>
 #include <unistd.h>
 using namespace std;
-Client::Client(const char *serverIP, int serverPort): serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
-    cout << "Client" << endl;
+ClientPlayer::ClientPlayer(Symbol symbol,const char *serverIP, int serverPort): Player(symbol),serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
+    cout << "ClientPlayer" << endl;
 }
-void Client::connectToServer() {
+void ClientPlayer::connectToServer() {
 // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket == -1) {
@@ -40,14 +40,15 @@ void Client::connectToServer() {
     memcpy((char*)&serverAddress.sin_addr.s_addr, (char*)server->h_addr, server->h_length);
 //htonsconverts values between host and network byte orders
     serverAddress.sin_port = htons(serverPort);
+
 // Establish a connection with the TCP server
-    if(connect(clientSocket, (
-            struct sockaddr*)&serverAddress,sizeof(serverAddress)) == -1) {
+    if(connect(clientSocket, (struct sockaddr*)&serverAddress,sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
     cout<<"Connected to server"<<endl;
 }
-    int Client::sendExercise(int arg1, char op, int arg2) {
+
+    int ClientPlayer::sendExercise(int arg1, char op, int arg2) {
 // Write the exercise arguments to the socket
         int n = write(clientSocket, &arg1, sizeof(arg1));
         if (n == -1) {
@@ -68,5 +69,8 @@ void Client::connectToServer() {
             throw
                     "Error reading result from socket";
         }
+
         return result;
     }
+
+Disc ClientPlayer::playerLogic(Player opponentPlayer){};

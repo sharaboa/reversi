@@ -6,9 +6,12 @@
 #define REVERSI_CLIENT_H
 
 
-class Client {
+#include "Player.h"
+
+class ClientPlayer : public Player {
     public:
-    Client(const char *serverIP, int serverPort);
+    virtual Disc playerLogic(Player opponentPlayer);
+    ClientPlayer(Symbol symbol,const char *serverIP, int serverPort);
     void connectToServer();
     int sendExercise(int arg1, char op, int arg2);
     private:
