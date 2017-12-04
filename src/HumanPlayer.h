@@ -29,7 +29,8 @@ public:
      * @param input - input of the player
      */
     void fromInputToDisc(char input[50]);
-private:
+
+protected:
     Disc myChoise;
 };
 

@@ -7,13 +7,14 @@
 
 
 #include "Player.h"
+#include "HumanPlayer.h"
 
-class ClientPlayer : public Player {
+class ClientPlayer : public HumanPlayer {
     public:
     virtual Disc playerLogic(Player opponentPlayer);
     ClientPlayer(Symbol symbol,const char *serverIP, int serverPort);
     void connectToServer();
-    int sendExercise(int arg1, char op, int arg2);
+    int sendExercise(int arg1,int arg2);
     private:
         const char *serverIP;
         int serverPort;

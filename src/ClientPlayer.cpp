@@ -12,7 +12,7 @@
 #include <string.h>
 #include <unistd.h>
 using namespace std;
-ClientPlayer::ClientPlayer(Symbol symbol,const char *serverIP, int serverPort): Player(symbol),serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
+ClientPlayer::ClientPlayer(Symbol symbol,const char *serverIP, int serverPort): HumanPlayer(symbol),serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
     cout << "ClientPlayer" << endl;
 }
 void ClientPlayer::connectToServer() {
@@ -46,31 +46,47 @@ void ClientPlayer::connectToServer() {
         throw "Error connecting to server";
     }
     cout<<"Connected to server"<<endl;
+
 }
 
-    int ClientPlayer::sendExercise(int arg1, char op, int arg2) {
+    int ClientPlayer::sendExercise(int arg1,int arg2) {
 // Write the exercise arguments to the socket
         int n = write(clientSocket, &arg1, sizeof(arg1));
         if (n == -1) {
             throw "Error writing arg1to socket";
-        }
-        n = write(clientSocket, &op, sizeof(op));
-        if (n == -1) {
-            throw "Error writing op to socket";
         }
         n = write(clientSocket, &arg2, sizeof(arg2));
         if (n == -1) {
             throw "Error writing arg2to socket";
         }
 // Read the result from the server
-        int result;
+      /*  int result;
         n = read(clientSocket, &result, sizeof(result));
         if (n == -1) {
             throw
                     "Error reading result from socket";
-        }
+        }*/
 
         return result;
     }
 
-Disc ClientPlayer::playerLogic(Player opponentPlayer){};
+Disc ClientPlayer::playerLogic(Player opponentPlayer){
+    optionStack.isRepeat();
+    cout << (char)symbol << ": It's your move." << endl << "Your possible moves: ";
+    for (int i = 0; i < optionStack.getAmount(); i++) {
+        cout << "(" << optionStack.getDisc(i).getRowLocation() << "," << optionStack.getDisc(i).getColumnLocation() << ") ";
+    }
+    cout << endl << endl << "Please enter your move row,col:";
+    while (true) {
+        char input[50];
+        cin.getline(input,50);
+        fromInputToDisc(input);
+        if (optionStack.appear(myChoise)) {
+            sendExercise(myChoise.getRowLocation(),myChoise.getColumnLocation());
+            return myChoise;
+        }
+        else{
+            cout << endl << endl << "illegal move! Please enter your move row,col:";
+        }
+    }
+}
