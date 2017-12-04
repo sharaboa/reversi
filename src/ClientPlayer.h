@@ -14,7 +14,7 @@ class ClientPlayer : public HumanPlayer {
     virtual Disc playerLogic(Player opponentPlayer);
     ClientPlayer(Symbol symbol,const char *serverIP, int serverPort);
     void connectToServer();
-    int sendExercise(int arg1,int arg2);
+    void sendExercise(int arg1,int arg2);
     private:
         const char *serverIP;
         int serverPort;

@@ -49,7 +49,7 @@ void ClientPlayer::connectToServer() {
 
 }
 
-    int ClientPlayer::sendExercise(int arg1,int arg2) {
+    void ClientPlayer::sendExercise(int arg1,int arg2) {
 // Write the exercise arguments to the socket
         int n = write(clientSocket, &arg1, sizeof(arg1));
         if (n == -1) {
@@ -67,7 +67,7 @@ void ClientPlayer::connectToServer() {
                     "Error reading result from socket";
         }*/
 
-        return result;
+       // return result;
     }
 
 Disc ClientPlayer::playerLogic(Player opponentPlayer){
