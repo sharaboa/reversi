@@ -46,6 +46,11 @@ void ClientPlayer::connectToServer() {
         throw "Error connecting to server";
     }
     cout<<"Connected to server"<<endl;
+    int n = read(clientSocket, &clientNum, sizeof(clientNum));
+    if (n == -1) {
+        throw
+                "Error reading result from socket";
+    }
 
 }
 
@@ -70,22 +75,46 @@ void ClientPlayer::connectToServer() {
        // return result;
     }
 
-Disc ClientPlayer::playerLogic(Player opponentPlayer){
+Disc ClientPlayer::playerLogic(Player opponentPlayer) {
     optionStack.isRepeat();
-    cout << (char)symbol << ": It's your move." << endl << "Your possible moves: ";
+    cout << (char) symbol << ": It's your move." << endl << "Your possible moves: ";
     for (int i = 0; i < optionStack.getAmount(); i++) {
-        cout << "(" << optionStack.getDisc(i).getRowLocation() << "," << optionStack.getDisc(i).getColumnLocation() << ") ";
+        cout << "(" << optionStack.getDisc(i).getRowLocation() << "," << optionStack.getDisc(i).getColumnLocation()
+             << ") ";
     }
     cout << endl << endl << "Please enter your move row,col:";
     while (true) {
         char input[50];
-        cin.getline(input,50);
+        cin.getline(input, 50);
         fromInputToDisc(input);
+        int arg1, arg2, n;
         if (optionStack.appear(myChoise)) {
-            sendExercise(myChoise.getRowLocation(),myChoise.getColumnLocation());
-            return myChoise;
-        }
-        else{
+            if (clientNum == 1 && symbol == X || clientNum == 2 && symbol == O) {
+                //sendExercise(myChoise.getRowLocation(), myChoise.getColumnLocation());
+
+                n = write(clientSocket, &arg1, sizeof(arg1));
+                if (n == -1) {
+                    throw "Error writing arg1to socket";
+                }
+                n = write(clientSocket, &arg2, sizeof(arg2));
+                if (n == -1) {
+                    throw "Error writing arg2to socket";
+                }
+                myChoise.setDisc(arg1, arg2);
+                return myChoise;
+            } else {
+                n = read(clientSocket, &arg1, sizeof(arg1));
+                if (n == -1) {
+                    throw "Error writing arg1to socket";
+                }
+                n = read(clientSocket, &arg2, sizeof(arg2));
+                if (n == -1) {
+                    throw "Error writing arg2to socket";
+                }
+                myChoise.setDisc(arg1, arg2);
+                return myChoise;
+            }
+        } else {
             cout << endl << endl << "illegal move! Please enter your move row,col:";
         }
     }
