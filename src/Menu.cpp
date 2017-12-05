@@ -11,17 +11,19 @@
 Menu::Menu() {}
 
 void Menu::gameMode(ReversiGame *reversiGame, Symbol black, Symbol white) {
-    char choise;
+    int choise;
+    cout << "Welcome to Reversi\n\n";
+
     while (true) {
-        cout << "choose opponent type:\npress h for human\npress c for computer\n";
+        cout << "choose an opponent type:\n1. a human local player\n2. an AI player\n3. a remote player\n";
         cin >> choise;
-        if (choise == '1' || choise == '1' || choise == 'h' || choise == 'H') {
+        if (choise == 1 || choise == 2 || choise == 3) {
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //skip bad input
-            reversiGame->manage(black, white, choise);
+            reversiGame->manage(black,white,choise);
             break;
         }
         // user didn't input a number
-        cout << "choose opponent type:\npress h for human\npress c for computer\n" << endl;
+        cout << "Wrong Choise! choose again\n" << endl;
         cin.clear(); // reset failbit
         cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //skip bad input
     }
