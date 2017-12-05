@@ -9,7 +9,7 @@
 
 //checks if the option presented is correct
 TEST(MoveOption_TEST, GetOptionStack) {
-    //initialize parameters
+    //manage parameters
     Board board(8);
     Player black(X);
     Player white(O);

@@ -33,7 +33,7 @@ public:
      * @param black - x player
      * @param white - o player
      */
-    void initialize(Symbol b,Symbol w,char x);
+    void manage(Symbol b, Symbol w, char x);
     /**
      * The game manager. decides who turn to play and returns the winner
      */
@@ -44,7 +44,7 @@ public:
      * @return the form of the winner
      */
     void announceWinner(Player *black,Player *white) const;
-
+    void initiallize (Player *black, Player *white, Board &board);
 
 private:
     Board board;

@@ -15,9 +15,9 @@ void Menu::gameMode(ReversiGame *reversiGame, Symbol black, Symbol white) {
     while (true) {
         cout << "choose opponent type:\npress h for human\npress c for computer\n";
         cin >> choise;
-        if (choise == 'c' || choise == 'C' || choise == 'h' || choise == 'H') {
+        if (choise == '1' || choise == '1' || choise == 'h' || choise == 'H') {
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //skip bad input
-            reversiGame->initialize(black,white,choise);
+            reversiGame->manage(black, white, choise);
             break;
         }
         // user didn't input a number

@@ -9,29 +9,40 @@
 ReversiGame::ReversiGame(int size): board(size),gameLogic(board),size(size) {}
 
 
-void ReversiGame::initialize(Symbol b,Symbol w,char x) {
-    Player *const black = new HumanPlayer(b);
+void ReversiGame::manage(Symbol b, Symbol w, char x) {
+    Player *black;
     Player *white;
     switch (x) {
-        case 'c': case 'C': {
-            white = new AiPlayer(w,gameLogic,board);
+        case '1':  {
+            black =new HumanPlayer(b);
+            white =new HumanPlayer(w);
+            initiallize(black,white,board);
+            play(black,white);
             break;
         }
-        case 'h': case 'H': {
-            white = new HumanPlayer(w);
+        case '2': {
+            black =new HumanPlayer(b);
+            white = new  AiPlayer(w,gameLogic,board);
+            initiallize(black,white,board);
+            play(black,white);
+            break;
+        }
+        case '3':{
+
+            break;
         }
     }
+    delete black;
+    delete white;
+}
+void ReversiGame::initiallize (Player *black, Player *white, Board &board){
     int midSize = size / 2;
     board.fillMatrixBoard(midSize,black->getSymbol(),white->getSymbol());
     white->addToStack(midSize + 1,midSize + 1);
     white->addToStack(midSize, midSize);
     black->addToStack(midSize, midSize + 1);
     black->addToStack(midSize + 1,midSize);
-    play(black,white);
-    delete black;
-    delete white;
 }
-
 void ReversiGame::play(Player *black,Player *white) {
     //notOver zeroed when both players have no moves
     int notOver = 2;
@@ -46,7 +57,6 @@ void ReversiGame::play(Player *black,Player *white) {
             notOver--;
             if(notOver) {
                 cout << (char)black->getSymbol() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
-
             }
         }
         if(notOver && black->getAmount() + white->getAmount() != size*size) {
