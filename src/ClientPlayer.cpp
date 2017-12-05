@@ -12,7 +12,7 @@
 #include <string.h>
 #include <unistd.h>
 using namespace std;
-ClientPlayer::ClientPlayer(Symbol symbol,const char *serverIP, int serverPort): HumanPlayer(symbol),serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
+ClientPlayer::ClientPlayer(Symbol symbol,const char *serverIP, int serverPort): HumanPlayer(symbol),serverIP(serverIP), serverPort(6886), clientSocket(0) {
     cout << "ClientPlayer" << endl;
 }
 void ClientPlayer::connectToServer() {
@@ -99,4 +99,16 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
         myChoise.setDisc(arg1, arg2);
         return myChoise;
     }
+}
+int ClientPlayer::getClientNum() {
+    return clientNum;
+}
+int ClientPlayer::getClientSocket() {
+    return clientSocket;
+}
+void ClientPlayer::setClientNum(int myClientNum) {
+    clientNum = myClientNum;
+}
+void ClientPlayer::setClientSocket(int myClientSocket) {
+    clientSocket = myClientSocket;
 }

@@ -14,6 +14,10 @@ class ClientPlayer : public HumanPlayer {
     virtual Disc playerLogic(Player opponentPlayer);
     ClientPlayer(Symbol symbol,const char *serverIP, int serverPort);
     void connectToServer();
+    int getClientNum();
+    int getClientSocket();
+    void setClientNum(int myClientNum);
+    void setClientSocket(int myClientSocket);
     private:
         const char *serverIP;
         int serverPort;

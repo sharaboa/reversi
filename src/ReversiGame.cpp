@@ -4,7 +4,9 @@
 //
 
 #include <iostream>
+#include <sys/socket.h>
 #include "ReversiGame.h"
+#include "ClientPlayer.h"
 
 ReversiGame::ReversiGame(int size): board(size),gameLogic(board),size(size) {}
 
@@ -21,6 +23,7 @@ void ReversiGame::manage(Symbol b, Symbol w, char x) {
             break;
         }
         case '2': {
+
             black =new HumanPlayer(b);
             white = new  AiPlayer(w,gameLogic,board);
             initiallize(black,white,board);
@@ -28,7 +31,14 @@ void ReversiGame::manage(Symbol b, Symbol w, char x) {
             break;
         }
         case '3':{
-
+            ClientPlayer player1(b,"0.0.0.0",6887);
+            player1.connectToServer();
+            ClientPlayer player2(w,"0.0.0.0",6887);
+            player2.setClientSocket(player1.getClientSocket());
+            player2.setClientNum(player1.getClientNum());
+            cout<<player1.getClientNum();
+            black = &player1;
+            white=&player2;
             break;
         }
     }
