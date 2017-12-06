@@ -158,4 +158,5 @@ void ClientPlayer::gameOver() {
     if (n == -1) {
         throw "Error writing arg2to socket";
     }
+
 }
