@@ -31,14 +31,17 @@ void ReversiGame::manage(Symbol b, Symbol w, char x) {
             break;
         }
         case '3':{
-            ClientPlayer player1(b,"0.0.0.0",6887);
+            ClientPlayer player1(b,"127.0.0.1",8888);
             player1.connectToServer();
-            ClientPlayer player2(w,"0.0.0.0",6887);
+            ClientPlayer player2(w,"0.0.0.0",8000);
             player2.setClientSocket(player1.getClientSocket());
             player2.setClientNum(player1.getClientNum());
-            cout<<player1.getClientNum();
+            cout<<player1.getClientNum()<<"aaaa";
             black = &player1;
             white=&player2;
+            cout<<player1.getClientSocket()<<endl;
+            cout<<player2.getClientSocket()<<endl;
+            player1.playerLogic(*white);
             break;
         }
     }

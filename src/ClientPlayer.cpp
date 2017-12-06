@@ -12,7 +12,7 @@
 #include <string.h>
 #include <unistd.h>
 using namespace std;
-ClientPlayer::ClientPlayer(Symbol symbol,const char *serverIP, int serverPort): HumanPlayer(symbol),serverIP(serverIP), serverPort(6886), clientSocket(0) {
+ClientPlayer::ClientPlayer(Symbol symbol,const char *serverIP, int serverPort): HumanPlayer(symbol),serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
     cout << "ClientPlayer" << endl;
 }
 void ClientPlayer::connectToServer() {
@@ -40,23 +40,50 @@ void ClientPlayer::connectToServer() {
     memcpy((char*)&serverAddress.sin_addr.s_addr, (char*)server->h_addr, server->h_length);
 //htonsconverts values between host and network byte orders
     serverAddress.sin_port = htons(serverPort);
-
+cout<<serverIP<<endl;
+    cout<<serverPort<<endl;
 // Establish a connection with the TCP server
     if(connect(clientSocket, (struct sockaddr*)&serverAddress,sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
-    cout<<"Connected to server"<<endl;
-    int n = read(clientSocket, &clientNum, sizeof(clientNum));
-    if (n == -1) {
-        throw
-                "Error reading result from socket";
-    }
+    cout<<"Connected to server\n"<<endl;
 
+    //initialize
+    int i = 5 ;
+    int n = write(clientSocket, &i, sizeof(i));
+    if (n == -1) {
+        throw "Error writing arg1to socket";
+    }
+    n = read(clientSocket, &i, sizeof(i));
+    if (n == -1) {
+        throw "Error writing arg1to socket";
+    }
+    clientNum = i;
+    cout<<endl<<clientNum<<endl;
+    if(clientNum == 2){
+        n = write(clientSocket, &i, sizeof(i));
+        if (n == -1) {
+            throw "Error writing arg1to socket";
+        }
+    }
 }
 
 
 Disc ClientPlayer::playerLogic(Player opponentPlayer) {
-    int arg1, arg2, n;
+   /* int i= 5 ;
+    int n = write(clientSocket, &i, sizeof(i));
+    if (n == -1) {
+        throw "Error writing arg1to socket";
+    }
+
+     n = read(clientSocket, &i, sizeof(i));
+    if (n == -1) {
+        throw "Error writing arg1to socket";
+    }*/
+
+    cout<<"wwww"<<clientNum<<endl;
+
+    int arg1, arg2 ;
     if (clientNum == 1 && symbol == X || clientNum == 2 && symbol == O) {
         optionStack.isRepeat();
         cout << (char) symbol << ": It's your move." << endl << "Your possible moves: ";
@@ -72,7 +99,7 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
 
             if (optionStack.appear(myChoise)) {
 
-                n = write(clientSocket, &arg1, sizeof(arg1));
+               int n = write(clientSocket, &arg1, sizeof(arg1));
                 if (n == -1) {
                     throw "Error writing arg1to socket";
                 }
@@ -88,7 +115,7 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
         }
     } else {
         cout<<"waiting for other player's move...\n";
-        n = read(clientSocket, &arg1, sizeof(arg1));
+       int  n = read(clientSocket, &arg1, sizeof(arg1));
         if (n == -1) {
             throw "Error writing arg1to socket";
         }
