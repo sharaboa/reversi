@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <sys/socket.h>
+#include <fstream>
 #include "ReversiGame.h"
 #include "ClientPlayer.h"
 
@@ -31,9 +32,22 @@ void ReversiGame::manage(Symbol b, Symbol w, char x) {
             break;
         }
         case '3':{
-            ClientPlayer player1(b,"127.0.0.1",8888);
+
+            string IP;
+            string data;
+            int port;
+            ifstream inFile;
+            inFile.open("/home/sahar/CLionProjects/reversi/reversi/src/setting.txt");
+            inFile >> data;
+            cout<<"IP: "<<data<<endl;
+            inFile >> port;
+            cout<<"port: "<<port<<endl;
+            inFile.close();
+            const char * serverIP = data.c_str();
+
+            ClientPlayer player1(b,serverIP,port);
             player1.connectToServer();
-            ClientPlayer player2(w,"127.0.0.0",8888);
+            ClientPlayer player2(w,serverIP,port);
             player2.setClientSocket(player1.getClientSocket());
             player2.setClientNum(player1.getClientNum());
             cout<<player1.getClientNum()<<"aaaa";
@@ -41,7 +55,10 @@ void ReversiGame::manage(Symbol b, Symbol w, char x) {
             white=&player2;
             cout<<player1.getClientSocket()<<endl;
             cout<<player2.getClientSocket()<<endl;
-            player1.playerLogic(*white);
+
+            initialize(black,white,board);
+            playClient(black, white);
+
             break;
         }
     }
@@ -99,38 +116,39 @@ void ReversiGame::announceWinner(Player *black,Player *white) const {
     }
 }
 
-void ReversiGame::playClient(Player *black,Player *white) {
+void ReversiGame::playClient(Player *currentPlayer,Player *opponentPlayer) {
     //notOver zeroed when both players have no moves
     int notOver = 2;
     cout << "current board:\n";
     board.printBoard();
-    while(notOver && black->getAmount() + white->getAmount() != size*size) {
-        black->playerMoveOption(*white ,board);
-        if (gameLogic.hasMoves(*black)) {
+    while(notOver && currentPlayer->getAmount() + opponentPlayer->getAmount() != size*size) {
+        currentPlayer->playerMoveOption(*opponentPlayer ,board);
+        if (gameLogic.hasMoves(*currentPlayer)) {
             notOver = 2;
-            gameLogic.turn(*black, *white, black->playerLogic(*white));
+            gameLogic.turn(*currentPlayer, *opponentPlayer, currentPlayer->playerLogic(*opponentPlayer));
         } else {
             notOver--;
             if(notOver) {
-                cout << (char)black->getSymbol() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
-                ((ClientPlayer*)black)->notMove();
+                cout << (char)currentPlayer->getSymbol() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
+                ((ClientPlayer*)currentPlayer)->notMove();
 
             }
         }
-        if(notOver && black->getAmount() + white->getAmount() != size*size) {
-            white->playerMoveOption(*black ,board);
-            if (gameLogic.hasMoves(*white)) {
+        if(notOver && currentPlayer->getAmount() + opponentPlayer->getAmount() != size*size) {
+            opponentPlayer->playerMoveOption(*currentPlayer ,board);
+            if (gameLogic.hasMoves(*opponentPlayer)) {
                 notOver = 2;
-                gameLogic.turn(*white, *black,white->playerLogic(*black));
+                gameLogic.turn(*opponentPlayer, *currentPlayer,opponentPlayer->playerLogic(*currentPlayer));
             } else {
                 notOver--;
                 if(notOver) {
-                    cout << (char)white->getSymbol() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
-                    ((ClientPlayer*)white)->notMove();
+                    cout << (char)opponentPlayer->getSymbol() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
+                    ((ClientPlayer*)opponentPlayer)->notMove();
                 }
             }
         }
     }
-    ((ClientPlayer*)black)->gameOver();
-    announceWinner(black,white);
+
+    ((ClientPlayer*)currentPlayer)->gameOver();
+    announceWinner(currentPlayer,opponentPlayer);
 }

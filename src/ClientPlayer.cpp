@@ -3,7 +3,6 @@
 //
 
 #include "ClientPlayer.h"
-#include "ClientPlayer.h"
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -14,6 +13,7 @@
 using namespace std;
 ClientPlayer::ClientPlayer(Symbol symbol,const char *serverIP, int serverPort): HumanPlayer(symbol),serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
     cout << "ClientPlayer" << endl;
+    clientNum = 0;
 }
 void ClientPlayer::connectToServer() {
 // Create a socket point
@@ -70,20 +70,7 @@ cout<<serverIP<<endl;
 
 
 Disc ClientPlayer::playerLogic(Player opponentPlayer) {
-   /* int i= 5 ;
-    int n = write(clientSocket, &i, sizeof(i));
-    if (n == -1) {
-        throw "Error writing arg1to socket";
-    }
-
-     n = read(clientSocket, &i, sizeof(i));
-    if (n == -1) {
-        throw "Error writing arg1to socket";
-    }*/
-
-    cout<<"wwww"<<clientNum<<endl;
-
-    int arg1, arg2 ;
+    int rowCord, colCord ;
     Disc d(0,0);
     if (clientNum == 1 && symbol == X || clientNum == 2 && symbol == O) {
         if(!(myChoise == d)) {
@@ -99,14 +86,16 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
                 char input[50];
                 cin.getline(input, 50);
                 fromInputToDisc(input);
-
+                rowCord = myChoise.getRowLocation();
+                colCord= myChoise.getColumnLocation();
+                cout<<"ggfgfggf"<<rowCord<<"    "<<colCord<<endl;
                 if (optionStack.appear(myChoise)) {
 
-                    int n = write(clientSocket, &arg1, sizeof(arg1));
+                    int n = write(clientSocket, &rowCord, sizeof(rowCord));
                     if (n == -1) {
                         throw "Error writing arg1to socket";
                     }
-                    n = write(clientSocket, &arg2, sizeof(arg2));
+                    n = write(clientSocket, &colCord, sizeof(colCord));
                     if (n == -1) {
                         throw "Error writing arg2to socket";
                     }
@@ -130,15 +119,15 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
         }
     } else {
         cout<<"waiting for other player's move...\n";
-       int  n = read(clientSocket, &arg1, sizeof(arg1));
+       int  n = read(clientSocket, &rowCord, sizeof(rowCord));
         if (n == -1) {
             throw "Error writing arg1to socket";
         }
-        n = read(clientSocket, &arg2, sizeof(arg2));
+        n = read(clientSocket, &colCord, sizeof(colCord));
         if (n == -1) {
             throw "Error writing arg2to socket";
         }
-        myChoise.setDisc(arg1, arg2);
+        myChoise.setDisc(rowCord, colCord);
         if(!(myChoise == d))
         return myChoise;
     }
@@ -160,7 +149,7 @@ void ClientPlayer::notMove() {
     myChoise.setDisc(0,0);
 }
 void ClientPlayer::gameOver() {
-    int over = -1;
+    int over = -2;
     int n = write(clientSocket, &over, sizeof(over));
     if (n == -1) {
         throw "Error writing arg1to socket";

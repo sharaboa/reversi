@@ -45,7 +45,7 @@ public:
      */
     void announceWinner(Player *black,Player *white) const;
     void initialize (Player *black, Player *white, Board &board);
-    void ReversiGame::playClient(Player *black,Player *white);
+    void playClient(Player *currentPlayer,Player *opponentPlayer);
 
 private:
     Board board;

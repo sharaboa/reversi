@@ -24,7 +24,7 @@ class ClientPlayer : public HumanPlayer {
         const char *serverIP;
         int serverPort;
         int clientSocket;
-        int clientNum = 0;
+        int clientNum;
 };
 
 
