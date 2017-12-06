@@ -18,6 +18,8 @@ class ClientPlayer : public HumanPlayer {
     int getClientSocket();
     void setClientNum(int myClientNum);
     void setClientSocket(int myClientSocket);
+    void notMove();
+    void gameOver();
     private:
         const char *serverIP;
         int serverPort;

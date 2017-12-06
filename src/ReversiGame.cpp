@@ -18,7 +18,7 @@ void ReversiGame::manage(Symbol b, Symbol w, char x) {
         case '1':  {
             black =new HumanPlayer(b);
             white =new HumanPlayer(w);
-            initiallize(black,white,board);
+            initialize(black,white,board);
             play(black,white);
             break;
         }
@@ -26,14 +26,14 @@ void ReversiGame::manage(Symbol b, Symbol w, char x) {
 
             black =new HumanPlayer(b);
             white = new  AiPlayer(w,gameLogic,board);
-            initiallize(black,white,board);
+            initialize(black,white,board);
             play(black,white);
             break;
         }
         case '3':{
             ClientPlayer player1(b,"127.0.0.1",8888);
             player1.connectToServer();
-            ClientPlayer player2(w,"0.0.0.0",8000);
+            ClientPlayer player2(w,"127.0.0.0",8888);
             player2.setClientSocket(player1.getClientSocket());
             player2.setClientNum(player1.getClientNum());
             cout<<player1.getClientNum()<<"aaaa";
@@ -48,7 +48,7 @@ void ReversiGame::manage(Symbol b, Symbol w, char x) {
     delete black;
     delete white;
 }
-void ReversiGame::initiallize (Player *black, Player *white, Board &board){
+void ReversiGame::initialize (Player *black, Player *white, Board &board){
     int midSize = size / 2;
     board.fillMatrixBoard(midSize,black->getSymbol(),white->getSymbol());
     white->addToStack(midSize + 1,midSize + 1);
@@ -97,4 +97,40 @@ void ReversiGame::announceWinner(Player *black,Player *white) const {
         cout << "Game Over! the winner is: " << (char)black->getSymbol() :
         cout << "Game Over! the winner is: " << (char)white->getSymbol();
     }
+}
+
+void ReversiGame::playClient(Player *black,Player *white) {
+    //notOver zeroed when both players have no moves
+    int notOver = 2;
+    cout << "current board:\n";
+    board.printBoard();
+    while(notOver && black->getAmount() + white->getAmount() != size*size) {
+        black->playerMoveOption(*white ,board);
+        if (gameLogic.hasMoves(*black)) {
+            notOver = 2;
+            gameLogic.turn(*black, *white, black->playerLogic(*white));
+        } else {
+            notOver--;
+            if(notOver) {
+                cout << (char)black->getSymbol() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
+                ((ClientPlayer*)black)->notMove();
+
+            }
+        }
+        if(notOver && black->getAmount() + white->getAmount() != size*size) {
+            white->playerMoveOption(*black ,board);
+            if (gameLogic.hasMoves(*white)) {
+                notOver = 2;
+                gameLogic.turn(*white, *black,white->playerLogic(*black));
+            } else {
+                notOver--;
+                if(notOver) {
+                    cout << (char)white->getSymbol() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
+                    ((ClientPlayer*)white)->notMove();
+                }
+            }
+        }
+    }
+    ((ClientPlayer*)black)->gameOver();
+    announceWinner(black,white);
 }

@@ -84,34 +84,49 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
     cout<<"wwww"<<clientNum<<endl;
 
     int arg1, arg2 ;
+    Disc d(0,0);
     if (clientNum == 1 && symbol == X || clientNum == 2 && symbol == O) {
-        optionStack.isRepeat();
-        cout << (char) symbol << ": It's your move." << endl << "Your possible moves: ";
-        for (int i = 0; i < optionStack.getAmount(); i++) {
-            cout << "(" << optionStack.getDisc(i).getRowLocation() << "," << optionStack.getDisc(i).getColumnLocation()
-                 << ") ";
-        }
-        cout << endl << endl << "Please enter your move row,col:";
-        while (true) {
-            char input[50];
-            cin.getline(input, 50);
-            fromInputToDisc(input);
-
-            if (optionStack.appear(myChoise)) {
-
-               int n = write(clientSocket, &arg1, sizeof(arg1));
-                if (n == -1) {
-                    throw "Error writing arg1to socket";
-                }
-                n = write(clientSocket, &arg2, sizeof(arg2));
-                if (n == -1) {
-                    throw "Error writing arg2to socket";
-                }
-                return myChoise;
-
-            } else {
-                cout << endl << endl << "illegal move! Please enter your move row,col:";
+        if(!(myChoise == d)) {
+            optionStack.isRepeat();
+            cout << (char) symbol << ": It's your move." << endl << "Your possible moves: ";
+            for (int i = 0; i < optionStack.getAmount(); i++) {
+                cout << "(" << optionStack.getDisc(i).getRowLocation() << ","
+                     << optionStack.getDisc(i).getColumnLocation()
+                     << ") ";
             }
+            cout << endl << endl << "Please enter your move row,col:";
+            while (true) {
+                char input[50];
+                cin.getline(input, 50);
+                fromInputToDisc(input);
+
+                if (optionStack.appear(myChoise)) {
+
+                    int n = write(clientSocket, &arg1, sizeof(arg1));
+                    if (n == -1) {
+                        throw "Error writing arg1to socket";
+                    }
+                    n = write(clientSocket, &arg2, sizeof(arg2));
+                    if (n == -1) {
+                        throw "Error writing arg2to socket";
+                    }
+                    return myChoise;
+                } else {
+                    cout << endl << endl << "illegal move! Please enter your move row,col:";
+                }
+            }
+        }
+        if(myChoise == d) {
+            int noChoise = 0;
+            int n = write(clientSocket, &noChoise, sizeof(noChoise));
+            if (n == -1) {
+                throw "Error writing arg1to socket";
+            }
+            n = write(clientSocket, &noChoise, sizeof(noChoise));
+            if (n == -1) {
+                throw "Error writing arg2to socket";
+            }
+            return myChoise;
         }
     } else {
         cout<<"waiting for other player's move...\n";
@@ -124,8 +139,10 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
             throw "Error writing arg2to socket";
         }
         myChoise.setDisc(arg1, arg2);
+        if(!(myChoise == d))
         return myChoise;
     }
+
 }
 int ClientPlayer::getClientNum() {
     return clientNum;
@@ -138,4 +155,18 @@ void ClientPlayer::setClientNum(int myClientNum) {
 }
 void ClientPlayer::setClientSocket(int myClientSocket) {
     clientSocket = myClientSocket;
+}
+void ClientPlayer::notMove() {
+    myChoise.setDisc(0,0);
+}
+void ClientPlayer::gameOver() {
+    int over = -1;
+    int n = write(clientSocket, &over, sizeof(over));
+    if (n == -1) {
+        throw "Error writing arg1to socket";
+    }
+    n = write(clientSocket, &over, sizeof(over));
+    if (n == -1) {
+        throw "Error writing arg2to socket";
+    }
 }

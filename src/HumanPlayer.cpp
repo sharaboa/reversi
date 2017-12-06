@@ -20,6 +20,7 @@ Disc HumanPlayer::playerLogic(Player opponentPlayer) {
         cin.getline(input,50);
         fromInputToDisc(input);
         if (optionStack.appear(myChoise)) {
+
             return myChoise;
         }
         else{

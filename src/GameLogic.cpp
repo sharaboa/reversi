@@ -9,13 +9,17 @@
 GameLogic::GameLogic(Board &board): board(board) {}
 
 void GameLogic::turn(Player &currentPlayer, Player &opponentPlayer,Disc playerChoise) {
-    vector<Player> tempPlayers = eat(currentPlayer,opponentPlayer,playerChoise,board);
-    updateMove(tempPlayers, currentPlayer, opponentPlayer,playerChoise);
-    cout << endl << endl;
-    cout << "current board:\n\n";
-    board.printBoard();
-    cout <<endl<< (char)currentPlayer.getSymbol() << " played (" << playerChoise.getRowLocation() << "," << playerChoise.getColumnLocation() << ")";
-    cout << " with score: " << currentPlayer.getAmount() - opponentPlayer.getAmount()<<"\n\n";
+    Disc d(0, 0);
+    if (!(playerChoise == d)) {
+        vector<Player> tempPlayers = eat(currentPlayer, opponentPlayer, playerChoise, board);
+        updateMove(tempPlayers, currentPlayer, opponentPlayer, playerChoise);
+        cout << endl << endl;
+        cout << "current board:\n\n";
+        board.printBoard();
+        cout << endl << (char) currentPlayer.getSymbol() << " played (" << playerChoise.getRowLocation() << ","
+             << playerChoise.getColumnLocation() << ")";
+        cout << " with score: " << currentPlayer.getAmount() - opponentPlayer.getAmount() << "\n\n";
+    }
 }
 
 vector<Player> GameLogic::eat(Player currentPlayer,Player opponentPlayer,Disc playerChoise,Board &tempBoard) {
