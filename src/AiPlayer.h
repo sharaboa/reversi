@@ -16,7 +16,7 @@ public:
      * @param myLogic
      * @param gameBoard
      */
-    AiPlayer(Symbol symbol, GameLogic myLogic,Board &gameBoard);
+    AiPlayer(Symbol symbol,GameLogic myLogic,Board &gameBoard);
     /**
      * algorithem to choose disc
      * @param opponentPlayer

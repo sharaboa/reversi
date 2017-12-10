@@ -33,11 +33,11 @@ public:
      * @param black - x player
      * @param white - o player
      */
-    void manage(Symbol b, Symbol w, char x);
+    //void manage(Symbol b, Symbol w, char x);
     /**
      * The game manager. decides who turn to play and returns the winner
      */
-    void play(Player *black,Player *white);
+    //virtual void play(Player *black,Player *white) = 0;
 
     /**
      * this fun announce the winner/a tie
@@ -45,9 +45,16 @@ public:
      */
     void announceWinner(Player *black,Player *white) const;
     void initialize (Player *black, Player *white, Board &board);
-    void playClient(Player *currentPlayer,Player *opponentPlayer);
+    void manageHuman(Symbol b, Symbol w);
+    void manageAi(Symbol b, Symbol w);
+    void manageRemoteGame(Symbol b, Symbol w);
+    void play(Player *current,Player *opponent);
+    //void playClient(Player *currentPlayer,Player *opponentPlayer);
+    // void manageHuman(Symbol b, Symbol w);
+    // void manageAi(Symbol b, Symbol w);
+    //void manageClient(Symbol b, Symbol w);
 
-private:
+protected:
     Board board;
     GameLogic gameLogic;
     const int size;

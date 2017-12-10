@@ -23,7 +23,7 @@ void Board::fillMatrixBoard(const int &midSize,Symbol black,Symbol white) {
     //puts spaces in rest of the matrix
     for (int i = 1; i < size - 1; i++) {
         for(int j = 1; j < size - 1; j++) {
-                matrixBoard[i][j] = S;
+            matrixBoard[i][j] = S;
         }
     }
     //puts the player's discs in the middle of the matrix
@@ -68,10 +68,10 @@ void Board::printBoard() const {
     }
 }
 Board::~Board() {
-        for (int i = 0; i < size; i++) {
-            delete[] matrixBoard[i];
-        }
-            delete[] matrixBoard;
+    for (int i = 0; i < size; i++) {
+        delete[] matrixBoard[i];
+    }
+    delete[] matrixBoard;
 }
 
 Symbol Board::getCell(const int &i,const int &j) const {
@@ -93,4 +93,3 @@ void Board::copyBoard(Board &otherBoard){
 int Board::getSize() const {
     return size - 2;
 }
-

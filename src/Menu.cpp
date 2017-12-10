@@ -6,11 +6,11 @@
 #include <cstdio>
 #include "Menu.h"
 #include "HumanPlayer.h"
-#include "ReversiGame.h"
+
 
 Menu::Menu() {}
 
-void Menu::gameMode(ReversiGame *reversiGame, Symbol black, Symbol white) {
+void Menu::gameMode(int size, Symbol black, Symbol white) {
     char choise;
     cout << "Welcome to Reversi\n\n";
 
@@ -19,7 +19,23 @@ void Menu::gameMode(ReversiGame *reversiGame, Symbol black, Symbol white) {
         cin >> choise;
         if (choise == '1' || choise == '2' || choise == '3') {
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //skip bad input
-            reversiGame->manage(black,white,choise);
+            switch (choise) {
+                case '1': {
+                    ReversiGame reversi(size);
+                    reversi.manageHuman(black, white);
+                    break;
+                }
+                case '2': {
+                    ReversiGame reversi(size);
+                    reversi.manageAi(black,white);
+                    break;
+                }
+                case '3': {
+                    ReversiGame reversi(size);
+                    reversi.manageRemoteGame(black,white);
+                    break;
+                }
+            }
             break;
         }
         // user didn't input a number

@@ -55,4 +55,3 @@ private:
 };
 
 #endif //EX2_GAMELOGIC_H
-

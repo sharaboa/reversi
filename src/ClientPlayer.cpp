@@ -40,8 +40,8 @@ void ClientPlayer::connectToServer() {
     memcpy((char*)&serverAddress.sin_addr.s_addr, (char*)server->h_addr, server->h_length);
 //htonsconverts values between host and network byte orders
     serverAddress.sin_port = htons(serverPort);
-cout<<serverIP<<endl;
-    cout<<serverPort<<endl;
+    //cout<<serverIP<<endl;
+    //cout<<serverPort<<endl;
 // Establish a connection with the TCP server
     if(connect(clientSocket, (struct sockaddr*)&serverAddress,sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
@@ -60,6 +60,9 @@ cout<<serverIP<<endl;
     }
     clientNum = i;
     cout<<endl<<clientNum<<endl;
+    if(clientNum == 1) {
+        cout << "waiting for other player to join...\n";
+    }
     if(clientNum == 2){
         n = write(clientSocket, &i, sizeof(i));
         if (n == -1) {
@@ -68,12 +71,10 @@ cout<<serverIP<<endl;
     }
 }
 
-
 Disc ClientPlayer::playerLogic(Player opponentPlayer) {
-    int rowCord, colCord ;
-    Disc d(0,0);
+    int rowCord, colCord;
     if (clientNum == 1 && symbol == X || clientNum == 2 && symbol == O) {
-        if(!(myChoise == d)) {
+        if (optionStack.getAmount()) {
             optionStack.isRepeat();
             cout << (char) symbol << ": It's your move." << endl << "Your possible moves: ";
             for (int i = 0; i < optionStack.getAmount(); i++) {
@@ -87,10 +88,8 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
                 cin.getline(input, 50);
                 fromInputToDisc(input);
                 rowCord = myChoise.getRowLocation();
-                colCord= myChoise.getColumnLocation();
-                cout<<"ggfgfggf"<<rowCord<<"    "<<colCord<<endl;
+                colCord = myChoise.getColumnLocation();
                 if (optionStack.appear(myChoise)) {
-
                     int n = write(clientSocket, &rowCord, sizeof(rowCord));
                     if (n == -1) {
                         throw "Error writing arg1to socket";
@@ -104,8 +103,7 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
                     cout << endl << endl << "illegal move! Please enter your move row,col:";
                 }
             }
-        }
-        if(myChoise == d) {
+        } else {
             int noChoise = 0;
             int n = write(clientSocket, &noChoise, sizeof(noChoise));
             if (n == -1) {
@@ -118,8 +116,10 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
             return myChoise;
         }
     } else {
-        cout<<"waiting for other player's move...\n";
-       int  n = read(clientSocket, &rowCord, sizeof(rowCord));
+        if(optionStack.getAmount())
+            cout << "waiting for other player's move...\n";
+
+        int n = read(clientSocket, &rowCord, sizeof(rowCord));
         if (n == -1) {
             throw "Error writing arg1to socket";
         }
@@ -128,10 +128,8 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
             throw "Error writing arg2to socket";
         }
         myChoise.setDisc(rowCord, colCord);
-        if(!(myChoise == d))
         return myChoise;
     }
-
 }
 int ClientPlayer::getClientNum() {
     return clientNum;
@@ -158,5 +156,4 @@ void ClientPlayer::gameOver() {
     if (n == -1) {
         throw "Error writing arg2to socket";
     }
-
 }

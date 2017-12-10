@@ -43,9 +43,11 @@ public:
  */
     void playerMoveOption(const Player opponentPlayer,Board &board);
 
+    //int getPlayerType();
 protected:
     Symbol symbol;
     StackOfDiscs optionStack;
+    //int playerType;
 
 };
 

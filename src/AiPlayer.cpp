@@ -6,7 +6,9 @@
 #include "AiPlayer.h"
 
 
-AiPlayer::AiPlayer(Symbol symbol,  GameLogic myLogic,Board &gameBoard) : Player(symbol), myLogic(myLogic),gameBoard(gameBoard) {}
+AiPlayer::AiPlayer(Symbol symbol,GameLogic myLogic,Board &gameBoard) : Player(symbol), myLogic(myLogic),gameBoard(gameBoard) {
+    //playerType =1;
+}
 
 Disc AiPlayer::playerLogic(Player opponentPlayer) {
     Board tempBoardAi(gameBoard.getSize());
@@ -38,10 +40,10 @@ Disc AiPlayer::playerLogic(Player opponentPlayer) {
                 maxHumanScore = tempPlayersAfterHuChoose[0].getAmount() - tempPlayersAfterHuChoose[1].getAmount();
             }
         }
-         if(minHumanScore >= maxHumanScore) {
-             minHumanScore = maxHumanScore;
-             myChoise.setDisc(tempStack.getDisc(i).getRowLocation(),tempStack.getDisc(i).getColumnLocation());
-         }
+        if(minHumanScore >= maxHumanScore) {
+            minHumanScore = maxHumanScore;
+            myChoise.setDisc(tempStack.getDisc(i).getRowLocation(),tempStack.getDisc(i).getColumnLocation());
+        }
     }
- return myChoise;
+    return myChoise;
 }

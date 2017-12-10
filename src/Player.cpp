@@ -7,12 +7,15 @@
 
 
 
-Player::Player(Symbol symbol): symbol(symbol), StackOfDiscs() {}
+Player::Player(Symbol symbol): symbol(symbol) ,StackOfDiscs() {}
 
 
 Symbol Player::getSymbol() const {
     return symbol;
 }
+/*int Player::getPlayerType(){
+    return playerType;
+}*/
 
 StackOfDiscs Player::getOptionStack() const {
     return optionStack;

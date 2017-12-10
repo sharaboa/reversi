@@ -10,7 +10,7 @@
 #include "HumanPlayer.h"
 
 class ClientPlayer : public HumanPlayer {
-    public:
+public:
     virtual Disc playerLogic(Player opponentPlayer);
     ClientPlayer(Symbol symbol,const char *serverIP, int serverPort);
     void connectToServer();
@@ -20,11 +20,11 @@ class ClientPlayer : public HumanPlayer {
     void setClientSocket(int myClientSocket);
     void notMove();
     void gameOver();
-    private:
-        const char *serverIP;
-        int serverPort;
-        int clientSocket;
-        int clientNum;
+private:
+    const char *serverIP;
+    int serverPort;
+    int clientSocket;
+    int clientNum;
 };
 
 

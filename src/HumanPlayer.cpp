@@ -6,7 +6,9 @@
 #include <cstdio>
 #include "HumanPlayer.h"
 
-HumanPlayer::HumanPlayer(Symbol symbol) : Player(symbol) {}
+HumanPlayer::HumanPlayer(Symbol symbol) : Player(symbol) {
+    //playerType = 1;
+}
 
 Disc HumanPlayer::playerLogic(Player opponentPlayer) {
     optionStack.isRepeat();

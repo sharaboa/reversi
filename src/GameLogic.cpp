@@ -62,9 +62,9 @@ void GameLogic::updateMove(const vector<Player>& tempPlayers, Player &currentPla
     opponentPlayer = tempPlayers[1];
     board.setCell(playerChoise.getRowLocation(),playerChoise.getColumnLocation(),currentPlayer.getSymbol());
     for(int i = 0; i < 2; i++) {
-       for(int j = 0;j < tempPlayers[i].getAmount(); j++) {
-           board.setCell(tempPlayers[i].getDisc(j).getRowLocation(),tempPlayers[i].getDisc(j).getColumnLocation(),tempPlayers[i].getSymbol());
-       }
+        for(int j = 0;j < tempPlayers[i].getAmount(); j++) {
+            board.setCell(tempPlayers[i].getDisc(j).getRowLocation(),tempPlayers[i].getDisc(j).getColumnLocation(),tempPlayers[i].getSymbol());
+        }
     }
 }
 
