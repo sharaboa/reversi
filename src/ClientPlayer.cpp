@@ -12,8 +12,8 @@
 #include <unistd.h>
 using namespace std;
 ClientPlayer::ClientPlayer(Symbol symbol,const char *serverIP, int serverPort): HumanPlayer(symbol),serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
-    cout << "ClientPlayer" << endl;
     clientNum = 0;
+    //playerType = 2;
 }
 void ClientPlayer::connectToServer() {
 // Create a socket point
@@ -40,39 +40,30 @@ void ClientPlayer::connectToServer() {
     memcpy((char*)&serverAddress.sin_addr.s_addr, (char*)server->h_addr, server->h_length);
 //htonsconverts values between host and network byte orders
     serverAddress.sin_port = htons(serverPort);
-    //cout<<serverIP<<endl;
-    //cout<<serverPort<<endl;
 // Establish a connection with the TCP server
     if(connect(clientSocket, (struct sockaddr*)&serverAddress,sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
-    cout<<"Connected to server\n"<<endl;
+    cout<<"waiting for other player to join...\n"<<endl;
 
     //initialize
     int i = 5 ;
-    int n = write(clientSocket, &i, sizeof(i));
-    if (n == -1) {
-        throw "Error writing arg1to socket";
-    }
-    n = read(clientSocket, &i, sizeof(i));
+    int n = read(clientSocket, &i, sizeof(i));
     if (n == -1) {
         throw "Error writing arg1to socket";
     }
     clientNum = i;
-    cout<<endl<<clientNum<<endl;
     if(clientNum == 1) {
-        cout << "waiting for other player to join...\n";
+        cout << "You are X and the first one to play.\n";
     }
     if(clientNum == 2){
-        n = write(clientSocket, &i, sizeof(i));
-        if (n == -1) {
-            throw "Error writing arg1to socket";
-        }
+        cout << "You are O and the second one to play.\n";
     }
 }
 
 Disc ClientPlayer::playerLogic(Player opponentPlayer) {
     int rowCord, colCord;
+    Disc d(0, 0);
     if (clientNum == 1 && symbol == X || clientNum == 2 && symbol == O) {
         if (optionStack.getAmount()) {
             optionStack.isRepeat();
@@ -89,6 +80,7 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
                 fromInputToDisc(input);
                 rowCord = myChoise.getRowLocation();
                 colCord = myChoise.getColumnLocation();
+                cout << "ggfgfggf" << rowCord << "    " << colCord << endl;
                 if (optionStack.appear(myChoise)) {
                     int n = write(clientSocket, &rowCord, sizeof(rowCord));
                     if (n == -1) {
@@ -156,4 +148,5 @@ void ClientPlayer::gameOver() {
     if (n == -1) {
         throw "Error writing arg2to socket";
     }
+
 }
