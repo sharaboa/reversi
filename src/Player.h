@@ -36,19 +36,16 @@ public:
      * @return a disc containing the player choise for his move in the game
      */
     virtual Disc playerLogic(Player p);
-/**
- * calculate the player vaild move option
- * @param opponentPlayer the opponent player
- * @param board the game current booard
- */
+    /**
+     * calculate the player vaild move option
+     * @param opponentPlayer the opponent player
+     * @param board the game current booard
+     */
     void playerMoveOption(const Player opponentPlayer,Board &board);
 
-    //int getPlayerType();
 protected:
     Symbol symbol;
     StackOfDiscs optionStack;
-    //int playerType;
-
 };
 
 

@@ -64,7 +64,6 @@ void ReversiGame::play(Player *current,Player *opponent) {
             if(notOver) {
                 cout << (char)current->getSymbol() << ": It's your move.\nNo possible moves. Play passes back to the othe player.\n\n\n";
                 if(typeid(*current) == typeid(ClientPlayer)) {
-                    //if (current->getPlayerType() == 2){
                     ((ClientPlayer*)current)->notMove();
                     gameLogic.turn(*current, *opponent, current->playerLogic(*opponent));
                 }
@@ -73,7 +72,6 @@ void ReversiGame::play(Player *current,Player *opponent) {
         swap(current,opponent);
     }
     if(typeid(*current) == typeid(ClientPlayer)) {
-        //if (current->getPlayerType() == 2){
         ((ClientPlayer*)current)->gameOver();
     }
     announceWinner(current,opponent);

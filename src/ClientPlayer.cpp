@@ -13,7 +13,6 @@
 using namespace std;
 ClientPlayer::ClientPlayer(Symbol symbol,const char *serverIP, int serverPort): HumanPlayer(symbol),serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
     clientNum = 0;
-    //playerType = 2;
 }
 void ClientPlayer::connectToServer() {
 // Create a socket point
@@ -44,10 +43,10 @@ void ClientPlayer::connectToServer() {
     if(connect(clientSocket, (struct sockaddr*)&serverAddress,sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
-    //cout<<"waiting for other player to join...\n"<<endl;
 
     //initialize
-    int i = 5 ;
+    int i;
+    //read clientNum - 1/2
     int n = read(clientSocket, &i, sizeof(i));
     if (n == -1) {
         throw "Error writing arg1to socket";
@@ -56,6 +55,7 @@ void ClientPlayer::connectToServer() {
     if(clientNum == 1) {
         cout << "You are X and the first one to play.\n";
         cout<<"waiting for other player to join...\n"<<endl;
+        //waite for second player to connect
         int n = read(clientSocket, &i, sizeof(i));
         if (n == -1) {
             throw "Error writing arg1to socket";
@@ -68,7 +68,7 @@ void ClientPlayer::connectToServer() {
 
 Disc ClientPlayer::playerLogic(Player opponentPlayer) {
     int rowCord, colCord;
-    Disc d(0, 0);
+    //choose disc if it's player's turn
     if (clientNum == 1 && symbol == X || clientNum == 2 && symbol == O) {
         if (optionStack.getAmount()) {
             optionStack.isRepeat();
@@ -85,7 +85,6 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
                 fromInputToDisc(input);
                 rowCord = myChoise.getRowLocation();
                 colCord = myChoise.getColumnLocation();
-                cout << "ggfgfggf" << rowCord << "    " << colCord << endl;
                 if (optionStack.appear(myChoise)) {
                     int n = write(clientSocket, &rowCord, sizeof(rowCord));
                     if (n == -1) {
@@ -101,6 +100,7 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
                 }
             }
         } else {
+            //there is no move so sending the agreed sign - (0,0)
             int noChoise = 0;
             int n = write(clientSocket, &noChoise, sizeof(noChoise));
             if (n == -1) {
@@ -112,6 +112,7 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
             }
             return myChoise;
         }
+        //updating the choise of the other player
     } else {
         if(optionStack.getAmount())
             cout << "waiting for other player's move...\n";

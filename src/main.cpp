@@ -14,13 +14,9 @@ using namespace std;
 
 
 int main() {
-    //ReversiGame* reversiGame = new ReversiGame(4);
+    ReversiGame* reversiGame = new ReversiGame(4);
     Menu menu;
-    menu.gameMode(4, X, O);
-    //delete reversiGame;
+    menu.gameMode(*reversiGame, X, O);
+    delete reversiGame;
     return 0;
-
-    /*  ClientPlayer a (X,"127.0.0.1",6886);
-      ClientPlayer b (X,"127.0.0.1",6886);*/
-
 }

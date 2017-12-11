@@ -10,7 +10,7 @@
 
 Menu::Menu() {}
 
-void Menu::gameMode(int size, Symbol black, Symbol white) {
+void Menu::gameMode(ReversiGame &reversiGame, Symbol black, Symbol white) {
     char choise;
     cout << "Welcome to Reversi\n\n";
 
@@ -21,18 +21,15 @@ void Menu::gameMode(int size, Symbol black, Symbol white) {
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //skip bad input
             switch (choise) {
                 case '1': {
-                    ReversiGame reversi(size);
-                    reversi.manageHuman(black, white);
+                    reversiGame.manageHuman(black, white);
                     break;
                 }
                 case '2': {
-                    ReversiGame reversi(size);
-                    reversi.manageAi(black,white);
+                    reversiGame.manageAi(black,white);
                     break;
                 }
                 case '3': {
-                    ReversiGame reversi(size);
-                    reversi.manageRemoteGame(black,white);
+                    reversiGame.manageRemoteGame(black,white);
                     break;
                 }
             }

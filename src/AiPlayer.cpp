@@ -6,9 +6,7 @@
 #include "AiPlayer.h"
 
 
-AiPlayer::AiPlayer(Symbol symbol,GameLogic myLogic,Board &gameBoard) : Player(symbol), myLogic(myLogic),gameBoard(gameBoard) {
-    //playerType =1;
-}
+AiPlayer::AiPlayer(Symbol symbol,GameLogic myLogic,Board &gameBoard) : Player(symbol), myLogic(myLogic),gameBoard(gameBoard) {}
 
 Disc AiPlayer::playerLogic(Player opponentPlayer) {
     Board tempBoardAi(gameBoard.getSize());

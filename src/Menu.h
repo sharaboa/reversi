@@ -22,7 +22,7 @@ public:
      * @param black the first player of the game. player symbol is X
      * @param white the second player of the game. player symbol is O
      */
-    void gameMode(int size, Symbol black, Symbol white);
+    void gameMode(ReversiGame &reversiGame, Symbol black, Symbol white);
 };
 
 

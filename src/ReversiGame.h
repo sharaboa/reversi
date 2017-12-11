@@ -19,7 +19,7 @@ using namespace std;
 class ReversiGame {
 public:
     /**
-     * constructor. Initializes board and players
+     * constructor. Initializes board
      * @param size - of board
      * @param black - first player
      * @param white - second player
@@ -28,31 +28,42 @@ public:
     ReversiGame(int size);
 
     /**
-     * Initializes the board and players after placing two discs per player in the center of the board
-     * @param board
-     * @param black - x player
-     * @param white - o player
-     */
-    //void manage(Symbol b, Symbol w, char x);
-    /**
-     * The game manager. decides who turn to play and returns the winner
-     */
-    //virtual void play(Player *black,Player *white) = 0;
-
-    /**
      * this fun announce the winner/a tie
      * @return the form of the winner
      */
     void announceWinner(Player *black,Player *white) const;
+    /**
+     * Initializes the board and players by placing two discs per player in the center of the board
+     * @param black  - x player
+     * @param white  - o player
+     * @param board
+     */
     void initialize (Player *black, Player *white, Board &board);
+    /**
+     * build 2 humans players
+     * @param b - x
+     * @param w - o
+     */
     void manageHuman(Symbol b, Symbol w);
+    /**
+     * build human and ai player
+     * @param b - x
+     * @param w - o
+     */
     void manageAi(Symbol b, Symbol w);
+    /**
+     * build 2 players on the same port
+     * reading for file the port and ip
+     * @param b - x
+     * @param w - o
+     */
     void manageRemoteGame(Symbol b, Symbol w);
+    /**
+     * manage the turns of the 2 players
+     * @param current - current player
+     * @param opponent - other player
+     */
     void play(Player *current,Player *opponent);
-    //void playClient(Player *currentPlayer,Player *opponentPlayer);
-    // void manageHuman(Symbol b, Symbol w);
-    // void manageAi(Symbol b, Symbol w);
-    //void manageClient(Symbol b, Symbol w);
 
 protected:
     Board board;
