@@ -6,7 +6,6 @@
 
 #include "ReversiGame.h"
 #include "Menu.h"
-#include "ClientPlayer.h"
 
 
 using namespace std;
@@ -14,7 +13,7 @@ using namespace std;
 
 
 int main() {
-    ReversiGame* reversiGame = new ReversiGame(4);
+    ReversiGame* reversiGame = new ReversiGame(6);
     Menu menu;
     menu.gameMode(*reversiGame, X, O);
     delete reversiGame;

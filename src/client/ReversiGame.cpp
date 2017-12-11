@@ -82,7 +82,7 @@ void ReversiGame::announceWinner(Player *black,Player *white) const {
         cout << "Game Over! it's a tie " << endl;
     } else {
         black->getAmount() > white->getAmount() ?
-        cout << "Game Over! the winner is: " << (char)black->getSymbol() :
-        cout << "Game Over! the winner is: " << (char)white->getSymbol();
+        cout << "Game Over! the winner is: " << (char)black->getSymbol() << endl:
+        cout << "Game Over! the winner is: " << (char)white->getSymbol() << endl;
     }
 }

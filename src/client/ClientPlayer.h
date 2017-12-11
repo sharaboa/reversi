@@ -1,5 +1,6 @@
 //
-// Created by or on 03/12/17.
+// Or Sharabi 312530496
+//Sahar levi 203405147
 //
 
 #ifndef REVERSI_CLIENT_H

@@ -1,14 +1,13 @@
 //
-// Created by or on 03/12/17.
+// Or Sharabi 312530496
+//Sahar levi 203405147
 //
 
 #include "ClientPlayer.h"
-#include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
-#include <string.h>
 #include <unistd.h>
 using namespace std;
 ClientPlayer::ClientPlayer(Symbol symbol,const char *serverIP, int serverPort): HumanPlayer(symbol),serverIP(serverIP), serverPort(serverPort), clientSocket(0) {

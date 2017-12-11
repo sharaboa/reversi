@@ -5,7 +5,6 @@
 
 #include <cstdio>
 #include "Menu.h"
-#include "HumanPlayer.h"
 
 
 Menu::Menu() {}
