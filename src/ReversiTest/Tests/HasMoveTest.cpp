@@ -4,7 +4,7 @@
 //
 
 #include <gtest/gtest.h>
-#include <src/GameLogic.h>
+#include <client/GameLogic.h>
 
 //test at beginning of game
 TEST(GameLogicTest_TEST, InitializeHasMoves) {

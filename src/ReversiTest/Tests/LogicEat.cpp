@@ -4,8 +4,8 @@
 //
 
 #include <gtest/gtest.h>
-#include <src/Board.h>
-#include <src/AiPlayer.h>
+#include <client/Board.h>
+#include <client/AiPlayer.h>
 
 //check if the eat func works properly
 

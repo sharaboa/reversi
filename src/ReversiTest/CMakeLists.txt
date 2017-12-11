@@ -7,10 +7,10 @@ include_directories(${reversi_SOURCE_DIR}/)
 include_directories(${gtest_SOURCE_DIR}/include)
 
 #Add project files
-file(GLOB Reversi_Sources ${reversi_SOURCE_DIR}/src/*.cpp)
+file(GLOB Reversi_Sources ${reversi_SOURCE_DIR}/client/*.cpp)
 file(GLOB Test_Sources ${ReversiTest_SOURCE_DIR}/Tests/*.cpp)
 set(SOURCE_FILES ${Test_Sources} ${Reversi_Sources} Tests/HasMoveTest.cpp)
-list(REMOVE_ITEM SOURCE_FILES ${reversi_SOURCE_DIR}/src/main.cpp)
+list(REMOVE_ITEM SOURCE_FILES ${reversi_SOURCE_DIR}/client/main.cpp)
 
 
 add_executable(ReversiTest ${SOURCE_FILES})

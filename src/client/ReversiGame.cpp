@@ -39,16 +39,12 @@ void ReversiGame::manageAi(Symbol b, Symbol w) {
     delete white;
 }
 void ReversiGame::manageRemoteGame(Symbol b, Symbol w){
-
-    string IP;
     string data;
     int port;
     ifstream inFile;
     inFile.open("setting.txt");
     inFile >> data;
-    cout<<"IP: "<<data<<endl;
     inFile >> port;
-    cout<<"port: "<<port<<endl;
     inFile.close();
 
     const char * serverIP = data.c_str();

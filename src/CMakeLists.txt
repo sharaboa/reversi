@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.8)
 project(reversi)
 add_subdirectory(ReversiTest)
+add_subdirectory(server)
+add_subdirectory(client)
 set(CMAKE_CXX_STANDARD 98)
 
 set(SOURCE_FILES

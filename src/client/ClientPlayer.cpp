@@ -10,9 +10,8 @@
 #include <netdb.h>
 #include <unistd.h>
 using namespace std;
-ClientPlayer::ClientPlayer(Symbol symbol,const char *serverIP, int serverPort): HumanPlayer(symbol),serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
-    clientNum = 0;
-}
+ClientPlayer::ClientPlayer(Symbol symbol,const char *serverIP, int serverPort):
+        HumanPlayer(symbol), serverIP(serverIP), serverPort(serverPort), clientSocket(0), clientNum(0){}
 void ClientPlayer::connectToServer() {
 // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);

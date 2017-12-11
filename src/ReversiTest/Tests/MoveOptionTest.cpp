@@ -4,7 +4,7 @@
 //
 
 #include <gtest/gtest.h>
-#include <src/GameLogic.h>
+#include <client/GameLogic.h>
 
 
 //checks if the option presented is correct

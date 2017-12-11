@@ -4,9 +4,9 @@
 //
 
 #include <gtest/gtest.h>
-#include <src/Board.h>
-#include <src/AiPlayer.h>
-#include <src/HumanPlayer.h>
+#include <client/AiPlayer.h>
+#include <client/HumanPlayer.h>
+#include <client/Board.h>
 //check that the ai logic works and calculate the correct move
 TEST(AiPlayer__TEST, Testing){
 
