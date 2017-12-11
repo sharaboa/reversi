@@ -44,7 +44,7 @@ void ClientPlayer::connectToServer() {
     if(connect(clientSocket, (struct sockaddr*)&serverAddress,sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
-    cout<<"waiting for other player to join...\n"<<endl;
+    //cout<<"waiting for other player to join...\n"<<endl;
 
     //initialize
     int i = 5 ;
@@ -55,6 +55,11 @@ void ClientPlayer::connectToServer() {
     clientNum = i;
     if(clientNum == 1) {
         cout << "You are X and the first one to play.\n";
+        cout<<"waiting for other player to join...\n"<<endl;
+        int n = read(clientSocket, &i, sizeof(i));
+        if (n == -1) {
+            throw "Error writing arg1to socket";
+        }
     }
     if(clientNum == 2){
         cout << "You are O and the second one to play.\n";
