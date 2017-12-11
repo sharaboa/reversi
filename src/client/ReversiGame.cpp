@@ -7,6 +7,7 @@
 #include "ReversiGame.h"
 #include "ClientPlayer.h"
 #include <typeinfo>
+#include <fstream>
 
 
 ReversiGame::ReversiGame(int size): board(size),gameLogic(board),size(size) {}
@@ -39,10 +40,21 @@ void ReversiGame::manageAi(Symbol b, Symbol w) {
 }
 void ReversiGame::manageRemoteGame(Symbol b, Symbol w){
 
+    string IP;
+    string data;
+    int port;
+    ifstream inFile;
+    inFile.open("setting.txt");
+    inFile >> data;
+    cout<<"IP: "<<data<<endl;
+    inFile >> port;
+    cout<<"port: "<<port<<endl;
+    inFile.close();
 
-    ClientPlayer player1(b,"127.0.0.1",8888);
+    const char * serverIP = data.c_str();
+    ClientPlayer player1(b,serverIP,port);
     player1.connectToServer();
-    ClientPlayer player2(w,"127.0.0.1",8888);
+    ClientPlayer player2(w,serverIP,port);
     player2.setClientSocket(player1.getClientSocket());
     player2.setClientNum(player1.getClientNum());
     initialize(&player1,&player2,board);
