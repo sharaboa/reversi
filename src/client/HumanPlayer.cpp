@@ -6,9 +6,7 @@
 #include <cstdio>
 #include "HumanPlayer.h"
 
-HumanPlayer::HumanPlayer(Symbol symbol) : Player(symbol) {
-    //playerType = 1;
-}
+HumanPlayer::HumanPlayer(Symbol symbol) : Player(symbol) {}
 
 Disc HumanPlayer::playerLogic(Player opponentPlayer) {
     optionStack.isRepeat();
@@ -21,9 +19,9 @@ Disc HumanPlayer::playerLogic(Player opponentPlayer) {
         char input[50];
         cin.getline(input,50);
         fromInputToDisc(input);
-        if (optionStack.appear(myChoise)) {
+        if (optionStack.appear(myChoice)) {
 
-            return myChoise;
+            return myChoice;
         }
         else{
             cout << endl << endl << "illegal move! Please enter your move row,col:";
@@ -44,5 +42,5 @@ void HumanPlayer::fromInputToDisc(char input[50]) {
     }
     sscanf(modified[0].c_str(), "%d", &row);
     sscanf(modified[1].c_str(),"%d",&col);
-    myChoise.setDisc(row,col);
+    myChoice.setDisc(row,col);
 }

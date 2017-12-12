@@ -31,7 +31,7 @@ public:
     void fromInputToDisc(char input[50]);
 
 protected:
-    Disc myChoise;
+    Disc myChoice;
 };
 
 

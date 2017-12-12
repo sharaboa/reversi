@@ -28,13 +28,13 @@ public:
      * @param currentPlayer - current player's stack
      * @param opponentPlayer - opponent's stack
      */
-    vector<Player> eat(Player currentPlayer, Player opponentPlayer,Disc playerChoise, Board &tempBoard);
+    vector<Player> eat(Player currentPlayer, Player opponentPlayer,Disc playerChoice, Board &tempBoard);
     /**
      * manages player's turn
      * @param currentPlayer - current player
      * @param opponentPlayer - opponent player
      */
-    void turn(Player &currentPlayer, Player &opponentPlayer,Disc playerChoise);
+    void turn(Player &currentPlayer, Player &opponentPlayer,Disc playerChoice);
 
     /**
      * Returns the number of options available to the current player
@@ -46,9 +46,9 @@ public:
      * @param tempPlayers - vector contain the stacks of players that need to be update
      * @param currentPlayer - current player before move
      * @param opponentPlayer - opponent player before move
-     * @param playerChoise - current player choise of disc
+     * @param playerChoice - current player choise of disc
      */
-    void updateMove(const vector<Player> &tempPlayers, Player &currentPlayer, Player &opponentPlayer,Disc &playerChoise);
+    void updateMove(const vector<Player> &tempPlayers, Player &currentPlayer, Player &opponentPlayer,Disc &playerChoice);
 
 private:
     Board &board;

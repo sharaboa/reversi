@@ -24,7 +24,7 @@ public:
      */
     virtual Disc playerLogic(Player opponentPlayer) ;
 private:
-    Disc myChoise;
+    Disc myChoice;
     GameLogic myLogic;
     Board gameBoard;
 };

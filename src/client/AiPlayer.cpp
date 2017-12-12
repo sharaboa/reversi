@@ -32,7 +32,7 @@ Disc AiPlayer::playerLogic(Player opponentPlayer) {
                 //tempPlayersAfterHuChoose[0] = Human
                 maxHumanScore = tempPlayersAfterHuChoose[0].getAmount() - tempPlayersAfterHuChoose[1].getAmount();
                 minHumanScore = tempPlayersAfterHuChoose[0].getAmount() - tempPlayersAfterHuChoose[1].getAmount();
-                myChoise.setDisc(tempStack.getDisc(i).getRowLocation(),tempStack.getDisc(i).getColumnLocation());
+                myChoice.setDisc(tempStack.getDisc(i).getRowLocation(),tempStack.getDisc(i).getColumnLocation());
             }
             if(tempPlayersAfterHuChoose[0].getAmount() - tempPlayersAfterHuChoose[1].getAmount() < maxHumanScore) {
                 maxHumanScore = tempPlayersAfterHuChoose[0].getAmount() - tempPlayersAfterHuChoose[1].getAmount();
@@ -40,8 +40,8 @@ Disc AiPlayer::playerLogic(Player opponentPlayer) {
         }
         if(minHumanScore >= maxHumanScore) {
             minHumanScore = maxHumanScore;
-            myChoise.setDisc(tempStack.getDisc(i).getRowLocation(),tempStack.getDisc(i).getColumnLocation());
+            myChoice.setDisc(tempStack.getDisc(i).getRowLocation(),tempStack.getDisc(i).getColumnLocation());
         }
     }
-    return myChoise;
+    return myChoice;
 }

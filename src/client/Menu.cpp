@@ -10,15 +10,15 @@
 Menu::Menu() {}
 
 void Menu::gameMode(ReversiGame &reversiGame, Symbol black, Symbol white) {
-    char choise;
-    cout << "Welcome to Reversi\n\n";
+    char choice;
+    cout << "\nWelcome to Reversi\n\n";
 
     while (true) {
         cout << "choose an opponent type:\n1. a human local player\n2. an AI player\n3. a remote player\n";
-        cin >> choise;
-        if (choise == '1' || choise == '2' || choise == '3') {
+        cin >> choice;
+        if (choice == '1' || choice == '2' || choice == '3') {
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //skip bad input
-            switch (choise) {
+            switch (choice) {
                 case '1': {
                     reversiGame.manageHuman(black, white);
                     break;
@@ -34,8 +34,8 @@ void Menu::gameMode(ReversiGame &reversiGame, Symbol black, Symbol white) {
             }
             break;
         }
-        // user didn't input a number
-        cout << "Wrong Choise! choose again\n" << endl;
+        // user didn't input correct choice
+        cout << "Wrong Choice! choose again\n" << endl;
         cin.clear(); // reset failbit
         cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //skip bad input
     }

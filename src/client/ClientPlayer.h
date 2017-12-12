@@ -19,6 +19,7 @@ public:
      * @param serverPort  - port
      */
     ClientPlayer(Symbol symbol,const char *serverIP, int serverPort);
+    
     /**
      * play turn and sending the move to the other player
      * update other player move

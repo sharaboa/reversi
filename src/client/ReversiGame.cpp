@@ -46,8 +46,8 @@ void ReversiGame::manageRemoteGame(Symbol b, Symbol w){
     inFile >> data;
     inFile >> port;
     inFile.close();
-
     const char * serverIP = data.c_str();
+    
     ClientPlayer player1(b,serverIP,port);
     player1.connectToServer();
     ClientPlayer player2(w,serverIP,port);
