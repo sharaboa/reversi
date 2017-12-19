@@ -61,7 +61,6 @@ void Server::connect (sockaddr_in &clientAddress,socklen_t &clientAddressLen) {
     while (numOfClients < MAX_CONNECTED_CLIENTS) {
 // Accept a new client connection
         cout << "Waiting for client connections..." << endl;
-
         //player1
         if (numOfClients == 0) {
             clientSocket1 = accept(serverSocket, (struct sockaddr *) &clientAddress, &clientAddressLen);
