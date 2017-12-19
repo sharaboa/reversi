@@ -31,7 +31,7 @@ public:
      * @param clientAddress
      * @param clientAddressLen
      */
-    void connect(sockaddr_in &clientAddress,socklen_t &clientAddressLen);
+    void *connect(void *args);
     /**
      * manage the communication of two players.
      * sending to each other the chosen disc

@@ -7,9 +7,16 @@
 #include <string.h>
 #include <iostream>
 #include <fstream>
+#include <pthread.h>
+#include <cstdlib>
 
 using namespace std;
-#define MAX_CONNECTED_CLIENTS 2
+#define MAX_CONNECTED_CLIENTS 10
+
+struct ThreadArgs {
+    struct sockaddr_in ca;
+    socklen_t cal;
+} args;
 
 Server::Server() : serverSocket(0) {
     string p;
@@ -40,9 +47,18 @@ void Server::start() {
 // Define the client socket's structures
     struct sockaddr_in clientAddress;
     socklen_t clientAddressLen = sizeof((struct sockaddr*)&clientAddress);
+
     //connecting to client
-    while(true) {
-        connect(clientAddress, clientAddressLen);
+    while(true)  {
+        args.ca = clientAddress;
+        args.cal = clientAddressLen;
+        pthread_t thread;
+        int rc = pthread_create(&thread, NULL, connect, &args);
+        if (rc) {
+            cout << "Error: unable to create thread, " << rc << endl;
+            exit(-1);
+        }
+        //connect(clientAddress, clientAddressLen);
         ClientCom();
 // Close communication with the client
         close(clientSocket1);
@@ -57,13 +73,15 @@ void Server::stop() {
 }
 
 
-void Server::connect (sockaddr_in &clientAddress,socklen_t &clientAddressLen) {
+void * Server::connect (void *tArgs) {
+    struct ThreadArgs *args = (struct ThreadArgs *) tArgs;
+
     while (numOfClients < MAX_CONNECTED_CLIENTS) {
 // Accept a new client connection
         cout << "Waiting for client connections..." << endl;
         //player1
         if (numOfClients == 0) {
-            clientSocket1 = accept(serverSocket, (struct sockaddr *) &clientAddress, &clientAddressLen);
+            clientSocket1 = accept(serverSocket, (struct sockaddr *) &args->ca, &args->cal);
             cout << "Client connected" << endl;
             numOfClients++;
             int i = 1;
