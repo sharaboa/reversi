@@ -9,12 +9,15 @@
 #include <map>
 #include "Command.h"
 class CommandsManager {
+
 public:
     CommandsManager();
     ~CommandsManager();
-    void executeCommand(string command, vector<string> args);
+    void executeCommand(string input);
+
 private:
     map<string, Command *> commandsMap;
+
 };
 
 

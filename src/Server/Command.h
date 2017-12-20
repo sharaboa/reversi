@@ -9,10 +9,15 @@
 
 #include <vector>
 #include<string>
+#include "Server.h"
+
 using namespace
 std;
 class Command {
 public:
-    virtual void execute(vector<string> args) = 0;
+    virtual void execute(string args, int clientSocket);
     virtual ~Command() {}
+
+protected:
+    Server &server;
 };

@@ -8,7 +8,8 @@
 
 #include <unistd.h>
 #include <netinet/in.h>
-
+#include "CommandsManager.h"
+#include "GameStruct.h"
 
 class Server {
 
@@ -32,13 +33,7 @@ public:
      * @param clientAddressLen
      */
     void *connect(void *args);
-    /**
-     * manage the communication of two players.
-     * sending to each other the chosen disc
-     *  0,0 if there is no move
-     *  -2,-2 if the game is over
-     */
-    void ClientCom();
+
     /**
      * sending to each other the chosen disc
      *  0,0 if there is no move
@@ -47,8 +42,10 @@ public:
      * @param clientSocket2 - opponent player
      * @return - false if game continue and true otherwise(game over)
      */
-    bool handleClient(int clientSocket, int clientSocket2) ;
-
+    bool handleClient(int clientSocket) ;
+    vector <game> getList();
+    void writeToClient (int clientSoket,string output);
+    void readToClient();
 private:
 
     int port;
@@ -56,6 +53,8 @@ private:
     int numOfClients;
     int clientSocket1;
     int clientSocket2;
+    CommandsManager manager;
+    vector <game> gamesList;
 };
 
 #endif //SERVER_SERVER_H

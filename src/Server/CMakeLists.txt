@@ -3,5 +3,5 @@ project(server)
 
 set(CMAKE_CXX_STANDARD 98)
 
-set(SOURCE_FILES main.cpp Server.cpp Server.h Command.h CommandsManager.cpp CommandsManager.h)
+set(SOURCE_FILES main.cpp Server.cpp Server.h Command.h CommandsManager.cpp CommandsManager.h StartCommand.cpp StartCommand.h ListGamesCommand.cpp ListGamesCommand.h GameStruct.h)
 add_executable(server ${SOURCE_FILES})

@@ -19,6 +19,7 @@ struct ThreadArgs {
 } args;
 
 Server::Server() : serverSocket(0) {
+
     string p;
     ifstream inFile;
     inFile.open("setting.txt");
@@ -47,20 +48,19 @@ void Server::start() {
 // Define the client socket's structures
     struct sockaddr_in clientAddress;
     socklen_t clientAddressLen = sizeof((struct sockaddr*)&clientAddress);
-
+    args.ca = clientAddress;
+    args.cal = clientAddressLen;
     //connecting to client
     while(true)  {
-        args.ca = clientAddress;
-        args.cal = clientAddressLen;
-        pthread_t thread;
-        int rc = pthread_create(&thread, NULL, connect, &args);
-        if (rc) {
-            cout << "Error: unable to create thread, " << rc << endl;
-            exit(-1);
+        pthread_t thread[MAX_CONNECTED_CLIENTS];
+        for(int i = 0 ; i<MAX_CONNECTED_CLIENTS;i++) {
+            int rc = pthread_create(&thread[i], NULL, connect, &args);
+            if (rc) {
+                cout << "Error: unable to create thread, " << rc << endl;
+                exit(-1);
+            }
         }
-        //connect(clientAddress, clientAddressLen);
-        ClientCom();
-// Close communication with the client
+        // Close communication with the client
         close(clientSocket1);
         close(clientSocket2);
         numOfClients = 0;
@@ -75,97 +75,34 @@ void Server::stop() {
 
 void * Server::connect (void *tArgs) {
     struct ThreadArgs *args = (struct ThreadArgs *) tArgs;
-
-    while (numOfClients < MAX_CONNECTED_CLIENTS) {
-// Accept a new client connection
-        cout << "Waiting for client connections..." << endl;
-        //player1
-        if (numOfClients == 0) {
-            clientSocket1 = accept(serverSocket, (struct sockaddr *) &args->ca, &args->cal);
-            cout << "Client connected" << endl;
-            numOfClients++;
-            int i = 1;
-            int n = write(clientSocket1, &i, sizeof(i));
-            if (n == -1) {
-                cout << "Error writing to socket" << endl;
-            }
-            if (clientSocket1 == -1) {
-                throw runtime_error("Error on accept client 1");
-            }
-        }
-        //player2
-        if (numOfClients == 1) {
-            clientSocket2 = accept(serverSocket, (struct sockaddr *) &clientAddress, &clientAddressLen);
-            cout << "Client connected" << endl;
-            numOfClients++;
-            int i = 2;
-            //write to first player that the other player connected
-            int n = write(clientSocket1, &i, sizeof(i));
-            if (n == -1) {
-                cout << "Error writing to socket" << endl;
-            }
-            if (clientSocket1 == -1) {
-                throw runtime_error("Error on accept client 1");
-            }
-            n = write(clientSocket2, &i, sizeof(i));
-            if (n == -1) {
-                cout << "Error writing to socket" << endl;
-            }
-            if (clientSocket2 == -1) {
-                throw runtime_error("Error on accept client 2");
-            }
-        }
+    int  clientSocket = accept(serverSocket, (struct sockaddr *) &args->ca, &args->cal);
+    cout << "Client connected" << endl;
+    while(true){
+        handleClient(clientSocket);
     }
 }
 
 
-void Server::ClientCom() {
-    while (true) {
-        if (!handleClient(clientSocket1, clientSocket2)) {
-            break;
-        }
-        if (!handleClient(clientSocket2, clientSocket1)) {
-            break;
-        }
-    }
-}
 
 // Handle requests from a specific client
-bool Server::handleClient(int clientSocket, int clientSocket2) {
-    int rowCordination, colCordination;
+bool Server::handleClient(int clientSocket) {
+    string input;
 // Read new exercise arguments - read coordinates as two int
-    int n = read(clientSocket, &rowCordination, sizeof (rowCordination));
+    int n = read(clientSocket, &input, sizeof (input));
 
     if (n == -1) {
         cout << "Error reading rowCordination" << endl;
         return false;
     }
-    if (n == 0) {
-        cout << "Client disconnected" << endl;
-        return false;
-    }
-    n = read(clientSocket, &colCordination, sizeof (colCordination));
-    if (n == -1) {
-        cout << "Error reading colCordination" << endl;
-        return false;
-    }
-    if (n == 0) {
-        cout << "Client disconnected" << endl;
-        return false;
-    }
-    if(rowCordination == -2 && colCordination== -2) {
-        return true;
-    }
-// Write the result back to the client - write coordinates as two int
-    n = write(clientSocket2, &rowCordination, sizeof(rowCordination));
+    manager.executeCommand(input);
+}
+
+vector<game> Server::getList() {
+    return gamesList;
+}
+void Server::writeToClient(int clientSocket,string output) {
+    int n = write(clientSocket, &output, sizeof(output));
     if (n == -1) {
         cout << "Error writing to socket" << endl;
-        return false;
     }
-    n = write(clientSocket2, &colCordination, sizeof(colCordination));
-    if (n == -1) {
-        cout << "Error writing to socket" << endl;
-        return false;
-    }
-    return true;
 }
