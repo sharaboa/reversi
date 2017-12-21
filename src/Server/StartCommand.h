@@ -10,7 +10,7 @@
 #include "GameStruct.h"
 class StartCommand :public Command {
 public:
-    StartCommand();
+    StartCommand(vector <Game> gamesList);
     virtual void execute(string args,int clientSocket);
 
 };

@@ -8,16 +8,16 @@
 #endif //REVERSI_COMMAND_H
 
 #include <vector>
-#include<string>
-#include "Server.h"
+#include <string>
+#include "GameStruct.h"
 
-using namespace
-std;
+
+using namespace std;
 class Command {
 public:
-    virtual void execute(string args, int clientSocket);
+    virtual void execute(string args, int clientSocket) = 0;
     virtual ~Command() {}
 
 protected:
-    Server &server;
+    vector <Game> gamesList;
 };

@@ -61,12 +61,17 @@ void Server::start() {
             }
         }
         // Close communication with the client
-        close(clientSocket1);
+        /*close(clientSocket1);
         close(clientSocket2);
-        numOfClients = 0;
+        numOfClients = 0;*/
     }
 }
 
+void Server::closeGame(Game game) {
+    close(game.xSocket);
+    close(game.oSocket);
+    /////// need to close both threads ////////////
+}
 
 void Server::stop() {
     close(serverSocket);
@@ -94,15 +99,16 @@ bool Server::handleClient(int clientSocket) {
         cout << "Error reading rowCordination" << endl;
         return false;
     }
-    manager.executeCommand(input);
+    manager.executeCommand(input,clientSocket);
 }
 
-vector<game> Server::getList() {
+/*vector<Game> Server::getList() {
     return gamesList;
-}
-void Server::writeToClient(int clientSocket,string output) {
-    int n = write(clientSocket, &output, sizeof(output));
+}*/
+/*
+void Server::writeToClient(int clientSocket,struct Output &out) {
+    int n = write(clientSocket, &out, sizeof(out));
     if (n == -1) {
         cout << "Error writing to socket" << endl;
     }
-}
+}*/

@@ -6,34 +6,34 @@
 #include "CommandsManager.h"
 #include "StartCommand.h"
 #include "ListGamesCommand.h"
+#include "JoinCommand.h"
+#include "PlayCommand.h"
+#include "CloseCommand.h"
 
 
 //#include "PrintCommand.h"
 
 
 CommandsManager::CommandsManager() {
-    //commandsMap["print"] = new PrintCommand();
 
     //add to the list
-    commandsMap["start"] = new StartCommand();
+    commandsMap["start"] = new StartCommand(gamesList);
     //vector
-    commandsMap["list_games"] = new ListGamesCommand();
-    commandsMap["join"] = new JoinCommand();
-    commandsMap["play"] = new PlayCommand();
-    commandsMap["close"] = new CloseCommand();
+    commandsMap["list_games"] = new ListGamesCommand(gamesList);
+    commandsMap["join"] = new JoinCommand(gamesList);
+    commandsMap["play"] = new PlayCommand(gamesList);
+    commandsMap["close"] = new CloseCommand(gamesList);
 
-// Add more commands...
 }
-void CommandsManager::executeCommand(string input) {
+void CommandsManager::executeCommand(string input,int clientSocket) {
     int i = input.find('<');
     int y = input.find('>');
     string command = input.substr(0,i);
     string arg = input.substr(i+1,y);
     arg.erase(arg.end()-1,arg.end());
-    strncpy(command,input,y);
+    //strncpy(command,input,y);
     Command *commandObj = commandsMap[command];
-    commandObj->execute(arg);
-
+    commandObj->execute(arg,clientSocket);
 }
 CommandsManager::~CommandsManager() {
     map<string, Command *>::iterator it;

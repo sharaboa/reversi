@@ -2,12 +2,17 @@
 // Created by sahar on 19/12/17.
 //
 
-#include "Server.h"
 
 #ifndef REVERSI_GAMESTRUCT_H
 #define REVERSI_GAMESTRUCT_H
 
-struct game{
+#include "Server.h"
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+struct Game{
     string gameName;
     int xSocket;
     int oSocket;

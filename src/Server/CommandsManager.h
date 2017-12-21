@@ -13,11 +13,11 @@ class CommandsManager {
 public:
     CommandsManager();
     ~CommandsManager();
-    void executeCommand(string input);
+    void executeCommand(string input,int clientSocket);
 
 private:
     map<string, Command *> commandsMap;
-
+    vector <Game> gamesList;
 };
 
 

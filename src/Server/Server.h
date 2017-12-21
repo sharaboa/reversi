@@ -43,9 +43,10 @@ public:
      * @return - false if game continue and true otherwise(game over)
      */
     bool handleClient(int clientSocket) ;
-    vector <game> getList();
-    void writeToClient (int clientSoket,string output);
+    vector <Game> getList();
+    void writeToClient (int clientSoket,struct Output &out);
     void readToClient();
+    void closeGame(Game game);
 private:
 
     int port;
@@ -54,7 +55,7 @@ private:
     int clientSocket1;
     int clientSocket2;
     CommandsManager manager;
-    vector <game> gamesList;
+    //vector <Game> gamesList;
 };
 
 #endif //SERVER_SERVER_H
