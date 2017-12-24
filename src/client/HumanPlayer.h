@@ -7,6 +7,7 @@
 #define REVERSI_HUMANPLAYER_H
 
 #include "Player.h"
+#include "ScreenView.h"
 #include <string>
 #include <cstring>
 #include <iostream>
@@ -32,6 +33,7 @@ public:
 
 protected:
     Disc myChoice;
+    ScreenView screenView;
 };
 
 

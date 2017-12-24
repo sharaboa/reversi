@@ -28,11 +28,6 @@ public:
     ReversiGame(int size);
 
     /**
-     * this fun announce the winner/a tie
-     * @return the form of the winner
-     */
-    void announceWinner(Player *black,Player *white) const;
-    /**
      * Initializes the board and players by placing two discs per player in the center of the board
      * @param black  - x player
      * @param white  - o player
@@ -69,6 +64,7 @@ protected:
     Board board;
     GameLogic gameLogic;
     const int size;
+    ScreenView screenView;
 };
 
 

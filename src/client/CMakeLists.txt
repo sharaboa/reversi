@@ -25,4 +25,4 @@ add_executable(client
     ReversiGame.h
     StackOfDiscs.cpp
     StackOfDiscs.h
-    Symbol.h)
+    Symbol.h ScreenView.cpp ScreenView.h)

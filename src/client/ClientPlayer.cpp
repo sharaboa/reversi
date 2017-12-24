@@ -9,9 +9,10 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <unistd.h>
-#include <fstream>
 
 using namespace std;
+
+
 ClientPlayer::ClientPlayer(Symbol symbol,const char *serverIP, int serverPort):
         HumanPlayer(symbol), serverIP(serverIP), serverPort(serverPort), clientSocket(0), clientNum(0){}
 
@@ -53,35 +54,31 @@ void ClientPlayer::connectToServer() {
     if (n == -1) {
         throw "Error writing arg1to socket";
     }
-    cout << "connected to server\n";
+    screenView.printClientConnection(clientNum);
     clientNum = i;
     if(clientNum == 1) {
-        cout<<"waiting for other player to join...\n"<<endl;
+        screenView.printClientConnection(clientNum);
         //waite for second player to connect
         int n = read(clientSocket, &i, sizeof(i));
         if (n == -1) {
             throw "Error writing arg1to socket";
         }
-        cout << "You are X and the first one to play.\n";
+        screenView.printClientConnection(3);
     }
     if(clientNum == 2){
-        cout << "\nYou are O and the second one to play.\n";
+        screenView.printClientConnection(clientNum);
     }
 }
 
 Disc ClientPlayer::playerLogic(Player opponentPlayer) {
     int rowCord, colCord;
+    int choice;
     //choose disc if it's player's turn
     if (clientNum == 1 && symbol == X || clientNum == 2 && symbol == O) {
         if (optionStack.getAmount()) {
             optionStack.isRepeat();
-            cout << (char) symbol << ": It's your move." << endl << "Your possible moves: ";
-            for (int i = 0; i < optionStack.getAmount(); i++) {
-                cout << "(" << optionStack.getDisc(i).getRowLocation() << ","
-                     << optionStack.getDisc(i).getColumnLocation()
-                     << ") ";
-            }
-            cout << endl << endl << "Please enter your move row,col:";
+            choice = 1;
+            screenView.printEnterMove(optionStack,symbol,choice);
             while (true) {
                 char input[50];
                 cin.getline(input, 50);
@@ -99,7 +96,8 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
                     }
                     return myChoice;
                 } else {
-                    cout << endl << endl << "illegal move! Please enter your move row,col:";
+                    choice = 0;
+                    screenView.printEnterMove(optionStack,symbol,choice);
                 }
             }
         } else {
@@ -115,10 +113,12 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
             }
             return myChoice;
         }
-        //updating the choise of the other player
+        //updating the choice of the other player
     } else {
-        if(optionStack.getAmount())
-            cout << "waiting for other player's move...\n";
+        if(optionStack.getAmount()) {
+            choice = 2;
+            screenView.printEnterMove(optionStack,symbol,choice);
+        }
 
         int n = read(clientSocket, &rowCord, sizeof(rowCord));
         if (n == -1) {
@@ -157,5 +157,4 @@ void ClientPlayer::gameOver() {
     if (n == -1) {
         throw "Error writing arg2to socket";
     }
-
 }

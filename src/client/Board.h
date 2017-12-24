@@ -11,7 +11,6 @@
 #include "Disc.h"
 #include "Symbol.h"
 
-using namespace std;
 
 
 class Board {
@@ -34,10 +33,7 @@ public:
      * @param white - white player's form
      */
     void fillMatrixBoard(const int &midSize,Symbol black,Symbol white);
-    /**
-     * prints the board.
-     */
-    void printBoard() const;
+
     /**
      * destructor.
      */

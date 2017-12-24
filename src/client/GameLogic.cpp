@@ -13,12 +13,7 @@ void GameLogic::turn(Player &currentPlayer, Player &opponentPlayer,Disc playerCh
     if (!(playerChoice == d)) {
         vector<Player> tempPlayers = eat(currentPlayer, opponentPlayer, playerChoice, board);
         updateMove(tempPlayers, currentPlayer, opponentPlayer, playerChoice);
-        cout << endl << endl;
-        cout << "current board:\n\n";
-        board.printBoard();
-        cout << endl << (char) currentPlayer.getSymbol() << " played (" << playerChoice.getRowLocation() << ","
-             << playerChoice.getColumnLocation() << ")";
-        cout << " with score: " << currentPlayer.getAmount() - opponentPlayer.getAmount() << "\n\n";
+        screenView.printMove(board,playerChoice,currentPlayer.getSymbol());
     }
 }
 

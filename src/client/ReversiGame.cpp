@@ -47,7 +47,7 @@ void ReversiGame::manageRemoteGame(Symbol b, Symbol w){
     inFile >> port;
     inFile.close();
     const char * serverIP = data.c_str();
-    
+
     ClientPlayer player1(b,serverIP,port);
     player1.connectToServer();
     ClientPlayer player2(w,serverIP,port);
@@ -60,8 +60,8 @@ void ReversiGame::manageRemoteGame(Symbol b, Symbol w){
 void ReversiGame::play(Player *current,Player *opponent) {
     //notOver zeroed when both players have no moves
     int notOver = 2;
-    cout << "current board:\n";
-    board.printBoard();
+    screenView.printBoard(board);
+    //board.printBoard();
     while(notOver && current->getAmount() + opponent->getAmount() != size*size) {
         current->playerMoveOption(*opponent ,board);
         if (gameLogic.hasMoves(*current)) {
@@ -82,15 +82,5 @@ void ReversiGame::play(Player *current,Player *opponent) {
     if(typeid(*current) == typeid(ClientPlayer)) {
         ((ClientPlayer*)current)->gameOver();
     }
-    announceWinner(current,opponent);
-}
-
-void ReversiGame::announceWinner(Player *black,Player *white) const {
-    if (black->getAmount() == white->getAmount()) {
-        cout << "Game Over! it's a tie " << endl;
-    } else {
-        black->getAmount() > white->getAmount() ?
-        cout << "Game Over! the winner is: " << (char)black->getSymbol() << endl:
-        cout << "Game Over! the winner is: " << (char)white->getSymbol() << endl;
-    }
+    screenView.announceWinner(current->getSymbol(),opponent->getSymbol(),current->getAmount(),opponent->getAmount());
 }

@@ -8,12 +8,12 @@
 
 #include "Board.h"
 #include "Player.h"
+#include "ScreenView.h"
 #include <string>
 #include <cstring>
 #include <vector>
 #include <iostream>
 
-using namespace std;
 
 class GameLogic {
 public:
@@ -52,6 +52,7 @@ public:
 
 private:
     Board &board;
+    ScreenView screenView;
 };
 
 #endif //EX2_GAMELOGIC_H

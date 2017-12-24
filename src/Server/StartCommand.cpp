@@ -9,7 +9,10 @@
 #include "StartCommand.h"
 
 StartCommand::StartCommand(vector <Game> gamesList) {}
-////////we didnt write this fun right - we put the newGame in list every time this name doesnt appear
+
+
+////////we didnt write this fun right - we put the newGame in gamesList every time the name doesnt appear
+
 /*
 void StartCommand::execute(string args, int clientSocket) {
     Game newGame;

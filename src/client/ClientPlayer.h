@@ -9,6 +9,7 @@
 
 #include "Player.h"
 #include "HumanPlayer.h"
+#include "ScreenView.h"
 
 class ClientPlayer : public HumanPlayer {
 public:
@@ -19,7 +20,7 @@ public:
      * @param serverPort  - port
      */
     ClientPlayer(Symbol symbol,const char *serverIP, int serverPort);
-    
+
     /**
      * play turn and sending the move to the other player
      * update other player move
@@ -64,6 +65,7 @@ private:
     int serverPort;
     int clientSocket;
     int clientNum;
+    ScreenView screenView;
 };
 
 

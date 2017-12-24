@@ -4,8 +4,6 @@
 //
 
 #include "Board.h"
-#include <iostream>
-
 
 
 Board::Board(const int size): size(size+2){
@@ -41,32 +39,6 @@ void Board::fillMatrixBoard(const int &midSize,Symbol black,Symbol white) {
     }
 }
 
-void Board::printBoard() const {
-    //prints number by line and column
-    for(int i = 0; i < size - 1; i++) {
-        for(int j = 0; j < size - 1; j++) {
-            if (i == 0 && j == 0) {
-                cout << " | ";
-            } else {
-                if (i == 0 && j > 0) {
-                    cout << j << " | ";
-                } else {
-                    if (j == 0 && i > 0) {
-                        cout << i << "| ";
-                    } else {
-                        cout << (char)matrixBoard[i][j] << " | ";
-                    }
-                }
-            }
-        }
-        //prints lines separates lines
-        cout << endl << "--";
-        for(int k = 0; k < (size - 2) * 4; k++) {
-            cout << "-";
-        }
-        cout << endl;
-    }
-}
 Board::~Board() {
     for (int i = 0; i < size; i++) {
         delete[] matrixBoard[i];

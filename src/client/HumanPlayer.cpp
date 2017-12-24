@@ -10,21 +10,17 @@ HumanPlayer::HumanPlayer(Symbol symbol) : Player(symbol) {}
 
 Disc HumanPlayer::playerLogic(Player opponentPlayer) {
     optionStack.isRepeat();
-    cout << (char)symbol << ": It's your move." << endl << "Your possible moves: ";
-    for (int i = 0; i < optionStack.getAmount(); i++) {
-        cout << "(" << optionStack.getDisc(i).getRowLocation() << "," << optionStack.getDisc(i).getColumnLocation() << ") ";
-    }
-    cout << endl << endl << "Please enter your move row,col:";
+    int choice = 1;
+    screenView.printEnterMove(optionStack,symbol,choice);
     while (true) {
         char input[50];
         cin.getline(input,50);
         fromInputToDisc(input);
         if (optionStack.appear(myChoice)) {
-
             return myChoice;
-        }
-        else{
-            cout << endl << endl << "illegal move! Please enter your move row,col:";
+        } else{
+            choice = 0;
+            screenView.printEnterMove(optionStack,symbol,choice);
         }
     }
 }

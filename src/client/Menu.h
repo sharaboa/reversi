@@ -23,6 +23,9 @@ public:
      * @param white the second player of the game. player symbol is O
      */
     void gameMode(ReversiGame &reversiGame, Symbol black, Symbol white);
+
+private:
+    ScreenView screenView;
 };
 
 
