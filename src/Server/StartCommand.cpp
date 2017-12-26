@@ -1,14 +1,11 @@
 //
-// Created by sahar on 19/12/17.
+// Created by sahar on 26/12/17.
 //
 
-/*struct Output{
-    string errorCode = "-1";
-} out;*/
 
 #include "StartCommand.h"
 
-StartCommand::StartCommand(vector <Game> gamesList) {}
+StartCommand::StartCommand(const vector <Game> &gamesList): gamesList(gamesList) {}
 
 void StartCommand::execute(string args, int clientSocket) {
     bool canStart = true;

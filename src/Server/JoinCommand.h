@@ -1,19 +1,20 @@
-
 //
-// Created by or on 21/12/17.
+// Created by sahar on 26/12/17.
 //
 
-#ifndef REVERSI_JOINCOMMAND_H
-#define REVERSI_JOINCOMMAND_H
+#ifndef SERVER_JOINCOMMAND_H
+#define SERVER_JOINCOMMAND_H
 
 #include "Command.h"
-#include "GameStruct.h"
 
 class JoinCommand: public Command {
 public:
-    JoinCommand(vector <Game> gamesList);
-    virtual void execute(string arg,int clientSocket);
+    JoinCommand(const vector <Game> &gamesList);
+    virtual void execute(string args,int clientSocket);
+
+private:
+    vector<Game> gamesList;
 };
 
 
-#endif //REVERSI_JOINCOMMAND_H
+#endif //SERVER_JOINCOMMAND_H

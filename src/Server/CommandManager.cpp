@@ -1,31 +1,26 @@
 //
-// Created by or on 19/12/17.
+// Created by sahar on 26/12/17.
 //
 
-#include <cstring>
-#include "CommandsManager.h"
+#include "CommandManager.h"
+
+
 #include "StartCommand.h"
 #include "ListGamesCommand.h"
 #include "JoinCommand.h"
-#include "PlayCommand.h"
 #include "CloseCommand.h"
 
 
-//#include "PrintCommand.h"
-
-
-CommandsManager::CommandsManager() {
-
+CommandManager::CommandManager() {
     //add to the list
     commandsMap["start"] = new StartCommand(gamesList);
     //vector
     commandsMap["list_games"] = new ListGamesCommand(gamesList);
     commandsMap["join"] = new JoinCommand(gamesList);
-    commandsMap["play"] = new PlayCommand(gamesList);
+  //  commandsMap["play"] = new PlayCommand(gamesList);
     commandsMap["close"] = new CloseCommand(gamesList);
-
 }
-void CommandsManager::executeCommand(string input,int clientSocket) {
+void CommandManager::executeCommand(string input,int clientSocket) {
     int s = input.find('<');
     int y = input.find('>');
     string command = input.substr(0,s);
@@ -35,7 +30,7 @@ void CommandsManager::executeCommand(string input,int clientSocket) {
     Command *commandObj = commandsMap[command];
     commandObj->execute(arg,clientSocket);
 }
-CommandsManager::~CommandsManager() {
+CommandManager::~CommandManager() {
     map<string, Command *>::iterator it;
     for (it = commandsMap.begin(); it != commandsMap.end(); it++) {
         delete it->second;

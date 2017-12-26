@@ -46,7 +46,7 @@ void ClientPlayer::connectToServer() {
     if(connect(clientSocket, (struct sockaddr*)&serverAddress,sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
-
+   cout<<"connected to server";
     //initialize
     int i;
     //read clientNum - 1/2

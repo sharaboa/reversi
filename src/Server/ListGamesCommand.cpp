@@ -1,12 +1,10 @@
 //
-// Created by sahar on 19/12/17.
+// Created by sahar on 26/12/17.
 //
 
 #include "ListGamesCommand.h"
 
-
-ListGamesCommand::ListGamesCommand(vector <Game> gamesList) {}
-
+ListGamesCommand::ListGamesCommand(const vector <Game> &gamesList): gamesList(gamesList) {}
 void ListGamesCommand::execute(string arg, int clientSocket){
     vector <string> availableGame;
     for (int i = 0;i<gamesList.size();i++)

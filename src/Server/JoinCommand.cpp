@@ -1,11 +1,10 @@
 //
-// Created by or on 21/12/17.
+// Created by sahar on 26/12/17.
 //
 
 #include "JoinCommand.h"
 
-
-JoinCommand::JoinCommand(vector <Game> gamesList) {}
+JoinCommand::JoinCommand(const vector <Game> &gamesList): gamesList(gamesList) {}
 
 void JoinCommand::execute(string args, int clientSocket) {
     string player;

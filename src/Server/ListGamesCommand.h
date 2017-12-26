@@ -1,18 +1,22 @@
 //
-// Created by sahar on 19/12/17.
+// Created by sahar on 26/12/17.
 //
 
-#ifndef REVERSI_LISTGAMESCOMMAND_H
-#define REVERSI_LISTGAMESCOMMAND_H
-
+#ifndef SERVER_LISTGAMESCOMMAND_H
+#define SERVER_LISTGAMESCOMMAND_H
 
 #include "Command.h"
 
+
 class ListGamesCommand: public Command {
-public:
-    ListGamesCommand(vector <Game> gamesList);
-    virtual void execute(string arg,int clientSocket);
+    public:
+        ListGamesCommand(const vector <Game> &gamesList);
+        virtual void execute(string arg,int clientSocket);
+
+private:
+    vector <Game> gamesList;
+
 };
 
 
-#endif //REVERSI_LISTGAMESCOMMAND_H
+#endif //SERVER_LISTGAMESCOMMAND_H

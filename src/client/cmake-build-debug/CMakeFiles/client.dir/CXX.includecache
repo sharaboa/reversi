@@ -6,37 +6,35 @@
 
 #IncludeRegexTransform: 
 
-/home/or/CLionProjects/reversi/src/client/AiPlayer.cpp
+/home/sahar/CLionProjects/reversi/src/src/client/AiPlayer.cpp
 AiPlayer.h
-/home/or/CLionProjects/reversi/src/client/AiPlayer.h
+/home/sahar/CLionProjects/reversi/src/src/client/AiPlayer.h
 
-/home/or/CLionProjects/reversi/src/client/AiPlayer.h
+/home/sahar/CLionProjects/reversi/src/src/client/AiPlayer.h
 Player.h
-/home/or/CLionProjects/reversi/src/client/Player.h
+/home/sahar/CLionProjects/reversi/src/src/client/Player.h
 GameLogic.h
-/home/or/CLionProjects/reversi/src/client/GameLogic.h
+/home/sahar/CLionProjects/reversi/src/src/client/GameLogic.h
 
-/home/or/CLionProjects/reversi/src/client/Board.cpp
+/home/sahar/CLionProjects/reversi/src/src/client/Board.cpp
 Board.h
-/home/or/CLionProjects/reversi/src/client/Board.h
-iostream
--
+/home/sahar/CLionProjects/reversi/src/src/client/Board.h
 
-/home/or/CLionProjects/reversi/src/client/Board.h
+/home/sahar/CLionProjects/reversi/src/src/client/Board.h
 Board.h
-/home/or/CLionProjects/reversi/src/client/Board.h
+/home/sahar/CLionProjects/reversi/src/src/client/Board.h
 string
 -
 vector
 -
 Disc.h
-/home/or/CLionProjects/reversi/src/client/Disc.h
+/home/sahar/CLionProjects/reversi/src/src/client/Disc.h
 Symbol.h
-/home/or/CLionProjects/reversi/src/client/Symbol.h
+/home/sahar/CLionProjects/reversi/src/src/client/Symbol.h
 
-/home/or/CLionProjects/reversi/src/client/ClientPlayer.cpp
+/home/sahar/CLionProjects/reversi/src/src/client/ClientPlayer.cpp
 ClientPlayer.h
-/home/or/CLionProjects/reversi/src/client/ClientPlayer.h
+/home/sahar/CLionProjects/reversi/src/src/client/ClientPlayer.h
 sys/socket.h
 -
 netinet/in.h
@@ -48,29 +46,33 @@ netdb.h
 unistd.h
 -
 
-/home/or/CLionProjects/reversi/src/client/ClientPlayer.h
+/home/sahar/CLionProjects/reversi/src/src/client/ClientPlayer.h
 Player.h
-/home/or/CLionProjects/reversi/src/client/Player.h
+/home/sahar/CLionProjects/reversi/src/src/client/Player.h
 HumanPlayer.h
-/home/or/CLionProjects/reversi/src/client/HumanPlayer.h
+/home/sahar/CLionProjects/reversi/src/src/client/HumanPlayer.h
+ScreenView.h
+/home/sahar/CLionProjects/reversi/src/src/client/ScreenView.h
 
-/home/or/CLionProjects/reversi/src/client/Disc.cpp
+/home/sahar/CLionProjects/reversi/src/src/client/Disc.cpp
 Disc.h
-/home/or/CLionProjects/reversi/src/client/Disc.h
+/home/sahar/CLionProjects/reversi/src/src/client/Disc.h
 
-/home/or/CLionProjects/reversi/src/client/Disc.h
+/home/sahar/CLionProjects/reversi/src/src/client/Disc.h
 
-/home/or/CLionProjects/reversi/src/client/GameLogic.cpp
+/home/sahar/CLionProjects/reversi/src/src/client/GameLogic.cpp
 iostream
 -
 GameLogic.h
-/home/or/CLionProjects/reversi/src/client/GameLogic.h
+/home/sahar/CLionProjects/reversi/src/src/client/GameLogic.h
 
-/home/or/CLionProjects/reversi/src/client/GameLogic.h
+/home/sahar/CLionProjects/reversi/src/src/client/GameLogic.h
 Board.h
-/home/or/CLionProjects/reversi/src/client/Board.h
+/home/sahar/CLionProjects/reversi/src/src/client/Board.h
 Player.h
-/home/or/CLionProjects/reversi/src/client/Player.h
+/home/sahar/CLionProjects/reversi/src/src/client/Player.h
+ScreenView.h
+/home/sahar/CLionProjects/reversi/src/src/client/ScreenView.h
 string
 -
 cstring
@@ -80,15 +82,17 @@ vector
 iostream
 -
 
-/home/or/CLionProjects/reversi/src/client/HumanPlayer.cpp
+/home/sahar/CLionProjects/reversi/src/src/client/HumanPlayer.cpp
 cstdio
 -
 HumanPlayer.h
-/home/or/CLionProjects/reversi/src/client/HumanPlayer.h
+/home/sahar/CLionProjects/reversi/src/src/client/HumanPlayer.h
 
-/home/or/CLionProjects/reversi/src/client/HumanPlayer.h
+/home/sahar/CLionProjects/reversi/src/src/client/HumanPlayer.h
 Player.h
-/home/or/CLionProjects/reversi/src/client/Player.h
+/home/sahar/CLionProjects/reversi/src/src/client/Player.h
+ScreenView.h
+/home/sahar/CLionProjects/reversi/src/src/client/ScreenView.h
 string
 -
 cstring
@@ -96,79 +100,91 @@ cstring
 iostream
 -
 
-/home/or/CLionProjects/reversi/src/client/Menu.cpp
+/home/sahar/CLionProjects/reversi/src/src/client/Menu.cpp
 cstdio
 -
 Menu.h
-/home/or/CLionProjects/reversi/src/client/Menu.h
+/home/sahar/CLionProjects/reversi/src/src/client/Menu.h
 
-/home/or/CLionProjects/reversi/src/client/Menu.h
+/home/sahar/CLionProjects/reversi/src/src/client/Menu.h
 iostream
 -
 limits
 -
 ReversiGame.h
-/home/or/CLionProjects/reversi/src/client/ReversiGame.h
+/home/sahar/CLionProjects/reversi/src/src/client/ReversiGame.h
 
-/home/or/CLionProjects/reversi/src/client/Player.cpp
+/home/sahar/CLionProjects/reversi/src/src/client/Player.cpp
 Player.h
-/home/or/CLionProjects/reversi/src/client/Player.h
+/home/sahar/CLionProjects/reversi/src/src/client/Player.h
 
-/home/or/CLionProjects/reversi/src/client/Player.h
+/home/sahar/CLionProjects/reversi/src/src/client/Player.h
 StackOfDiscs.h
-/home/or/CLionProjects/reversi/src/client/StackOfDiscs.h
+/home/sahar/CLionProjects/reversi/src/src/client/StackOfDiscs.h
 Disc.h
-/home/or/CLionProjects/reversi/src/client/Disc.h
+/home/sahar/CLionProjects/reversi/src/src/client/Disc.h
 iostream
 -
 vector
 -
 
-/home/or/CLionProjects/reversi/src/client/ReversiGame.cpp
+/home/sahar/CLionProjects/reversi/src/src/client/ReversiGame.cpp
 iostream
 -
 ReversiGame.h
-/home/or/CLionProjects/reversi/src/client/ReversiGame.h
+/home/sahar/CLionProjects/reversi/src/src/client/ReversiGame.h
 ClientPlayer.h
-/home/or/CLionProjects/reversi/src/client/ClientPlayer.h
+/home/sahar/CLionProjects/reversi/src/src/client/ClientPlayer.h
 typeinfo
 -
 fstream
 -
 
-/home/or/CLionProjects/reversi/src/client/ReversiGame.h
+/home/sahar/CLionProjects/reversi/src/src/client/ReversiGame.h
 string
 -
 cstring
 -
 Board.h
-/home/or/CLionProjects/reversi/src/client/Board.h
+/home/sahar/CLionProjects/reversi/src/src/client/Board.h
 Player.h
-/home/or/CLionProjects/reversi/src/client/Player.h
+/home/sahar/CLionProjects/reversi/src/src/client/Player.h
 GameLogic.h
-/home/or/CLionProjects/reversi/src/client/GameLogic.h
+/home/sahar/CLionProjects/reversi/src/src/client/GameLogic.h
 HumanPlayer.h
-/home/or/CLionProjects/reversi/src/client/HumanPlayer.h
+/home/sahar/CLionProjects/reversi/src/src/client/HumanPlayer.h
 AiPlayer.h
-/home/or/CLionProjects/reversi/src/client/AiPlayer.h
+/home/sahar/CLionProjects/reversi/src/src/client/AiPlayer.h
 
-/home/or/CLionProjects/reversi/src/client/StackOfDiscs.cpp
-StackOfDiscs.h
-/home/or/CLionProjects/reversi/src/client/StackOfDiscs.h
+/home/sahar/CLionProjects/reversi/src/src/client/ScreenView.cpp
+ScreenView.h
+/home/sahar/CLionProjects/reversi/src/src/client/ScreenView.h
 
-/home/or/CLionProjects/reversi/src/client/StackOfDiscs.h
-Disc.h
-/home/or/CLionProjects/reversi/src/client/Disc.h
+/home/sahar/CLionProjects/reversi/src/src/client/ScreenView.h
+iostream
+-
 Board.h
-/home/or/CLionProjects/reversi/src/client/Board.h
+/home/sahar/CLionProjects/reversi/src/src/client/Board.h
+StackOfDiscs.h
+/home/sahar/CLionProjects/reversi/src/src/client/StackOfDiscs.h
+
+/home/sahar/CLionProjects/reversi/src/src/client/StackOfDiscs.cpp
+StackOfDiscs.h
+/home/sahar/CLionProjects/reversi/src/src/client/StackOfDiscs.h
+
+/home/sahar/CLionProjects/reversi/src/src/client/StackOfDiscs.h
+Disc.h
+/home/sahar/CLionProjects/reversi/src/src/client/Disc.h
+Board.h
+/home/sahar/CLionProjects/reversi/src/src/client/Board.h
 vector
 -
 
-/home/or/CLionProjects/reversi/src/client/Symbol.h
+/home/sahar/CLionProjects/reversi/src/src/client/Symbol.h
 
-/home/or/CLionProjects/reversi/src/client/main.cpp
+/home/sahar/CLionProjects/reversi/src/src/client/main.cpp
 ReversiGame.h
-/home/or/CLionProjects/reversi/src/client/ReversiGame.h
+/home/sahar/CLionProjects/reversi/src/src/client/ReversiGame.h
 Menu.h
-/home/or/CLionProjects/reversi/src/client/Menu.h
+/home/sahar/CLionProjects/reversi/src/src/client/Menu.h
 

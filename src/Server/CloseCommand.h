@@ -1,18 +1,20 @@
 //
-// Created by or on 21/12/17.
+// Created by sahar on 26/12/17.
 //
 
-#ifndef REVERSI_CLOSECOMMAND_H
-#define REVERSI_CLOSECOMMAND_H
-
+#ifndef SERVER_CLOSECOMMAND_H
+#define SERVER_CLOSECOMMAND_H
 
 #include "Command.h"
 
 class CloseCommand: public Command {
 public:
-    CloseCommand(vector <Game> gamesList);
+    CloseCommand(const vector <Game> &gamesList);
     virtual void execute(string arg,int clientSocket);
+
+private:
+    vector<Game> gamesList;
 };
 
 
-#endif //REVERSI_CLOSECOMMAND_H
+#endif //SERVER_CLOSECOMMAND_H

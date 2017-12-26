@@ -8,7 +8,7 @@
 
 #include <unistd.h>
 #include <netinet/in.h>
-#include "CommandsManager.h"
+#include <vector>
 #include "GameStruct.h"
 
 class Server {
@@ -23,16 +23,13 @@ public:
      * running the game
      */
     void start();
-    /**
-     * close the server socket - not in use
-     */
-    void stop();
+
     /**
      * connect players and sending 1 to first player and 2 for second
      * @param clientAddress
      * @param clientAddressLen
      */
-    void *connect(void *args);
+    static void *connect(void *args);
 
     /**
      * sending to each other the chosen disc
@@ -50,11 +47,11 @@ public:
 private:
 
     int port;
-    int serverSocket;
+    //static int serverSocket;
     int numOfClients;
     int clientSocket1;
     int clientSocket2;
-    CommandsManager manager;
+   // CommandsManager manager;
     //vector <Game> gamesList;
 };
 

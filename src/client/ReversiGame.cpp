@@ -42,7 +42,7 @@ void ReversiGame::manageRemoteGame(Symbol b, Symbol w){
     string data;
     int port;
     ifstream inFile;
-    inFile.open("setting.txt");
+    inFile.open("/home/sahar/CLionProjects/reversi/src/src/client/setting.txt");
     inFile >> data;
     inFile >> port;
     inFile.close();

@@ -6,9 +6,11 @@
 #include <iostream>
 #include <cstdlib>
 #include "Server.h"
+#include "CommandManager.h"
 using namespace std;
 int main() {
     Server server;
+
     try {
         server.start();
     } catch (const char *msg) {

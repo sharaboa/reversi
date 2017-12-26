@@ -1,19 +1,21 @@
 //
-// Created by sahar on 19/12/17.
+// Created by sahar on 26/12/17.
 //
 
-#ifndef REVERSI_STARTCOMMAND_H
-#define REVERSI_STARTCOMMAND_H
-
+#ifndef SERVER_STARTCOMMAND_H
+#define SERVER_STARTCOMMAND_H
 
 #include "Command.h"
-#include "GameStruct.h"
-class StartCommand :public Command {
+
+class StartCommand: public Command{
 public:
-    StartCommand(vector <Game> gamesList);
+    StartCommand(const vector <Game> &gamesList);
     virtual void execute(string arg,int clientSocket);
 
+private:
+    vector <Game> gamesList;
 };
 
 
-#endif //REVERSI_STARTCOMMAND_H
+
+#endif //SERVER_STARTCOMMAND_H

@@ -6,7 +6,7 @@
 #ifndef REVERSI_GAMESTRUCT_H
 #define REVERSI_GAMESTRUCT_H
 
-#include "Server.h"
+
 #include <iostream>
 #include <cstring>
 
