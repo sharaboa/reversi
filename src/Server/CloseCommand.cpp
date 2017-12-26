@@ -2,6 +2,7 @@
 // Created by or on 21/12/17.
 //
 
+#include <unistd.h>
 #include "CloseCommand.h"
 
 CloseCommand::CloseCommand(vector <Game> gamesList) {}
