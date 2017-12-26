@@ -11,7 +11,7 @@
 class CloseCommand: public Command {
 public:
     CloseCommand(vector <Game> gamesList);
-    virtual void execute(string args,int clientSocket);
+    virtual void execute(string arg,int clientSocket);
 };
 
 

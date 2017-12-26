@@ -6,7 +6,7 @@
 
 CloseCommand::CloseCommand(vector <Game> gamesList) {}
 
-void CloseCommand::execute(string args, int clientSocket) {
+void CloseCommand::execute(string arg, int clientSocket) {
     for (int i = 0;i<gamesList.size();i++) {
         if(gamesList.at(i).gameName == args) {
             close(gamesList.at(i).xSocket);

@@ -16,7 +16,7 @@ public:
     void executeCommand(string input,int clientSocket);
 
 private:
-    map<string, Command *> commandsMap;
+    map<string, Command*> commandsMap;
     vector <Game> gamesList;
 };
 

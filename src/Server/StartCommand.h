@@ -11,7 +11,7 @@
 class StartCommand :public Command {
 public:
     StartCommand(vector <Game> gamesList);
-    virtual void execute(string args,int clientSocket);
+    virtual void execute(string arg,int clientSocket);
 
 };
 

@@ -26,10 +26,10 @@ CommandsManager::CommandsManager() {
 
 }
 void CommandsManager::executeCommand(string input,int clientSocket) {
-    int i = input.find('<');
+    int s = input.find('<');
     int y = input.find('>');
-    string command = input.substr(0,i);
-    string arg = input.substr(i+1,y);
+    string command = input.substr(0,s);
+    string arg = input.substr(s+1,y);
     arg.erase(arg.end()-1,arg.end());
     //strncpy(command,input,y);
     Command *commandObj = commandsMap[command];

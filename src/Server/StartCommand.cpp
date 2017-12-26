@@ -10,23 +10,6 @@
 
 StartCommand::StartCommand(vector <Game> gamesList) {}
 
-
-////////we didnt write this fun right - we put the newGame in gamesList every time the name doesnt appear
-
-/*
-void StartCommand::execute(string args, int clientSocket) {
-    Game newGame;
-    ///////maybe needs to ust str copy
-    newGame.gameName = args;
-    newGame.xSocket = clientSocket;
-    for(int i = 0; i < gamesList.size(); i++){
-        if(gamesList.at(i).gameName.compare(args) != 0){
-            gamesList.push_back(newGame);
-        } else {
-            write(clientSocket, &out, sizeof(out));
-        }
-    }
-}*/
 void StartCommand::execute(string args, int clientSocket) {
     bool canStart = true;
     Game newGame;

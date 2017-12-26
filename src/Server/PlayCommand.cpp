@@ -14,7 +14,7 @@
 
 PlayCommand::PlayCommand(vector <Game> gamesList) {}
 
-void PlayCommand::execute(string args, int clientSocket) {
+void PlayCommand::execute(string arg, int clientSocket) {
     int i = args.find(',');
     string r = args.substr(0,i);
     string c = args.substr(i+1);

@@ -11,7 +11,7 @@
 class JoinCommand: public Command {
 public:
     JoinCommand(vector <Game> gamesList);
-    virtual void execute(string args,int clientSocket);
+    virtual void execute(string arg,int clientSocket);
 };
 
 
