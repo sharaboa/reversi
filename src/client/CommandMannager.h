@@ -13,7 +13,7 @@ class CommandMannager {
 public:
     CommandMannager();
     ~CommandMannager();
-    void executeCommand(string command,string arg,int clientSocket);
+    void executeCommand(string input,int clientSocket);
     bool validCommand(string command);
 private:
     map<string, Command*> commandsMap;

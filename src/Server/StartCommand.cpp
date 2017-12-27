@@ -18,8 +18,15 @@ void StartCommand::execute(string args, int clientSocket) {
             canStart = false;
         }
     }
-    if(canStart)
+    if(canStart) {
+        int succesCode = 1;
+        int n = write(clientSocket, &succesCode, sizeof(succesCode));
+        if (n == -1) {
+            cout << "Error writing to socket" << endl;
+        }
+
         gamesList.push_back(newGame);
+    }
     else {
         int errorCode = -1;
         int n = write(clientSocket, &errorCode, sizeof(errorCode));

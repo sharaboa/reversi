@@ -7,7 +7,9 @@
 
 #include "Command.h"
 class CloseCommand: public Command{
-
+public:
+    CloseCommand();
+    virtual void execute(string input,int clientSocket);
 };
 
 

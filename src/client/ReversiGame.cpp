@@ -57,24 +57,23 @@ void ReversiGame::manageRemoteGame(Symbol b, Symbol w) {
     int repeat = 1;
     CommandMannager myMannager;
     ScreenView myView;
-    string command,arg;
+    string command,arg,input;
     while(repeat) {
         bool validInput = false;
         while(!validInput) {
             myView.remotePlayerMenu();
-            string input;
             cin >> input;
-            long s = input.find('<');
-            long y = input.find('>');
+            int s = input.find('<');
+            int y = input.find('>');
             command = input.substr(0, s);
             arg = input.substr(s + 1, y);
             arg.erase(arg.end() - 1, arg.end());
             validInput = myMannager.validCommand(command);
         }
-        myMannager.executeCommand(command, arg, player1.getClientSocket());
+        myMannager.executeCommand(input, player1.getClientSocket());
         if (command.compare("join")) {
             play(&player1, &player2);
-            myMannager.executeCommand("close",NULL,player1.getClientSocket());
+            myMannager.executeCommand("close",player1.getClientSocket());
             repeat = 0;
         }
     }

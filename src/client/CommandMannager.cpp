@@ -15,10 +15,14 @@ CommandMannager::CommandMannager() {
     commandsMap["list_games"] = new ListOfGamesCommand();
 }
 
-void CommandMannager::executeCommand(string command,string arg,int clientSocket) {
+void CommandMannager::executeCommand(string input,int clientSocket) {
+    string command;
+    long s = input.find('<');
+    long y = input.find('>');
+    command = input.substr(0, s);
 
     Command *commandObj = commandsMap[command];
-    commandObj->execute(arg,clientSocket);
+    commandObj->execute(input,clientSocket);
 }
 
 bool CommandMannager::validCommand(string command){

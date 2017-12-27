@@ -8,6 +8,9 @@
 #include "Command.h"
 
 class JoinCommand : public Command{
+public:
+    JoinCommand();
+    virtual void execute(string input,int clientSocket);
 
 };
 
