@@ -12,7 +12,7 @@ public:
     HandelClient(int clientSocket);
     static void *readCommand(void *tArgs);
 private:
-    static CommandManager manager;
+
     int clientSocket;
 };
 

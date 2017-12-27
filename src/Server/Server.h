@@ -10,6 +10,8 @@
 #include <netinet/in.h>
 #include <vector>
 #include "GameStruct.h"
+#include "CommandManager.h"
+
 
 class Server {
 
@@ -44,6 +46,7 @@ public:
     void writeToClient (int clientSoket,struct Output &out);
     void readToClient();
     void closeGame(Game game);
+    void exitThreads();
 private:
 
     int port;
@@ -51,7 +54,9 @@ private:
     int numOfClients;
     int clientSocket1;
     int clientSocket2;
-   // CommandsManager manager;
+    vector <pthread_t> threadsList;
+    vector <int> socketsList;
+    CommandManager myManager;
     //vector <Game> gamesList;
 };
 

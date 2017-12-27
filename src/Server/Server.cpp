@@ -10,6 +10,8 @@
 #include <pthread.h>
 #include <cstdlib>
 #include <complex>
+#include <bits/sigthread.h>
+#include "HandelClient.h"
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 10
@@ -51,7 +53,9 @@ void Server::start() {
     args.serverSocket1 = serverSocket;
    //thread for accepting the client
     pthread_t thread;
+
     int rc = pthread_create(&thread, NULL, connect, &args);
+   threadsList.push_back(thread);
     if (rc) {
         cout << "Error: unable to create thread, " << rc << endl;
         exit(-1);
@@ -83,36 +87,23 @@ void * Server::connect (void *tArgs) {
         struct sockaddr_in clientAddress;
         socklen_t clientAddressLen = sizeof((struct sockaddr *) &clientAddress);
         int clientSocket = accept(args->serverSocket1, (struct sockaddr *) &clientAddress, &clientAddressLen);
+        //  socketsList.push_back(clientSocket);
         cout << "Client connected" << endl;
-
-        /*while (true) {
-            handleClient(clientSocket);
-        }*/
+        HandelClient handleClient(clientSocket);
     }
 }
 
-
-
-// Handle requests from a specific client
-bool Server::handleClient(int clientSocket) {
-    string input;
-// Read new exercise arguments - read coordinates as two int
-    int n = read(clientSocket, &input, sizeof (input));
-
-    if (n == -1) {
-        cout << "Error reading rowCordination" << endl;
-        return false;
+void Server:: exitThreads() {
+    string command;
+    while(!command.compare("close server"))
+    {
+        cout << "Enter command: ";
+        cin >> command;
+        if (command.compare("close server")) {
+            myManager.executeCommand("closeServer", NULL);
+        }
     }
-  //  manager.executeCommand(input,clientSocket);
+    for (int i = 0;i < threadsList.size();i++) {
+        pthread_kill(threadsList.at(i), 1);
+    }
 }
-
-/*vector<Game> Server::getList() {
-    return gamesList;
-}*/
-/*
-void Server::writeToClient(int clientSocket,struct Output &out) {
-    int n = write(clientSocket, &out, sizeof(out));
-    if (n == -1) {
-        cout << "Error writing to socket" << endl;
-    }
-}*/

@@ -9,6 +9,7 @@
 #include "ListGamesCommand.h"
 #include "JoinCommand.h"
 #include "CloseCommand.h"
+#include "closeServerCommand.h"
 
 
 CommandManager::CommandManager() {
@@ -19,6 +20,7 @@ CommandManager::CommandManager() {
     commandsMap["join"] = new JoinCommand(gamesList);
   //  commandsMap["play"] = new PlayCommand(gamesList);
     commandsMap["close"] = new CloseCommand(gamesList);
+    commandsMap["closeServer"] = new closeServerCommand();
 }
 void CommandManager::executeCommand(string input,int clientSocket) {
     int s = input.find('<');
