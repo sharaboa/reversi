@@ -78,7 +78,6 @@ void Server::closeGame(Game game) {
 }
 
 
-
 void * Server::connect (void *tArgs) {
     while (true) {
         cout << "Waiting for client connections..." << endl;

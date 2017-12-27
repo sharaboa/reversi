@@ -25,4 +25,5 @@ add_executable(client
     ReversiGame.h
     StackOfDiscs.cpp
     StackOfDiscs.h
-    Symbol.h ScreenView.cpp ScreenView.h)
+    Symbol.h ScreenView.cpp ScreenView.h
+        CommandMannager.h CommandMannager.cpp Command.h JoinCommand.cpp JoinCommand.h StartCommand.cpp StartCommand.h CloseCommand.cpp CloseCommand.h ListOfGamesCommand.cpp ListOfGamesCommand.h)

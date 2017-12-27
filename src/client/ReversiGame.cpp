@@ -8,7 +8,7 @@
 #include "ClientPlayer.h"
 #include <typeinfo>
 #include <fstream>
-
+#include "CommandMannager.h"
 
 ReversiGame::ReversiGame(int size): board(size),gameLogic(board),size(size) {}
 
@@ -38,7 +38,7 @@ void ReversiGame::manageAi(Symbol b, Symbol w) {
     delete black;
     delete white;
 }
-void ReversiGame::manageRemoteGame(Symbol b, Symbol w){
+void ReversiGame::manageRemoteGame(Symbol b, Symbol w) {
     string data;
     int port;
     ifstream inFile;
@@ -46,15 +46,38 @@ void ReversiGame::manageRemoteGame(Symbol b, Symbol w){
     inFile >> data;
     inFile >> port;
     inFile.close();
-    const char * serverIP = data.c_str();
+    const char *serverIP = data.c_str();
 
-    ClientPlayer player1(b,serverIP,port);
+    ClientPlayer player1(b, serverIP, port);
     player1.connectToServer();
-    ClientPlayer player2(w,serverIP,port);
+    ClientPlayer player2(w, serverIP, port);
     player2.setClientSocket(player1.getClientSocket());
     player2.setClientNum(player1.getClientNum());
-    initialize(&player1,&player2,board);
-    play(&player1, &player2);
+    initialize(&player1, &player2, board);
+    int repeat = 1;
+    CommandMannager myMannager;
+    ScreenView myView;
+    string command,arg;
+    while(repeat) {
+        bool validInput = false;
+        while(!validInput) {
+            myView.remotePlayerMenu();
+            string input;
+            cin >> input;
+            long s = input.find('<');
+            long y = input.find('>');
+            command = input.substr(0, s);
+            arg = input.substr(s + 1, y);
+            arg.erase(arg.end() - 1, arg.end());
+            validInput = myMannager.validCommand(command);
+        }
+        myMannager.executeCommand(command, arg, player1.getClientSocket());
+        if (command.compare("join")) {
+            play(&player1, &player2);
+            myMannager.executeCommand("close",NULL,player1.getClientSocket());
+            repeat = 0;
+        }
+    }
 }
 
 void ReversiGame::play(Player *current,Player *opponent) {

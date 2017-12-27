@@ -54,6 +54,10 @@ public:
      * @param amountPlayer2 - the amount of disc the player putted on board
      */
     void announceWinner(Symbol player1,Symbol player2,int amountPlayer1,int amountPlayer2) const;
-};
+
+    void coutToScreen(string output);
+    void remotePlayerMenu();
+
+    };
 
 #endif //REVERSI_SCREENVIEW_H

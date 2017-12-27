@@ -47,27 +47,7 @@ void ClientPlayer::connectToServer() {
         throw "Error connecting to server";
     }
    cout<<"connected to server";
-    //initialize
-    int i;
-    //read clientNum - 1/2
-    int n = read(clientSocket, &i, sizeof(i));
-    if (n == -1) {
-        throw "Error writing arg1to socket";
-    }
-    screenView.printClientConnection(clientNum);
-    clientNum = i;
-    if(clientNum == 1) {
-        screenView.printClientConnection(clientNum);
-        //waite for second player to connect
-        int n = read(clientSocket, &i, sizeof(i));
-        if (n == -1) {
-            throw "Error writing arg1to socket";
-        }
-        screenView.printClientConnection(3);
-    }
-    if(clientNum == 2){
-        screenView.printClientConnection(clientNum);
-    }
+
 }
 
 Disc ClientPlayer::playerLogic(Player opponentPlayer) {
@@ -157,4 +137,45 @@ void ClientPlayer::gameOver() {
     if (n == -1) {
         throw "Error writing arg2to socket";
     }
+}
+
+void ClientPlayer::readClientNum() {
+    //initialize
+    int i;
+    //read clientNum - 1/2
+    int n = read(clientSocket, &i, sizeof(i));
+    if (n == -1) {
+        throw "Error writing arg1to socket";
+    }
+    screenView.printClientConnection(clientNum);
+    clientNum = i;
+    if(clientNum == 1) {
+        screenView.printClientConnection(clientNum);
+        //waite for second player to connect
+        int n = read(clientSocket, &i, sizeof(i));
+        if (n == -1) {
+            throw "Error writing arg1to socket";
+        }
+        screenView.printClientConnection(3);
+    }
+    if(clientNum == 2){
+        screenView.printClientConnection(clientNum);
+    }
+}
+
+string ClientPlayer::readFromServer() {
+    string command;
+    int n = read(clientSocket, &command, sizeof(command));
+    if (n == -1) {
+        throw "Error writing arg1to socket";
+    }
+    return command;
+}
+
+void ClientPlayer::writeToServer(string command) {
+    int n = write(clientSocket, &command, sizeof(command));
+    if (n == -1) {
+        throw "Error writing arg1to socket";
+    }
+
 }

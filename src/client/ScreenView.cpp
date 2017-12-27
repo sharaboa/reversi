@@ -109,3 +109,14 @@ void ScreenView::announceWinner(Symbol player1,Symbol player2,int amountPlayer1,
         cout << "Game Over! the winner is: " << (char)player2 << endl;
     }
 }
+
+void ScreenView::coutToScreen(string output){
+    cout<<output;
+}
+void ScreenView::remotePlayerMenu() {
+    cout << "Remote player menu:\n";
+    cout<< "start<Game_Name>\n";
+    cout<<"join<Room_Name>\n";
+    cout<<"list_games\n";
+    cout << "Choose your command: \n";
+}

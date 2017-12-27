@@ -60,6 +60,9 @@ public:
      * updating myChoise as (-2,-2) disc to sign that the game is over
      */
     void gameOver();
+    void readClientNum();
+    string readFromServer();
+    void writeToServer(string command);
 private:
     const char *serverIP;
     int serverPort;
