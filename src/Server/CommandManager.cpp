@@ -9,18 +9,16 @@
 #include "ListGamesCommand.h"
 #include "JoinCommand.h"
 #include "CloseCommand.h"
-#include "closeServerCommand.h"
 
 
 CommandManager::CommandManager() {
     //add to the list
-    commandsMap["start"] = new StartCommand(gamesList);
+    commandsMap["start"] = new StartCommand;
     //vector
-    commandsMap["list_games"] = new ListGamesCommand(gamesList);
-    commandsMap["join"] = new JoinCommand(gamesList);
-  //  commandsMap["play"] = new PlayCommand(gamesList);
-    commandsMap["close"] = new CloseCommand(gamesList);
-    commandsMap["closeServer"] = new closeServerCommand();
+    commandsMap["list_games"] = new ListGamesCommand;
+    commandsMap["join"] = new JoinCommand;
+  //  commandsMap["play"] = new PlayCommand(gamesListManager);
+    commandsMap["close"] = new CloseCommand;
 }
 void CommandManager::executeCommand(string input,int clientSocket) {
     int s = input.find('<');

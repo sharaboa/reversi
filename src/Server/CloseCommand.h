@@ -9,11 +9,8 @@
 
 class CloseCommand: public Command {
 public:
-    CloseCommand(const vector <Game> &gamesList);
+    CloseCommand();
     virtual void execute(string arg,int clientSocket);
-
-private:
-    vector<Game> gamesList;
 };
 
 

@@ -102,7 +102,7 @@ void Server:: exitThreads() {
             myManager.executeCommand("closeServer", NULL);
         }
     }
-    for (int i = 0;i < threadsList.size();i++) {
+    /*for (int i = 0;i < threadsList.size();i++) {
         pthread_kill(threadsList.at(i), 1);
-    }
+    }*/
 }

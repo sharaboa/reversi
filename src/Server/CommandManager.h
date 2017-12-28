@@ -15,7 +15,8 @@ class CommandManager {
         void executeCommand(string input,int clientSocket);
     private:
         map<string, Command*> commandsMap;
-        vector <Game> gamesList;
+        //vector <Game> gamesList;
+
 
 };
 

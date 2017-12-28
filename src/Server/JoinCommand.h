@@ -9,11 +9,9 @@
 
 class JoinCommand: public Command {
 public:
-    JoinCommand(const vector <Game> &gamesList);
+    JoinCommand();
     virtual void execute(string args,int clientSocket);
 
-private:
-    vector<Game> gamesList;
 };
 
 

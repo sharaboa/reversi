@@ -4,14 +4,14 @@
 
 #include "CloseCommand.h"
 
-CloseCommand::CloseCommand(const vector <Game> &gamesList):gamesList(gamesList) {}
+CloseCommand::CloseCommand() {}
 
 void CloseCommand::execute(string arg, int clientSocket) {
-    for (int i = 0;i<gamesList.size();i++) {
-        if(gamesList.at(i).gameName == arg) {
-            close(gamesList.at(i).xSocket);
-            close(gamesList.at(i).oSocket);
-            gamesList.erase(gamesList.begin() + i);
+    for (int i = 0;i<gamesList->getGamesList().size();i++) {
+        if(gamesList->getGamesList().at(i).gameName == arg) {
+            close(gamesList->getGamesList().at(i).xSocket);
+            close(gamesList->getGamesList().at(i).oSocket);
+            gamesList->removeGame(arg);
         }
     }
 }

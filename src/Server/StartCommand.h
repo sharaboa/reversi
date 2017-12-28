@@ -9,11 +9,8 @@
 
 class StartCommand: public Command{
 public:
-    StartCommand(const vector <Game> &gamesList);
+    StartCommand();
     virtual void execute(string arg,int clientSocket);
-
-private:
-    vector <Game> gamesList;
 };
 
 

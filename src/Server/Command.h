@@ -8,6 +8,7 @@
 
 #include <vector>
 #include "GameStruct.h"
+#include "GamesListManager.h"
 #include <unistd.h>
 
 class Command {
@@ -15,7 +16,8 @@ class Command {
         virtual void execute(string arg, int clientSocket) = 0;
         virtual ~Command() {}
     protected:
-        vector <Game> gamesList;
+    GamesListManager *gamesList = GamesListManager::getInstance();
+
 };
 
 

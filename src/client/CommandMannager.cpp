@@ -44,6 +44,3 @@ CommandMannager::~CommandMannager() {
         delete it->second;
     }
 }
-
-
-
