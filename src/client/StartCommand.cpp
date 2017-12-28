@@ -23,6 +23,6 @@ void StartCommand::execute(string input, int clientSocket) {
     }
 
     ScreenView myView;
-
+    myView.coutToScreen(i);
 
 }

@@ -101,10 +101,6 @@ void * Server::connect (void *tArgs) {
         //  socketsList.push_back(clientSocket);
         cout << "Client connected" << endl;
         HandelClient handleClient(clientSocket);
-        while (true){
-
-        }
-
     }
 }
 
