@@ -42,18 +42,18 @@ void ReversiGame::manageRemoteGame(Symbol b, Symbol w) {
     string data;
     int port;
     ifstream inFile;
-    inFile.open("/home/sahar/CLionProjects/reversi/src/src/client/setting.txt");
+    inFile.open("setting.txt");
     inFile >> data;
     inFile >> port;
     inFile.close();
-    const char *serverIP = data.c_str();
+    const char * serverIP = data.c_str();
 
-    ClientPlayer player1(b, serverIP, port);
+    ClientPlayer player1(b,serverIP,port);
     player1.connectToServer();
-    ClientPlayer player2(w, serverIP, port);
+    ClientPlayer player2(w,serverIP,port);
     player2.setClientSocket(player1.getClientSocket());
     player2.setClientNum(player1.getClientNum());
-    initialize(&player1, &player2, board);
+    initialize(&player1,&player2,board);
     int repeat = 1;
     CommandMannager myMannager;
     ScreenView myView;

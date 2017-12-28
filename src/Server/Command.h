@@ -11,14 +11,10 @@
 #include "GamesListManager.h"
 #include <unistd.h>
 
-class Command {
+class Command: public GamesListManager  {
     public:
         virtual void execute(string arg, int clientSocket) = 0;
         virtual ~Command() {}
-    protected:
-    GamesListManager *gamesList = GamesListManager::getInstance();
-
 };
-
 
 #endif //SERVER_COMMAND_H
