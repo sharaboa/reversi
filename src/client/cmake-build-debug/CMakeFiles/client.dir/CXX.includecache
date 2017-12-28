@@ -54,6 +54,40 @@ HumanPlayer.h
 ScreenView.h
 /home/sahar/CLionProjects/reversi/src/src/client/ScreenView.h
 
+/home/sahar/CLionProjects/reversi/src/src/client/CloseCommand.cpp
+CloseCommand.h
+/home/sahar/CLionProjects/reversi/src/src/client/CloseCommand.h
+
+/home/sahar/CLionProjects/reversi/src/src/client/CloseCommand.h
+Command.h
+/home/sahar/CLionProjects/reversi/src/src/client/Command.h
+
+/home/sahar/CLionProjects/reversi/src/src/client/Command.h
+unistd.h
+-
+string
+-
+
+/home/sahar/CLionProjects/reversi/src/src/client/CommandMannager.cpp
+CommandMannager.h
+/home/sahar/CLionProjects/reversi/src/src/client/CommandMannager.h
+StartCommand.h
+/home/sahar/CLionProjects/reversi/src/src/client/StartCommand.h
+JoinCommand.h
+/home/sahar/CLionProjects/reversi/src/src/client/JoinCommand.h
+CloseCommand.h
+/home/sahar/CLionProjects/reversi/src/src/client/CloseCommand.h
+ListOfGamesCommand.h
+/home/sahar/CLionProjects/reversi/src/src/client/ListOfGamesCommand.h
+
+/home/sahar/CLionProjects/reversi/src/src/client/CommandMannager.h
+map
+-
+ClientPlayer.h
+/home/sahar/CLionProjects/reversi/src/src/client/ClientPlayer.h
+Command.h
+/home/sahar/CLionProjects/reversi/src/src/client/Command.h
+
 /home/sahar/CLionProjects/reversi/src/src/client/Disc.cpp
 Disc.h
 /home/sahar/CLionProjects/reversi/src/src/client/Disc.h
@@ -100,6 +134,28 @@ cstring
 iostream
 -
 
+/home/sahar/CLionProjects/reversi/src/src/client/JoinCommand.cpp
+JoinCommand.h
+/home/sahar/CLionProjects/reversi/src/src/client/JoinCommand.h
+
+/home/sahar/CLionProjects/reversi/src/src/client/JoinCommand.h
+Command.h
+/home/sahar/CLionProjects/reversi/src/src/client/Command.h
+
+/home/sahar/CLionProjects/reversi/src/src/client/ListOfGamesCommand.cpp
+cstring
+-
+ListOfGamesCommand.h
+/home/sahar/CLionProjects/reversi/src/src/client/ListOfGamesCommand.h
+ScreenView.h
+/home/sahar/CLionProjects/reversi/src/src/client/ScreenView.h
+
+/home/sahar/CLionProjects/reversi/src/src/client/ListOfGamesCommand.h
+vector
+-
+Command.h
+/home/sahar/CLionProjects/reversi/src/src/client/Command.h
+
 /home/sahar/CLionProjects/reversi/src/src/client/Menu.cpp
 cstdio
 -
@@ -139,6 +195,8 @@ typeinfo
 -
 fstream
 -
+CommandMannager.h
+/home/sahar/CLionProjects/reversi/src/src/client/CommandMannager.h
 
 /home/sahar/CLionProjects/reversi/src/src/client/ReversiGame.h
 string
@@ -179,6 +237,18 @@ Board.h
 /home/sahar/CLionProjects/reversi/src/src/client/Board.h
 vector
 -
+
+/home/sahar/CLionProjects/reversi/src/src/client/StartCommand.cpp
+cstring
+-
+StartCommand.h
+/home/sahar/CLionProjects/reversi/src/src/client/StartCommand.h
+ScreenView.h
+/home/sahar/CLionProjects/reversi/src/src/client/ScreenView.h
+
+/home/sahar/CLionProjects/reversi/src/src/client/StartCommand.h
+Command.h
+/home/sahar/CLionProjects/reversi/src/src/client/Command.h
 
 /home/sahar/CLionProjects/reversi/src/src/client/Symbol.h
 

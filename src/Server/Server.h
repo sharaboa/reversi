@@ -51,13 +51,11 @@ private:
 
     int port;
     //static int serverSocket;
-    int numOfClients;
-    int clientSocket1;
-    int clientSocket2;
+
     vector <pthread_t> threadsList;
     vector <int> socketsList;
     CommandManager myManager;
-    //vector <Game> gamesList;
+
 };
 
 #endif //SERVER_SERVER_H

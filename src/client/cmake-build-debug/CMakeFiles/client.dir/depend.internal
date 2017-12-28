@@ -26,6 +26,26 @@ CMakeFiles/client.dir/ClientPlayer.cpp.o
  /home/sahar/CLionProjects/reversi/src/src/client/ScreenView.h
  /home/sahar/CLionProjects/reversi/src/src/client/StackOfDiscs.h
  /home/sahar/CLionProjects/reversi/src/src/client/Symbol.h
+CMakeFiles/client.dir/CloseCommand.cpp.o
+ /home/sahar/CLionProjects/reversi/src/src/client/CloseCommand.cpp
+ /home/sahar/CLionProjects/reversi/src/src/client/CloseCommand.h
+ /home/sahar/CLionProjects/reversi/src/src/client/Command.h
+CMakeFiles/client.dir/CommandMannager.cpp.o
+ /home/sahar/CLionProjects/reversi/src/src/client/Board.h
+ /home/sahar/CLionProjects/reversi/src/src/client/ClientPlayer.h
+ /home/sahar/CLionProjects/reversi/src/src/client/CloseCommand.h
+ /home/sahar/CLionProjects/reversi/src/src/client/Command.h
+ /home/sahar/CLionProjects/reversi/src/src/client/CommandMannager.cpp
+ /home/sahar/CLionProjects/reversi/src/src/client/CommandMannager.h
+ /home/sahar/CLionProjects/reversi/src/src/client/Disc.h
+ /home/sahar/CLionProjects/reversi/src/src/client/HumanPlayer.h
+ /home/sahar/CLionProjects/reversi/src/src/client/JoinCommand.h
+ /home/sahar/CLionProjects/reversi/src/src/client/ListOfGamesCommand.h
+ /home/sahar/CLionProjects/reversi/src/src/client/Player.h
+ /home/sahar/CLionProjects/reversi/src/src/client/ScreenView.h
+ /home/sahar/CLionProjects/reversi/src/src/client/StackOfDiscs.h
+ /home/sahar/CLionProjects/reversi/src/src/client/StartCommand.h
+ /home/sahar/CLionProjects/reversi/src/src/client/Symbol.h
 CMakeFiles/client.dir/Disc.cpp.o
  /home/sahar/CLionProjects/reversi/src/src/client/Disc.cpp
  /home/sahar/CLionProjects/reversi/src/src/client/Disc.h
@@ -44,6 +64,19 @@ CMakeFiles/client.dir/HumanPlayer.cpp.o
  /home/sahar/CLionProjects/reversi/src/src/client/HumanPlayer.cpp
  /home/sahar/CLionProjects/reversi/src/src/client/HumanPlayer.h
  /home/sahar/CLionProjects/reversi/src/src/client/Player.h
+ /home/sahar/CLionProjects/reversi/src/src/client/ScreenView.h
+ /home/sahar/CLionProjects/reversi/src/src/client/StackOfDiscs.h
+ /home/sahar/CLionProjects/reversi/src/src/client/Symbol.h
+CMakeFiles/client.dir/JoinCommand.cpp.o
+ /home/sahar/CLionProjects/reversi/src/src/client/Command.h
+ /home/sahar/CLionProjects/reversi/src/src/client/JoinCommand.cpp
+ /home/sahar/CLionProjects/reversi/src/src/client/JoinCommand.h
+CMakeFiles/client.dir/ListOfGamesCommand.cpp.o
+ /home/sahar/CLionProjects/reversi/src/src/client/Board.h
+ /home/sahar/CLionProjects/reversi/src/src/client/Command.h
+ /home/sahar/CLionProjects/reversi/src/src/client/Disc.h
+ /home/sahar/CLionProjects/reversi/src/src/client/ListOfGamesCommand.cpp
+ /home/sahar/CLionProjects/reversi/src/src/client/ListOfGamesCommand.h
  /home/sahar/CLionProjects/reversi/src/src/client/ScreenView.h
  /home/sahar/CLionProjects/reversi/src/src/client/StackOfDiscs.h
  /home/sahar/CLionProjects/reversi/src/src/client/Symbol.h
@@ -71,6 +104,8 @@ CMakeFiles/client.dir/ReversiGame.cpp.o
  /home/sahar/CLionProjects/reversi/src/src/client/AiPlayer.h
  /home/sahar/CLionProjects/reversi/src/src/client/Board.h
  /home/sahar/CLionProjects/reversi/src/src/client/ClientPlayer.h
+ /home/sahar/CLionProjects/reversi/src/src/client/Command.h
+ /home/sahar/CLionProjects/reversi/src/src/client/CommandMannager.h
  /home/sahar/CLionProjects/reversi/src/src/client/Disc.h
  /home/sahar/CLionProjects/reversi/src/src/client/GameLogic.h
  /home/sahar/CLionProjects/reversi/src/src/client/HumanPlayer.h
@@ -92,6 +127,15 @@ CMakeFiles/client.dir/StackOfDiscs.cpp.o
  /home/sahar/CLionProjects/reversi/src/src/client/Disc.h
  /home/sahar/CLionProjects/reversi/src/src/client/StackOfDiscs.cpp
  /home/sahar/CLionProjects/reversi/src/src/client/StackOfDiscs.h
+ /home/sahar/CLionProjects/reversi/src/src/client/Symbol.h
+CMakeFiles/client.dir/StartCommand.cpp.o
+ /home/sahar/CLionProjects/reversi/src/src/client/Board.h
+ /home/sahar/CLionProjects/reversi/src/src/client/Command.h
+ /home/sahar/CLionProjects/reversi/src/src/client/Disc.h
+ /home/sahar/CLionProjects/reversi/src/src/client/ScreenView.h
+ /home/sahar/CLionProjects/reversi/src/src/client/StackOfDiscs.h
+ /home/sahar/CLionProjects/reversi/src/src/client/StartCommand.cpp
+ /home/sahar/CLionProjects/reversi/src/src/client/StartCommand.h
  /home/sahar/CLionProjects/reversi/src/src/client/Symbol.h
 CMakeFiles/client.dir/main.cpp.o
  /home/sahar/CLionProjects/reversi/src/src/client/AiPlayer.h

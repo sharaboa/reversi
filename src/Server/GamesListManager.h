@@ -18,7 +18,7 @@ public:
     vector<Game> getGamesList() const;
 private:
     vector<Game> gamesList;
-    GamesListManager(): gamesList(0) {};
+    GamesListManager(): gamesList() {};
     GamesListManager(const GamesListManager &other);
     ~GamesListManager() {};
     static GamesListManager *instance;

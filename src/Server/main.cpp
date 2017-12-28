@@ -10,7 +10,7 @@
 using namespace std;
 int main() {
 
-    GamesListManager *sc1,*sc2, *sc3;
+   /* GamesListManager *sc1,*sc2, *sc3;
     sc1 = GamesListManager::getInstance();
     Game game1;
     game1.gameName = "or";
@@ -23,7 +23,7 @@ int main() {
     sc3 = GamesListManager::getInstance();
     sc3->removeGame(game2.gameName);
     f = sc2->getGamesList();
-
+*/
 
     Server server;
 

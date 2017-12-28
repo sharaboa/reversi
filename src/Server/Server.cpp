@@ -31,7 +31,7 @@ Server::Server() {
   //  inFile.close();
 }
 void Server::start() {
-    numOfClients = 0;
+  //  numOfClients = 0;
 // Create a socket point
     int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket == -1) {
@@ -55,20 +55,32 @@ void Server::start() {
     pthread_t thread;
 
     int rc = pthread_create(&thread, NULL, connect, &args);
-   threadsList.push_back(thread);
+
     if (rc) {
         cout << "Error: unable to create thread, " << rc << endl;
         exit(-1);
     }
-
-    while (true) {
+    while (true){
 
     }
+    /*string command ;
+
+    while(true){
+        if(!command.compare("close server"))
+        {
+            cout << "Enter command: ";
+            cin >> command;
+        }
+        else{
+           // myManager.executeCommand("closeServer", NULL);
+           pthread_cancel(thread);
+           exitThreads();
+            break;
+
+        }
+    }*/
 }
-    // Close communication with the client
-    /*close(clientSocket1);
-    close(clientSocket2);
-    numOfClients = 0;*/
+
 
 
 void Server::closeGame(Game game) {
@@ -89,20 +101,16 @@ void * Server::connect (void *tArgs) {
         //  socketsList.push_back(clientSocket);
         cout << "Client connected" << endl;
         HandelClient handleClient(clientSocket);
+        while (true){
+
+        }
+
     }
 }
 
 void Server:: exitThreads() {
-    string command;
-    while(!command.compare("close server"))
-    {
-        cout << "Enter command: ";
-        cin >> command;
-        if (command.compare("close server")) {
-            myManager.executeCommand("closeServer", NULL);
-        }
-    }
-    /*for (int i = 0;i < threadsList.size();i++) {
-        pthread_kill(threadsList.at(i), 1);
+   /*//change to game list
+    for (int i = 0;i < myManager;i++) {
+        pthread_cancel(threadsList.at(i));
     }*/
 }

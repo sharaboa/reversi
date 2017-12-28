@@ -25,9 +25,10 @@ vector<Game> GamesListManager::getGamesList() const {
 GamesListManager *GamesListManager::instance = 0;
 GamesListManager *GamesListManager::getInstance()
 {
-    if (instance == 0)
+    if (!instance)
     {
         instance = new GamesListManager;
+        return instance;
     }
     return instance;
 }
