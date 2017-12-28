@@ -5,7 +5,7 @@
 
 #include "StartCommand.h"
 
-StartCommand::StartCommand(const vector <Game> &gamesList): gamesList(gamesList) {}
+StartCommand::StartCommand() {}
 
 void StartCommand::execute(string args, int clientSocket) {
     bool canStart = true;
@@ -13,20 +13,13 @@ void StartCommand::execute(string args, int clientSocket) {
     ///////maybe needs to ust str copy
     newGame.gameName = args;
     newGame.xSocket = clientSocket;
-    for(int i = 0; i < gamesList.size(); i++){
-        if (gamesList.at(i).gameName.compare(args) == 0) {
+    for(int i = 0; i < gamesList->getGamesList().size(); i++){
+        if (gamesList->getGamesList().at(i).gameName.compare(args) == 0) {
             canStart = false;
         }
     }
-    if(canStart) {
-        int succesCode = 1;
-        int n = write(clientSocket, &succesCode, sizeof(succesCode));
-        if (n == -1) {
-            cout << "Error writing to socket" << endl;
-        }
-
-        gamesList.push_back(newGame);
-    }
+    if(canStart)
+        gamesList->addGame(newGame);
     else {
         int errorCode = -1;
         int n = write(clientSocket, &errorCode, sizeof(errorCode));
