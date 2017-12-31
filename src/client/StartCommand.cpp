@@ -9,9 +9,9 @@
 StartCommand::StartCommand(){}
 
 void StartCommand::execute(string input, int clientSocket) {
-   char arg[50];
-    strcpy(arg,input.c_str());
-    int n = write(clientSocket, &arg, sizeof(arg));
+ //  char arg[50];
+   //  strcpy(arg,input.c_str());
+    int n = write(clientSocket, input.c_str(), input.length());
     if (n == -1) {
         throw "Error writing arg1to socket";
     }

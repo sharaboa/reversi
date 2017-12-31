@@ -88,9 +88,14 @@ void ScreenView::printClientConnection(int connection) const {
             break;
         }
         //print to x after second player connection
-        case 3:
+        case 3: {
             cout << "You are X and the first one to play.\n";
             break;
+        }
+        case -1: {
+            "You can not join this game. Please coose another one\n";
+            break;
+        }
     }
 }
 
@@ -111,7 +116,7 @@ void ScreenView::announceWinner(Symbol player1,Symbol player2,int amountPlayer1,
 }
 
 void ScreenView::coutToScreen(string output){
-    cout<<output;
+    cout<<output<<endl;
 }
 void ScreenView::remotePlayerMenu() {
     cout << "Remote player menu:\n";

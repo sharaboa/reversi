@@ -46,18 +46,18 @@ void ReversiGame::manageRemoteGame(Symbol b, Symbol w) {
     inFile >> data;
     inFile >> port;
     inFile.close();
-    const char * serverIP = data.c_str();
+    const char *serverIP = data.c_str();
 
-    ClientPlayer player1(b,serverIP,port);
+    ClientPlayer player1(b, serverIP, port);
     player1.connectToServer();
-    ClientPlayer player2(w,serverIP,port);
+    ClientPlayer player2(w, serverIP, port);
     player2.setClientSocket(player1.getClientSocket());
     player2.setClientNum(player1.getClientNum());
-    initialize(&player1,&player2,board);
+    initialize(&player1, &player2, board);
     int repeat = 1;
     CommandMannager myMannager;
     ScreenView myView;
-    string command,arg,input;
+    string command,input;
     while(repeat) {
         bool validInput = false;
         while(!validInput) {
@@ -71,7 +71,9 @@ void ReversiGame::manageRemoteGame(Symbol b, Symbol w) {
             validInput = myMannager.validCommand(command);
         }
         myMannager.executeCommand(input, player1.getClientSocket());
-        if (command.compare("join")) {
+        if (command.compare("join") == 0 ||command.compare("start") == 0) {
+            player1.readClientNum();
+            player2.setClientNum(player1.getClientNum());
             play(&player1, &player2);
             myMannager.executeCommand("close",player1.getClientSocket());
             repeat = 0;

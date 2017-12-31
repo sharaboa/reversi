@@ -7,11 +7,11 @@
 CloseCommand::CloseCommand() {}
 
 void CloseCommand::execute(string arg, int clientSocket) {
-    for (int i = 0;i<this->getInstance()->getGamesList().size();i++) {
-        if(this->getGamesList().at(i).gameName == arg) {
-            close(this->getGamesList().at(i).xSocket);
-            close(this->getGamesList().at(i).oSocket);
-            this->removeGame(arg);
+    for (int i = 0;i<gamesList->getGamesList().size();i++) {
+        if(gamesList->getGamesList().at(i).gameName == arg) {
+            close(gamesList->getGamesList().at(i).xSocket);
+            close(gamesList->getGamesList().at(i).oSocket);
+            gamesList->removeGame(arg);
         }
     }
 }

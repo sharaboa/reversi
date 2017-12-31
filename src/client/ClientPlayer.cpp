@@ -149,16 +149,19 @@ void ClientPlayer::readClientNum() {
     }
     screenView.printClientConnection(clientNum);
     clientNum = i;
-    if(clientNum == 1) {
+    if (clientNum == 1) {
         screenView.printClientConnection(clientNum);
         //waite for second player to connect
-        int n = read(clientSocket, &i, sizeof(i));
+        /*int n = read(clientSocket, &i, sizeof(i));
         if (n == -1) {
             throw "Error writing arg1to socket";
-        }
+        }*/
         screenView.printClientConnection(3);
     }
-    if(clientNum == 2){
+    if (clientNum == 2) {
+        screenView.printClientConnection(clientNum);
+    }
+    if (clientNum == 0) {
         screenView.printClientConnection(clientNum);
     }
 }

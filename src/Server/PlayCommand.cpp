@@ -4,7 +4,9 @@
 
 #include "PlayCommand.h"
 
-PlayCommand::PlayCommand(int clientSocket1, int clientSocket2): clientSocket1(clientSocket1), clientSocket2(clientSocket2){}
+PlayCommand::PlayCommand(int clientSocket1, int clientSocket2): clientSocket1(clientSocket1), clientSocket2(clientSocket2){
+    ClientCommunication();
+}
 
 void PlayCommand::ClientCommunication() {
     while (true) {

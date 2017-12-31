@@ -23,12 +23,15 @@ CommandManager::CommandManager() {
 void CommandManager::executeCommand(string input,int clientSocket) {
     int s = input.find('<');
     int y = input.find('>');
-    string command = input.substr(0,s);
-    string arg = input.substr(s+1,y);
-    arg.erase(arg.end()-1,arg.end());
-    //strncpy(command,input,y);
-    Command *commandObj = commandsMap[command];
-    commandObj->execute(arg,clientSocket);
+        string command = input.substr(0, s);
+        string arg = input.substr(s + 1);
+        arg.erase(arg.end() - 1, arg.end());
+        //strncpy(command,input,y);
+        Command *commandObj = commandsMap[command];
+    if(commandObj != NULL ) {
+        commandObj->execute(arg, clientSocket);
+    }
+
 }
 CommandManager::~CommandManager() {
     map<string, Command *>::iterator it;

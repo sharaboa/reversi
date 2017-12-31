@@ -7,24 +7,33 @@
 
 StartCommand::StartCommand() {}
 
-void StartCommand::execute(string args, int clientSocket) {
-    bool canStart = true;
+void StartCommand::execute(string room, int clientSocket) {
+    bool validName = true;
     Game newGame;
+    string arg;
     ///////maybe needs to ust str copy
-    newGame.gameName = args;
+    newGame.gameName = room;
     newGame.xSocket = clientSocket;
-    for(int i = 0; i < this->getGamesList().size(); i++){
-        if (this->getGamesList().at(i).gameName.compare(args) == 0) {
-            canStart = false;
+    for(int i = 0; i < gamesList->getGamesList().size(); i++){
+        if (gamesList->getGamesList().at(i).gameName.compare(room) == 0) {
+            validName = false;
         }
     }
-    if(canStart)
-        this->addGame(newGame);
-    else {
-        int errorCode = -1;
-        int n = write(clientSocket, &errorCode, sizeof(errorCode));
-        if (n == -1) {
-            cout << "Error writing to socket" << endl;
-        }
+    if(validName){
+        gamesList->addGame(newGame);
+   arg = "opened a new Room";
+    } else {
+        arg = "Error opened a new Room";
     }
+    char msg[50];
+    strcpy(msg,arg.c_str());
+    int n = write(clientSocket, &msg, sizeof(msg));
+    if (n == -1) {
+        cout << "Error writing to socket" << endl;
+    }
+    /*int clientNum = 1;
+    n = write(clientSocket, &clientNum, sizeof(clientNum));
+    if (n == -1) {
+        cout << "Error writing to socket" << endl;
+    }*/
 }

@@ -16,8 +16,7 @@ public:
     void removeGame(string name);
     void setGame(int i, int oSocket);
     vector<Game> getGamesList() const;
-
-protected:
+private:
     vector<Game> gamesList;
     GamesListManager(): gamesList() {};
     GamesListManager(const GamesListManager &other);

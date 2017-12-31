@@ -15,6 +15,6 @@ using namespace std;
 struct Game{
     string gameName;
     int xSocket;
-    int oSocket;
+    int oSocket = NULL;
 };
 #endif //REVERSI_GAMESTRUCT_H

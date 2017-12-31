@@ -10,7 +10,7 @@
 class StartCommand :public Command{
 public:
     StartCommand();
-    virtual void execute(string input,int clientSocket);
+    virtual void execute(string room,int clientSocket);
 
 };
 

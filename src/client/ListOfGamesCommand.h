@@ -13,8 +13,6 @@ public:
     ListOfGamesCommand();
     virtual void execute(string input,int clientSocket);
 
-private:
-    vector <string> listGame;
 };
 
 

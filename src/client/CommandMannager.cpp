@@ -27,11 +27,9 @@ void CommandMannager::executeCommand(string input,int clientSocket) {
 
 bool CommandMannager::validCommand(string command){
 
-       if(commandsMap.find(command) == commandsMap.end())
-       {
+       if(commandsMap.find(command) == commandsMap.end()) {
            return false;
-       }
-    else{
+       } else {
            return true;
        }
 

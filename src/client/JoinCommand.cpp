@@ -6,7 +6,7 @@
 JoinCommand::JoinCommand() {}
 
 void JoinCommand::execute(string input, int clientSocket) {
-    int n = write(clientSocket, &input, sizeof(input));
+    int n = write(clientSocket, input.c_str(), input.length());
     if (n == -1) {
         throw "Error writing arg1to socket";
     }

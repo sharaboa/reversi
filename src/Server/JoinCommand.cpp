@@ -3,30 +3,39 @@
 //
 
 #include "JoinCommand.h"
+#include "PlayCommand.h"
 
 JoinCommand::JoinCommand() {}
 
 void JoinCommand::execute(string args, int clientSocket) {
-    string player;
-    for (int i = 0;i<this->getGamesList().size();i++)
-        if((!(this->getGamesList().at(i).oSocket)) && (args.compare(this->getGamesList().at(i).gameName) == 0 )) {
-            this->getGamesList().at(i).oSocket = clientSocket;
-            int player = 1;
-            int n = write( this->getGamesList().at(i).xSocket, &player, sizeof(player));
+    int player = -1;
+    for (int i = 0;i<gamesList->getGamesList().size();i++)
+        if((!(gamesList->getGamesList().at(i).oSocket)) && (args.compare(gamesList->getGamesList().at(i).gameName) == 0 )) {
+            gamesList->setGame(i,clientSocket);
+            player = 1;
+            int n = write( gamesList->getGamesList().at(i).xSocket, &player, sizeof(player));
             if (n == -1) {
                 cout << "Error writing to socket" << endl;
             }
             player = 2;
-            n = write(this->getGamesList().at(i).oSocket, &player, sizeof(player));
+            n = write(gamesList->getGamesList().at(i).oSocket, &player, sizeof(player));
             if (n == -1) {
                 cout << "Error writing to socket" << endl;
             }
+            PlayCommand play(gamesList->getGamesList().at(i).xSocket,gamesList->getGamesList().at(i).oSocket);
+            //play.ClientCommunication;
         }
-    if(!player.size()) {
-        player = "You can not join this game. Please coose another one";
+    if(player == -1) {
         int n = write(clientSocket, &player, sizeof(player));
         if (n == -1) {
             cout << "Error writing to socket" << endl;
         }
+        /*player = "You can not join this game. Please coose another one";
+        int n = write(clientSocket, &player, sizeof(player));
+        if (n == -1) {
+            cout << "Error writing to socket" << endl;
+        }*/
     }
+
+
 }
