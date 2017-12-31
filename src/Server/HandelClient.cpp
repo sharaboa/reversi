@@ -48,7 +48,7 @@ void *HandelClient::readCommand(void *tArgs) {
            arg[i] = NULL;
        }
     }*/
-    while (loop.compare("close") != 0) {
+    //while (loop.compare("list_games") == 0) {
         vector<char> buffer(4096);
         string rcv;
         rcv.clear();
@@ -71,10 +71,11 @@ void *HandelClient::readCommand(void *tArgs) {
         }
         string command = rcv.substr(0, i);
         loop = rcv.substr(0, s);
-
+        
         CommandManager manager;
         manager.executeCommand(command, a);
-    }
-
+        if(command.compare("list_games") == 0) {
+            readCommand(tArgs);
+        }
+   // }
 }
-
