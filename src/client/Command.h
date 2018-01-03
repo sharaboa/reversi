@@ -10,13 +10,26 @@
 
 #include <unistd.h>
 #include <string>
+#include "ScreenView.h"
 
 using namespace std;
+
 class Command {
 public:
-    virtual void execute(string arg, int clientSocket) = 0;
+    /**
+     * abstract fun to execute command
+     * @param arg - name
+     * @param validStart - cheking if arg legal
+     * @param clientSocket - in order to communicate
+     */
+    virtual void execute(string arg,bool &validStart, int clientSocket) = 0;
+    /**
+     * destractor
+     */
     virtual ~Command() {}
 
+protected:
+    ScreenView screenView;
 };
 
 

@@ -9,15 +9,23 @@
 #include "Command.h"
 
 class CommandManager {
-    public:
-         CommandManager();
-        ~CommandManager();
-        void executeCommand(string input,int clientSocket);
-    private:
-        map<string, Command*> commandsMap;
-        //vector <Game> gamesList;
-
-
+public:
+    /**
+    * manage the commands of the client
+    */
+    CommandManager();
+    /**
+     * destructor
+     */
+    ~CommandManager();
+    /**
+     * exe the commands of the client
+     * @param input the client command
+     * @param clientSocket the client socket num
+     */
+    void executeCommand(string input,int clientSocket);
+private:
+    map<string, Command*> commandsMap;
 };
 
 

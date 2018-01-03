@@ -26,4 +26,4 @@ add_executable(client
     StackOfDiscs.cpp
     StackOfDiscs.h
     Symbol.h ScreenView.cpp ScreenView.h
-        CommandMannager.h CommandMannager.cpp Command.h JoinCommand.cpp JoinCommand.h StartCommand.cpp StartCommand.h CloseCommand.cpp CloseCommand.h ListOfGamesCommand.cpp ListOfGamesCommand.h)
+        CommandMannager.h CommandMannager.cpp Command.h JoinCommand.cpp JoinCommand.h StartCommand.cpp StartCommand.h ListOfGamesCommand.cpp ListOfGamesCommand.h ServerCom.cpp ServerCom.h)

@@ -60,9 +60,16 @@ public:
      * updating myChoise as (-2,-2) disc to sign that the game is over
      */
     void gameOver();
+    /**
+     * reading the client number from the server (clientNum == if he is x/o)
+     */
     void readClientNum();
-    string readFromServer();
-    void writeToServer(string command);
+    /**
+     * closing the com (socket) to the server
+     */
+    void closeSocket();
+
+
 private:
     const char *serverIP;
     int serverPort;

@@ -9,9 +9,17 @@
 
 
 class ListGamesCommand: public Command {
-    public:
-        ListGamesCommand();
-        virtual void execute(string arg,int clientSocket);
+public:
+    /**
+     * sending the list of opened games
+     */
+    ListGamesCommand();
+    /**
+     * exe the command
+     * @param arg the arg of the command
+     * @param clientSocket the socket asking to exe the commend
+     */
+    virtual void execute(string arg,int clientSocket);
 
 };
 

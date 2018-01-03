@@ -12,12 +12,25 @@
 #include <unistd.h>
 
 class Command {
-    public:
-        virtual void execute(string arg, int clientSocket) = 0;
-        virtual ~Command() {}
-    protected:
-    GamesListManager *gamesList = GamesListManager::getInstance();
-
+public:
+    /**
+     * exe the commands of the client
+     * @param input the client command
+     * @param clientSocket the client socket num
+     */
+    virtual void execute(string arg, int clientSocket) = 0;
+    /**
+     * destractur
+     */
+    virtual ~Command() {}
+protected:
+    /**
+     * singelton list access
+     * @return - list of games
+     */
+    GamesListManager* getGameList() const {
+        return GamesListManager::getInstance();
+    }
 };
 
 

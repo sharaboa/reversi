@@ -4,14 +4,13 @@
 //
 
 #include "Server.h"
-#include <string.h>
-#include <iostream>
 #include <fstream>
 #include <pthread.h>
 #include <cstdlib>
 #include <complex>
 #include <bits/sigthread.h>
 #include "HandelClient.h"
+#include "ThreadList.h"
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 10
@@ -20,20 +19,23 @@ struct ThreadArgs {
     int serverSocket1;
 };
 
-Server::Server() {
+struct handleArgs {
+    int clientSocket1;
+    pthread_t *tID;
+};
 
-   // string p;
-  //  ifstream inFile;
-   // inFile.open("setting.txt");
-  //  inFile >> p;
-    port = 8888;
-  //  inFile >> port;
-  //  inFile.close();
+Server::Server(): serverSocket(0), serverThreadId(0) {
+
+    string p;
+    ifstream inFile;
+    inFile.open("setting.txt");
+    inFile >> p;
+    inFile >> port;
+    inFile.close();
 }
 void Server::start() {
-  //  numOfClients = 0;
 // Create a socket point
-    int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+    serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket == -1) {
         throw "Error opening socket";
     }
@@ -51,62 +53,50 @@ void Server::start() {
 
     ThreadArgs args;
     args.serverSocket1 = serverSocket;
-   //thread for accepting the client
-    pthread_t thread;
-
-    int rc = pthread_create(&thread, NULL, connect, &args);
+    //thread for accepting the client
+    int rc = pthread_create(&serverThreadId, NULL, connect, (void *) serverSocket);
 
     if (rc) {
         cout << "Error: unable to create thread, " << rc << endl;
         exit(-1);
     }
-    while (true){
-
-    }
-    /*string command ;
-
-    while(true){
-        if(!command.compare("close server"))
-        {
-            cout << "Enter command: ";
-            cin >> command;
-        }
-        else{
-           // myManager.executeCommand("closeServer", NULL);
-           pthread_cancel(thread);
-           exitThreads();
-            break;
-
-        }
-    }*/
 }
 
 
-
-void Server::closeGame(Game game) {
-    close(game.xSocket);
-    close(game.oSocket);
-    /////// need to close both threads ////////////
-}
-
-
-void * Server::connect (void *tArgs) {
+void * Server::connect (void *socket) {
+    // Define the client socket's structures
+    struct sockaddr_in clientAddress;
+    socklen_t clientAddressLen = sizeof((struct sockaddr *) &clientAddress);
     while (true) {
         cout << "Waiting for client connections..." << endl;
-        struct ThreadArgs *args = (struct ThreadArgs *) tArgs;
-        // Define the client socket's structures
-        struct sockaddr_in clientAddress;
-        socklen_t clientAddressLen = sizeof((struct sockaddr *) &clientAddress);
-        int clientSocket = accept(args->serverSocket1, (struct sockaddr *) &clientAddress, &clientAddressLen);
-        //  socketsList.push_back(clientSocket);
+        //struct ThreadArgs *args = (struct ThreadArgs *) tArgs;
+        long serverSocket = (long)socket;
+        int clientSocket = accept(serverSocket, (struct sockaddr *) &clientAddress, &clientAddressLen);
         cout << "Client connected" << endl;
         HandelClient handleClient(clientSocket);
+        pthread_t thread;
+        handleArgs args2;
+        args2.clientSocket1 = clientSocket;
+        args2.tID = &thread;
+
+        int rc = pthread_create(&thread, NULL, handleClient.readCommand, &args2);
+        if (rc) {
+            cout << "Error: unable to create thread, " << rc << endl;
+            exit(-1);
+        }
     }
 }
 
-void Server:: exitThreads() {
-   /*//change to game list
-    for (int i = 0;i < myManager;i++) {
-        pthread_cancel(threadsList.at(i));
-    }*/
+void Server::stop() {
+    pthread_cancel(serverThreadId);
+    close(serverSocket);
+    for (int i = 0; i < ThreadList::getInstance()->getThreadList().size(); i++) {
+        pthread_cancel(ThreadList::getInstance()->getThreadList().at(i));
+    }
+    for (int i = 0; i < GamesListManager::getInstance()->getGamesList().size(); i++) {
+        close(GamesListManager::getInstance()->getGamesList().at(i).xSocket);
+        close(GamesListManager::getInstance()->getGamesList().at(i).oSocket);
+    }
+
+    cout << "Server stopped" << endl;
 }

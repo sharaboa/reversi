@@ -58,12 +58,12 @@ void ScreenView::printEnterMove(StackOfDiscs &optionStack, Symbol currentPlayer,
             cout << endl << endl << "Please enter your move row,col:";
             break;
         }
-        //just in clientPlayer
+            //just in clientPlayer
         case 2: {
             cout << "waiting for other player's move...\n";
             break;
         }
-        //illegal move
+            //illegal move
         case 0: {
             cout << endl << endl << "illegal move! Please enter your move row,col:";
         }
@@ -77,19 +77,14 @@ void ScreenView::printClientConnection(int connection) const {
             cout << "connected to server\n";
             break;
         }
-        //first player connected
+            //first player connected
         case 1: {
-            cout<<"waiting for other player to join...\n"<<endl;
+            cout<<"You are X and the first one to play.\n";
             break;
         }
-        //print to o after second player connection
+            //print to o after second player connection
         case 2: {
             cout << "\nYou are O and the second one to play.\n";
-            break;
-        }
-        //print to x after second player connection
-        case 3: {
-            cout << "You are X and the first one to play.\n";
             break;
         }
         case -1: {
@@ -115,13 +110,25 @@ void ScreenView::announceWinner(Symbol player1,Symbol player2,int amountPlayer1,
     }
 }
 
-void ScreenView::coutToScreen(string output){
+void ScreenView::coutToScreen(string output) const {
     cout<<output<<endl;
 }
-void ScreenView::remotePlayerMenu() {
+void ScreenView::remotePlayerMenu() const {
     cout << "Remote player menu:\n";
     cout<< "start<Game_Name>\n";
     cout<<"join<Room_Name>\n";
     cout<<"list_games\n";
     cout << "Choose your command: \n";
+}
+
+void ScreenView::printStartCommand(int valid) const {
+    if(valid == -1) {
+        cout << "Error opening a new Room\n";
+    } else {
+        cout << "opened a new Room\n";
+    }
+}
+
+void ScreenView::printServerDisconect() const {
+    cout << "server disconnected";
 }

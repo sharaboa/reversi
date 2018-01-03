@@ -54,10 +54,24 @@ public:
      * @param amountPlayer2 - the amount of disc the player putted on board
      */
     void announceWinner(Symbol player1,Symbol player2,int amountPlayer1,int amountPlayer2) const;
-
-    void coutToScreen(string output);
-    void remotePlayerMenu();
-
-    };
+    /**
+     * print asked string
+     * @param output 
+     */
+    void coutToScreen(string output) const;
+    /**
+     * menu of remote player
+     */
+    void remotePlayerMenu() const;
+    /**
+     * print if game opened or not
+     * @param valid - -1 if not open
+     */
+    void printStartCommand(int valid) const;
+    /**
+     * exit of server
+     */
+    void printServerDisconect() const;
+};
 
 #endif //REVERSI_SCREENVIEW_H

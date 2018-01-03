@@ -11,10 +11,30 @@
 
 class GamesListManager {
 public:
+    /**
+     * creating a singelton pattern class to keep a list of all the current oppened games
+     * @return the class itself if exist otherwise create a new one
+     */
     static GamesListManager *getInstance();
+    /**
+     *
+     * @param game the game name to add to the vector
+     */
     void addGame(Game game);
-    void removeGame(string name);
+    /**
+     * removing the i game from the vector
+     * @param i the game index
+     */
+    void removeGame(int i);
+    /**
+     * seting a new game
+     * @param i the index
+     * @param oSocket the 2 player socket
+     */
     void setGame(int i, int oSocket);
+    /**
+     * @return the vector holding the games
+     */
     vector<Game> getGamesList() const;
 private:
     vector<Game> gamesList;
@@ -22,6 +42,7 @@ private:
     GamesListManager(const GamesListManager &other);
     ~GamesListManager() {};
     static GamesListManager *instance;
+    static pthread_mutex_t lock;
 };
 
 

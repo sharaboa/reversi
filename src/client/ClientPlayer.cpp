@@ -9,6 +9,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <unistd.h>
+#include "ServerCom.h"
 
 using namespace std;
 
@@ -46,13 +47,12 @@ void ClientPlayer::connectToServer() {
     if(connect(clientSocket, (struct sockaddr*)&serverAddress,sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
-   cout<<"connected to server";
-
 }
 
 Disc ClientPlayer::playerLogic(Player opponentPlayer) {
     int rowCord, colCord;
     int choice;
+    ServerCom serverCom(clientSocket);
     //choose disc if it's player's turn
     if (clientNum == 1 && symbol == X || clientNum == 2 && symbol == O) {
         if (optionStack.getAmount()) {
@@ -66,14 +66,8 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
                 rowCord = myChoice.getRowLocation();
                 colCord = myChoice.getColumnLocation();
                 if (optionStack.appear(myChoice)) {
-                    int n = write(clientSocket, &rowCord, sizeof(rowCord));
-                    if (n == -1) {
-                        throw "Error writing arg1to socket";
-                    }
-                    n = write(clientSocket, &colCord, sizeof(colCord));
-                    if (n == -1) {
-                        throw "Error writing arg2to socket";
-                    }
+                    serverCom.writeInt(rowCord);
+                    serverCom.writeInt(colCord);
                     return myChoice;
                 } else {
                     choice = 0;
@@ -83,14 +77,8 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
         } else {
             //there is no move so sending the agreed sign - (0,0)
             int noChoice = 0;
-            int n = write(clientSocket, &noChoice, sizeof(noChoice));
-            if (n == -1) {
-                throw "Error writing arg1to socket";
-            }
-            n = write(clientSocket, &noChoice, sizeof(noChoice));
-            if (n == -1) {
-                throw "Error writing arg2to socket";
-            }
+            serverCom.writeInt(noChoice);
+            serverCom.writeInt(noChoice);
             return myChoice;
         }
         //updating the choice of the other player
@@ -99,15 +87,8 @@ Disc ClientPlayer::playerLogic(Player opponentPlayer) {
             choice = 2;
             screenView.printEnterMove(optionStack,symbol,choice);
         }
-
-        int n = read(clientSocket, &rowCord, sizeof(rowCord));
-        if (n == -1) {
-            throw "Error writing arg1to socket";
-        }
-        n = read(clientSocket, &colCord, sizeof(colCord));
-        if (n == -1) {
-            throw "Error writing arg2to socket";
-        }
+        serverCom.readInt(rowCord);
+        serverCom.readInt(colCord);
         myChoice.setDisc(rowCord, colCord);
         return myChoice;
     }
@@ -129,56 +110,22 @@ void ClientPlayer::notMove() {
 }
 void ClientPlayer::gameOver() {
     int over = -2;
-    int n = write(clientSocket, &over, sizeof(over));
-    if (n == -1) {
-        throw "Error writing arg1to socket";
-    }
-    n = write(clientSocket, &over, sizeof(over));
-    if (n == -1) {
-        throw "Error writing arg2to socket";
-    }
+    ServerCom serverCom(clientSocket);
+    serverCom.writeInt(over);
+    serverCom.writeInt(over);
 }
 
 void ClientPlayer::readClientNum() {
     //initialize
     int i;
     //read clientNum - 1/2
-    int n = read(clientSocket, &i, sizeof(i));
-    if (n == -1) {
-        throw "Error writing arg1to socket";
-    }
+    ServerCom serverCom(clientSocket);
+    serverCom.readInt(i);
     screenView.printClientConnection(clientNum);
     clientNum = i;
-    if (clientNum == 1) {
-        screenView.printClientConnection(clientNum);
-        //waite for second player to connect
-        /*int n = read(clientSocket, &i, sizeof(i));
-        if (n == -1) {
-            throw "Error writing arg1to socket";
-        }*/
-        screenView.printClientConnection(3);
-    }
-    if (clientNum == 2) {
-        screenView.printClientConnection(clientNum);
-    }
-    if (clientNum == 0) {
-        screenView.printClientConnection(clientNum);
-    }
+    screenView.printClientConnection(clientNum);
 }
 
-string ClientPlayer::readFromServer() {
-    string command;
-    int n = read(clientSocket, &command, sizeof(command));
-    if (n == -1) {
-        throw "Error writing arg1to socket";
-    }
-    return command;
-}
-
-void ClientPlayer::writeToServer(string command) {
-    int n = write(clientSocket, &command, sizeof(command));
-    if (n == -1) {
-        throw "Error writing arg1to socket";
-    }
-
+void ClientPlayer::closeSocket() {
+    close(clientSocket);
 }

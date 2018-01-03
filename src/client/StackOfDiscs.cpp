@@ -14,7 +14,6 @@ void StackOfDiscs::addToStack(int i, int j) {
     stack.push_back(disc);
 }
 
-
 void StackOfDiscs::removeFromStack(Disc &disc) {
     for(int i = 0; i <= stack.size(); i++) {
         if (stack[i] == disc) {

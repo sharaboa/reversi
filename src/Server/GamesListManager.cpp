@@ -8,13 +8,9 @@
 void GamesListManager::addGame(Game game) {
     gamesList.push_back(game);
 }
-void GamesListManager::removeGame(string name) {
-    for(int i = 0; i <= gamesList.size(); i++) {
-        if (gamesList[i].gameName.compare(name)) {
-            gamesList.erase(gamesList.begin() + i + 1);
-            break;
-        }
-    }
+void GamesListManager::removeGame(int i) {
+    gamesList.erase(gamesList.begin() + i);
+
 }
 void GamesListManager::setGame(int i, int oSocket) {
     gamesList[i].oSocket = oSocket;
@@ -22,12 +18,17 @@ void GamesListManager::setGame(int i, int oSocket) {
 vector<Game> GamesListManager::getGamesList() const {
     return gamesList;
 }
+
 GamesListManager *GamesListManager::instance = 0;
+pthread_mutex_t GamesListManager::lock;
+
 GamesListManager *GamesListManager::getInstance() {
-    if (!instance)
-    {
-        instance = new GamesListManager;
-        return instance;
+    if (instance == 0) {
+        pthread_mutex_lock(&lock);
+        if (instance == 0){
+            instance = new GamesListManager;
+        }
+        pthread_mutex_unlock(&lock);
     }
     return instance;
 }

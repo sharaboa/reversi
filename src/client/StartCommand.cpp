@@ -4,25 +4,28 @@
 
 #include <cstring>
 #include "StartCommand.h"
-#include "ScreenView.h"
 
 StartCommand::StartCommand(){}
 
-void StartCommand::execute(string input, int clientSocket) {
- //  char arg[50];
-   //  strcpy(arg,input.c_str());
+void StartCommand::execute(string input,bool &validArg, int clientSocket) {
     int n = write(clientSocket, input.c_str(), input.length());
     if (n == -1) {
-        throw "Error writing arg1to socket";
+        screenView.printServerDisconect();
+        exit(-1);
     }
-    char i[50];
-    /////////////////   if not use int
-    n = read(clientSocket, &i, sizeof(i));
+
+    int val;
+    n = read(clientSocket, &val, sizeof (val));
     if (n == -1) {
-        throw "Error writing arg1to socket";
+        screenView.printServerDisconect();
+        exit(-1);
     }
 
+    if(val == -1) {
+        validArg = false;
+    } else {
+        validArg = true;
+    }
     ScreenView myView;
-    myView.coutToScreen(i);
-
+    myView.printStartCommand(val);
 }
