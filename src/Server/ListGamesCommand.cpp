@@ -8,14 +8,15 @@ ListGamesCommand::ListGamesCommand() {}
 void ListGamesCommand::execute(string arg, int clientSocket){
     vector <string> availableGame;
     for (int i = 0;i<getGameList()->getGamesList().size();i++) {
-        availableGame.push_back(getGameList()->getGamesList().at(i).gameName);
+        if (getGameList()->getGamesList().at(i).oSocket == -2)
+            availableGame.push_back(getGameList()->getGamesList().at(i).gameName);
+
     }
 
     int i = 0;
     if(!availableGame.empty()){
         i=availableGame.size();
     }
-
     int n = write(clientSocket, &i, sizeof(i));
     if (n == -1) {
         cout << "Error writing to socket" << endl;

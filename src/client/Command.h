@@ -10,7 +10,6 @@
 
 #include <unistd.h>
 #include <string>
-#include "ScreenView.h"
 
 using namespace std;
 
@@ -27,9 +26,6 @@ public:
      * destractor
      */
     virtual ~Command() {}
-
-protected:
-    ScreenView screenView;
 };
 
 

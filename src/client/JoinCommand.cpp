@@ -4,24 +4,20 @@
 
 #include <iostream>
 #include "JoinCommand.h"
-
+#include "ServerCom.h"
 
 
 JoinCommand::JoinCommand() {}
 
 void JoinCommand::execute(string input,bool &validArg, int clientSocket) {
-    int n = write(clientSocket, input.c_str(), input.length());
-    if (n == -1) {
-        screenView.printServerDisconect();
-        exit(-1);
-    }
+
+
+    ServerCom serverCom(clientSocket);
+    serverCom.writeString(input);
 
     int i;
-    n = read(clientSocket,&i,sizeof(i));
-    if (n == -1) {
-        screenView.printServerDisconect();
-        exit(-1);
-    }
+    serverCom.readInt(i);
+
     if (i == -1){
         validArg = false;
     }else{

@@ -4,7 +4,7 @@
 #ID: 312530496
 
 server.out: compileAll
-	g++ *.o -o ../../exe/server.out
+	g++ -pthread -o ../../exe/server.out *.o
 	rm -f *.o
 
 compileAll: *.h *.cpp
