@@ -5,28 +5,17 @@
 
 #include "Server.h"
 #include <fstream>
-#include <pthread.h>
 #include <cstdlib>
 #include <complex>
-#include <bits/sigthread.h>
 #include "HandelClient.h"
-#include "ThreadList.h"
-#include "ThreadPool.h"
+
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 10
+#define THREAD_NUM 5
 
-struct ThreadArgs {
-    int serverSocket1;
-};
 
-struct handleArgs {
-    int clientSocket1;
-  //  pthread_t *tID;
-};
-
-Server::Server(): serverSocket(0), serverThreadId(0),threadPool(5) {
-    tasks[MAX_CONNECTED_CLIENTS];
+Server::Server(): serverSocket(0), serverThreadId(0),threadPool(THREAD_NUM) {
     string p;
     ifstream inFile;
     inFile.open("setting.txt");
@@ -35,7 +24,7 @@ Server::Server(): serverSocket(0), serverThreadId(0),threadPool(5) {
     inFile.close();
 }
 void Server::start() {
-// Create a socket point
+    // Create a socket point
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket == -1) {
         throw "Error opening socket";
@@ -49,11 +38,9 @@ void Server::start() {
     if (bind(serverSocket, (struct sockaddr *) &serverAddress, sizeof(serverAddress)) == -1) {
         throw runtime_error("Error on binding");
     }
-// Start listening to incoming connections
+    // Start listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
 
-    ThreadArgs args;
-    args.serverSocket1 = serverSocket;
     //thread for accepting the client
     int rc = pthread_create(&serverThreadId, NULL, connect, (void *) this);
     if (rc) {
@@ -69,15 +56,12 @@ void * Server::connect (void *s) {
     struct sockaddr_in clientAddress;
     socklen_t clientAddressLen = sizeof((struct sockaddr *) &clientAddress);
 
-    for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
+    while (true) {
         cout << "Waiting for client connections..." << endl;
         int clientSocket = accept(server->getServerSocket(), (struct sockaddr *) &clientAddress, &clientAddressLen);
         cout << "Client connected" << endl;
-        HandelClient handleClient(clientSocket);
-        //pthread_t thread;
-        handleArgs args2;
-        args2.clientSocket1 = clientSocket;
-        server->getPool().addTask(new Task(handleClient.readCommand, &args2));
+        HandelClient handleClient;
+        server->getPool().addTask(new Task(handleClient.readCommand, (void*)clientSocket));
     }
 }
 
@@ -94,11 +78,9 @@ void Server::stop() {
         close(GamesListManager::getInstance()->getGamesList().at(i).xSocket);
         close(GamesListManager::getInstance()->getGamesList().at(i).oSocket);
     }
-
     cout << "Server stopped" << endl;
 }
 
 ThreadPool& Server::getPool() {
     return threadPool;
 }
-

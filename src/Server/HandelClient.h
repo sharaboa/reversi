@@ -13,9 +13,9 @@ public:
      * handeling the client commands
      * @param clientSocket the socket of the client
      */
-    HandelClient(int clientSocket);
+    HandelClient();
     /**
-     * readind the clients command
+     * reading the clients command
      * @param tArgs the client soxket
      * @return void
      */

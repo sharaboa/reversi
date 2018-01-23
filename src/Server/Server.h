@@ -37,9 +37,15 @@ public:
      * stop the server - closing all opened threads
      */
     void stop();
-
+    /**
+     * return thread pool by reference
+     * @return
+     */
     ThreadPool& getPool() ;
-    Task getTask(int num);
+    /**
+     * return server socket
+     * @return
+     */
     long getServerSocket();
 
 private:
@@ -47,10 +53,7 @@ private:
     int port;
     long serverSocket; // the socket's file descriptor
     pthread_t serverThreadId;
-
     ThreadPool threadPool;
-    Task *tasks;
-
 };
 
 #endif //SERVER_SERVER_H

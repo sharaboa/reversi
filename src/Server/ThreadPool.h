@@ -13,9 +13,23 @@ using namespace std;
 
 class ThreadPool {
 public:
+    /**
+     * constructor
+     * @param threadsNum num of max threads running
+     */
     ThreadPool(int threadsNum);
+    /**
+     * adding task
+     * @param task
+     */
     void addTask(Task* task);
+    /**
+     * pthread mutex destroy
+     */
     void terminate();
+    /**
+     * destructor
+     */
     virtual~ThreadPool();
 private:
     queue<Task *> tasksQueue;
