@@ -11,6 +11,7 @@
 #include <bits/sigthread.h>
 #include "HandelClient.h"
 #include "ThreadList.h"
+#include "ThreadPool.h"
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 10
@@ -67,9 +68,11 @@ void * Server::connect (void *socket) {
     // Define the client socket's structures
     struct sockaddr_in clientAddress;
     socklen_t clientAddressLen = sizeof((struct sockaddr *) &clientAddress);
-    while (true) {
+    ///////////////////////////
+    ThreadPool threadPool(5);
+    Task *tasks[MAX_CONNECTED_CLIENTS];
+    for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
         cout << "Waiting for client connections..." << endl;
-        //struct ThreadArgs *args = (struct ThreadArgs *) tArgs;
         long serverSocket = (long)socket;
         int clientSocket = accept(serverSocket, (struct sockaddr *) &clientAddress, &clientAddressLen);
         cout << "Client connected" << endl;
@@ -78,14 +81,16 @@ void * Server::connect (void *socket) {
         handleArgs args2;
         args2.clientSocket1 = clientSocket;
         args2.tID = &thread;
-
-        int rc = pthread_create(&thread, NULL, handleClient.readCommand, &args2);
+        tasks[i] = new Task(handleClient.readCommand, &args2);
+        threadPool.addTask(tasks[i]);
+        /*int rc = pthread_create(&thread, NULL, handleClient.readCommand, &args2);
         if (rc) {
             cout << "Error: unable to create thread, " << rc << endl;
             exit(-1);
-        }
+        }*/
     }
 }
+
 
 void Server::stop() {
     pthread_cancel(serverThreadId);

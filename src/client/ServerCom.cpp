@@ -44,6 +44,7 @@ void ServerCom::readString(string &str) {
     str.append(temp);
 }
 void ServerCom::writeString(string input) {
+    input.insert(input.end(),'\0');
     int n = write(clientSocket, input.c_str(), input.length());
     if (n == -1) {
         screenView.printServerDisconect();

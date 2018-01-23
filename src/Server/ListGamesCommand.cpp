@@ -10,7 +10,6 @@ void ListGamesCommand::execute(string arg, int clientSocket){
     for (int i = 0;i<getGameList()->getGamesList().size();i++) {
         if (getGameList()->getGamesList().at(i).oSocket == -2)
             availableGame.push_back(getGameList()->getGamesList().at(i).gameName);
-
     }
 
     int i = 0;

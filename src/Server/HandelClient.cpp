@@ -30,6 +30,8 @@ void *HandelClient::readCommand(void *tArgs) {
     istringstream iss(str);
     string command;
     iss >> command;
+
+
     if(command.compare("join") == 0) {
         ThreadList::getInstance()->addThread(pthread_self());
     }
