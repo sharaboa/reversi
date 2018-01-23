@@ -15,8 +15,10 @@ ThreadPool::ThreadPool(int threadsNum) : stopped(false) {
 void *ThreadPool::execute(void *arg) {
     ThreadPool *pool = (ThreadPool *) arg;
     pool -> executeTasks();
+
 }
-void ThreadPool::addTask(Task *task) { tasksQueue.push(task); }
+void ThreadPool::addTask(Task *task) { tasksQueue.push(task);
+}
 void ThreadPool::executeTasks() {
     while (!stopped) {
         pthread_mutex_lock(&lock);
@@ -25,6 +27,7 @@ void ThreadPool::executeTasks() {
             tasksQueue.pop();
             pthread_mutex_unlock(&lock);
             task -> execute();
+            delete task;
         }
         else {
             pthread_mutex_unlock(&lock);

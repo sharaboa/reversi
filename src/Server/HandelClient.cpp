@@ -14,7 +14,7 @@ struct handleArgs {
 };
 
 HandelClient::HandelClient(int clientSocket) :clientSocket(clientSocket){
-    pthread_t thread;
+  //  pthread_t thread;
 }
 
 void *HandelClient::readCommand(void *tArgs) {
@@ -32,9 +32,9 @@ void *HandelClient::readCommand(void *tArgs) {
     iss >> command;
 
 
-    if(command.compare("join") == 0) {
+    /*if(command.compare("join") == 0) {
         ThreadList::getInstance()->addThread(pthread_self());
-    }
+    }*/
     CommandManager manager;
     manager.executeCommand(str,args->clientSocket1);
 }

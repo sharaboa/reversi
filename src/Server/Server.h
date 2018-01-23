@@ -11,6 +11,7 @@
 #include <vector>
 #include "GameStruct.h"
 #include "CommandManager.h"
+#include "ThreadPool.h"
 
 
 class Server {
@@ -31,16 +32,24 @@ public:
      * @param clientAddress
      * @param clientAddressLen
      */
-    static void *connect(void *args);
+    static void *connect(void *s);
     /**
      * stop the server - closing all opened threads
      */
     void stop();
+
+    ThreadPool& getPool() ;
+    Task getTask(int num);
+    long getServerSocket();
+
 private:
 
     int port;
     long serverSocket; // the socket's file descriptor
     pthread_t serverThreadId;
+
+    ThreadPool threadPool;
+    Task *tasks;
 
 };
 

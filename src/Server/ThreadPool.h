@@ -14,7 +14,7 @@ using namespace std;
 class ThreadPool {
 public:
     ThreadPool(int threadsNum);
-    void addTask(Task *task);
+    void addTask(Task* task);
     void terminate();
     virtual~ThreadPool();
 private:

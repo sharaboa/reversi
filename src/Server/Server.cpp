@@ -22,11 +22,11 @@ struct ThreadArgs {
 
 struct handleArgs {
     int clientSocket1;
-    pthread_t *tID;
+  //  pthread_t *tID;
 };
 
-Server::Server(): serverSocket(0), serverThreadId(0) {
-
+Server::Server(): serverSocket(0), serverThreadId(0),threadPool(5) {
+    tasks[MAX_CONNECTED_CLIENTS];
     string p;
     ifstream inFile;
     inFile.open("setting.txt");
@@ -55,8 +55,7 @@ void Server::start() {
     ThreadArgs args;
     args.serverSocket1 = serverSocket;
     //thread for accepting the client
-    int rc = pthread_create(&serverThreadId, NULL, connect, (void *) serverSocket);
-
+    int rc = pthread_create(&serverThreadId, NULL, connect, (void *) this);
     if (rc) {
         cout << "Error: unable to create thread, " << rc << endl;
         exit(-1);
@@ -64,40 +63,33 @@ void Server::start() {
 }
 
 
-void * Server::connect (void *socket) {
+void * Server::connect (void *s) {
+    Server* server = (Server*) s;
     // Define the client socket's structures
     struct sockaddr_in clientAddress;
     socklen_t clientAddressLen = sizeof((struct sockaddr *) &clientAddress);
-    ///////////////////////////
-    ThreadPool threadPool(5);
-    Task *tasks[MAX_CONNECTED_CLIENTS];
+
     for (int i = 0; i < MAX_CONNECTED_CLIENTS; i++) {
         cout << "Waiting for client connections..." << endl;
-        long serverSocket = (long)socket;
-        int clientSocket = accept(serverSocket, (struct sockaddr *) &clientAddress, &clientAddressLen);
+        int clientSocket = accept(server->getServerSocket(), (struct sockaddr *) &clientAddress, &clientAddressLen);
         cout << "Client connected" << endl;
         HandelClient handleClient(clientSocket);
-        pthread_t thread;
+        //pthread_t thread;
         handleArgs args2;
         args2.clientSocket1 = clientSocket;
-        args2.tID = &thread;
-        tasks[i] = new Task(handleClient.readCommand, &args2);
-        threadPool.addTask(tasks[i]);
-        /*int rc = pthread_create(&thread, NULL, handleClient.readCommand, &args2);
-        if (rc) {
-            cout << "Error: unable to create thread, " << rc << endl;
-            exit(-1);
-        }*/
+        server->getPool().addTask(new Task(handleClient.readCommand, &args2));
     }
 }
 
 
+long Server::getServerSocket() {
+    return serverSocket;
+}
+
 void Server::stop() {
     pthread_cancel(serverThreadId);
     close(serverSocket);
-    for (int i = 0; i < ThreadList::getInstance()->getThreadList().size(); i++) {
-        pthread_cancel(ThreadList::getInstance()->getThreadList().at(i));
-    }
+    threadPool.terminate();
     for (int i = 0; i < GamesListManager::getInstance()->getGamesList().size(); i++) {
         close(GamesListManager::getInstance()->getGamesList().at(i).xSocket);
         close(GamesListManager::getInstance()->getGamesList().at(i).oSocket);
@@ -105,3 +97,8 @@ void Server::stop() {
 
     cout << "Server stopped" << endl;
 }
+
+ThreadPool& Server::getPool() {
+    return threadPool;
+}
+
